@@ -12,6 +12,8 @@ from typing import List, Optional, Dict
 from datetime import datetime
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import numpy as np
+import firebase_admin
+from firebase_admin import credentials, db
 
 # --- Logging Setup ---
 logging.basicConfig(filename='ml_service.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
