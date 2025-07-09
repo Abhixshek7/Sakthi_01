@@ -1,0 +1,17 @@
+2025-07-09 14:43:47,301 ERROR Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+
+2025-07-09 14:46:43,154 DEBUG cmd: where.exe tbb.dll
+cwd: None
+2025-07-09 14:46:43,538 DEBUG Adding TBB (c:\Users\hp\OneDrive\Desktop\Sakthi_01\.venv\lib\site-packages\prophet\stan_model\cmdstan-2.33.1\stan\lib\stan_math\lib\tbb) to PATH
+2025-07-09 14:46:43,559 INFO Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-07-09 14:46:43,611 DEBUG input tempfile: C:\Users\hp\AppData\Local\Temp\tmpg4y10c9g\0xn0n7qg.json
+2025-07-09 14:46:44,456 DEBUG input tempfile: C:\Users\hp\AppData\Local\Temp\tmpg4y10c9g\rl7rs_1n.json
+2025-07-09 14:46:44,475 DEBUG idx 0
+2025-07-09 14:46:44,476 DEBUG running CmdStan, num_threads: None
+2025-07-09 14:46:44,476 DEBUG CmdStan args: ['C:\\Users\\hp\\OneDrive\\Desktop\\Sakthi_01\\.venv\\Lib\\site-packages\\prophet\\stan_model\\prophet_model.bin', 'random', 'seed=10646', 'data', 'file=C:\\Users\\hp\\AppData\\Local\\Temp\\tmpg4y10c9g\\0xn0n7qg.json', 'init=C:\\Users\\hp\\AppData\\Local\\Temp\\tmpg4y10c9g\\rl7rs_1n.json', 'output', 'file=C:\\Users\\hp\\AppData\\Local\\Temp\\tmpg4y10c9g\\prophet_modelu0_e9d9t\\prophet_model-20250709144644.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-07-09 14:46:44,476 INFO Chain [1] start processing
+2025-07-09 14:46:46,161 INFO Chain [1] done processing
+2025-07-09 14:46:46,190 INFO Trained model 'model_b2bc5836' from CSV with 10000 rows.
