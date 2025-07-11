@@ -15,6 +15,11 @@ import numpy as np
 import firebase_admin
 from firebase_admin import credentials, db
 
+cred = credentials.Certificate("firebase_key.json")
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://mlinventorymanagment-default-rtdb.firebaseio.com/'
+})
+
 # --- Logging Setup ---
 logging.basicConfig(filename='ml_service.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
@@ -64,6 +69,7 @@ def load_model(model_name: str):
     if not os.path.exists(path):
         raise HTTPException(status_code=404, detail=f"Model '{model_name}' not found.")
     with open(path, "rb") as f:
+        
         obj = pickle.load(f)
     return obj['model'], obj['meta']
 
@@ -88,6 +94,17 @@ def delete_model(model_name: str):
 
 def allowed_file(filename):
     return filename.endswith('.pkl')
+
+def save_prediction_to_firebase(date, prediction):
+    ref = db.reference('predictions')
+    ref.push({
+        'date': str(date),  # Ensure it's a string
+        'prediction': prediction
+    })
+
+def get_inventory_from_firebase():
+    ref = db.reference('inventory')
+    return ref.get()
 
 # --- Endpoints ---
 @app.get("/health", tags=["Utility"])
@@ -175,7 +192,12 @@ async def train_model_csv(
 
 @app.post("/predict", tags=["Prediction"])
 def predict_stockout(predict_data: PredictData, key: str = Depends(api_key_auth)):
-    """Predict future values using a specified model. Returns yhat, yhat_lower, yhat_upper."""
+    # Validate all future dates
+    for date_str in predict_data.future:
+        try:
+            datetime.strptime(date_str, "%Y-%m-%d")
+        except ValueError:
+            raise HTTPException(status_code=400, detail=f"Invalid date format in 'future': {date_str}. Use YYYY-MM-DD.")
     model_name = predict_data.model_name or list_models()[0]['model_name'] if list_models() else None
     if not model_name:
         raise HTTPException(status_code=400, detail="No model available. Please train first.")
@@ -183,6 +205,10 @@ def predict_stockout(predict_data: PredictData, key: str = Depends(api_key_auth)
     future_df = pd.DataFrame({'ds': predict_data.future})
     forecast = model.predict(future_df)
     result = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].to_dict(orient='records')
+    for item in result:
+        # Convert ds to string if it's not already
+        ds_str = str(item['ds'])
+        save_prediction_to_firebase(ds_str, item['yhat'])
     return {"forecast": result, "model_name": model_name}
 
 @app.post("/evaluate", tags=["Evaluation"])
@@ -227,3 +253,8 @@ def train_model_async(train_data: TrainData, background_tasks: BackgroundTasks, 
             logging.error(f"[ASYNC] Training failed: {e}")
     background_tasks.add_task(train_task)
     return {"message": "Training started in background."} 
+
+@app.get("/inventory")
+def get_inventory():
+    data = get_inventory_from_firebase()
+    return {"inventory": data} 
