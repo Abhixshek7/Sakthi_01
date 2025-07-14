@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { UserContext } from "../context/UserContext";
+import { allowedEmails } from '../../allowedEmails';
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
@@ -18,7 +19,7 @@ const navItems = [
 ];
 const bottomItems = [
   { label: "Settings", icon: Gear, to: "/settings" },
-  { label: "Help", icon: Question, to: "/help" },
+  { label: "Admin", icon: Question, to: "/admin", adminOnly: true },
   { label: "Log out", icon: SignOut, action: "logout" },
 ];
 
@@ -101,41 +102,44 @@ const Sidebar = ({ open, setOpen }) => {
       <Box sx={{ flexGrow: 1 }} />
       <Divider sx={{ my: 2, width: open ? '100%' : 40, mx: open ? 0 : 'auto' }} />
       <List sx={{ width: '100%' }}>
-        {bottomItems.map(({ label, icon: Icon, to, action }) => (
-          <ListItem
-            key={label}
-            button
-            component={to ? Link : 'button'}
-            to={to}
-            onClick={action === 'logout' ? handleLogout : undefined}
-            sx={{
-              justifyContent: open ? 'flex-start' : 'center',
-              px: open ? 2 : 0,
-              width: '100%',
-              minHeight: 48,
-              my: 0.5,
-              transition: 'all 0.3s',
-              ...(action === 'logout'
-                ? { 
-                    // Remove hover effect for logout
-                    '&:hover': {},
-                  }
-                : {
-                    '&:hover': {
-                      bgcolor: '#f5f5f5',
-                      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                        
+        {bottomItems.map(({ label, icon: Icon, to, action, adminOnly }) => {
+          if (adminOnly && (!user || !allowedEmails.includes(user.email))) return null;
+          return (
+            <ListItem
+              key={label}
+              button
+              component={to ? Link : 'button'}
+              to={to}
+              onClick={action === 'logout' ? handleLogout : undefined}
+              sx={{
+                justifyContent: open ? 'flex-start' : 'center',
+                px: open ? 2 : 0,
+                width: '100%',
+                minHeight: 48,
+                my: 0.5,
+                transition: 'all 0.3s',
+                ...(action === 'logout'
+                  ? { 
+                      // Remove hover effect for logout
+                      '&:hover': {},
+                    }
+                  : {
+                      '&:hover': {
+                        bgcolor: '#f5f5f5',
+                        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+                          
+                        },
                       },
-                    },
-                  }),
-            }}
-          >
-            <ListItemIcon sx={{ color: '#111 !important', minWidth: 0, justifyContent: 'center', display: 'flex' }}>
-              <Icon size={28} weight="regular" />
-            </ListItemIcon>
-            {open && <ListItemText primary={label} primaryTypographyProps={{ color: '#f5f5f5', sx: { color: '#111 !important' } }} />}
-          </ListItem>
-        ))}
+                    }),
+              }}
+            >
+              <ListItemIcon sx={{ color: '#111 !important', minWidth: 0, justifyContent: 'center', display: 'flex' }}>
+                <Icon size={28} weight="regular" />
+              </ListItemIcon>
+              {open && <ListItemText primary={label} primaryTypographyProps={{ color: '#f5f5f5', sx: { color: '#111 !important' } }} />}
+            </ListItem>
+          );
+        })}
       </List>
       {/* Sidebar open/close button at the bottom */}
       <Box sx={{ width: '100%', display: 'flex', justifyContent: open ? 'flex-end' : 'center', alignItems: 'center', mb: 2, px: open ? 2 : 0 }}>

@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Sales from "./pages/Sales";
 import Notifications from "./pages/Notifications";
-import Upload from "./pages/Upload";
+import Admin from "./pages/Admin";
 import { UserProvider } from "./context/UserContext";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/notifications" element={<Notifications />} />
-          <Route path="/upload" element={<Upload />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </UserProvider>

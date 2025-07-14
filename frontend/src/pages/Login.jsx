@@ -22,7 +22,8 @@ export default function Login() {
 
   const allowedEmails = [
     "abhixshek20@gmail.com",
-    "sharveshr9@gmail.com"
+    "sharveshsr9@gmail.com",
+    "sharvesheve@gmail.com"
     // Add more emails as needed
   ];
 
