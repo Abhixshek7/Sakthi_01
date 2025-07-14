@@ -3,17 +3,22 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Sales from "./pages/Sales";
 import Notifications from "./pages/Notifications";
+import Upload from "./pages/Upload";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/sales" element={<Sales />} />
-        <Route path="/notifications" element={<Notifications />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/sales" element={<Sales />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/upload" element={<Upload />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 
