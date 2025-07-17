@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks, Query, Depends, Response
+from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks, Query, Depends, Response, Header
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import pandas as pd
@@ -13,7 +13,13 @@ from datetime import datetime
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import numpy as np
 import firebase_admin
-from firebase_admin import credentials, db
+from firebase_admin import credentials, db, firestore, auth as firebase_auth
+from fastapi import UploadFile, File, Header, HTTPException
+from firebase_admin import firestore, auth as firebase_auth
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from fastapi.middleware.cors import CORSMiddleware
+import chardet
 
 cred = credentials.Certificate("firebase_key.json")
 firebase_admin.initialize_app(cred, {
@@ -25,7 +31,7 @@ logging.basicConfig(filename='ml_service.log', level=logging.INFO, format='%(asc
 
 # --- Constants ---
 MODEL_DIR = "models"
-API_KEY = "supersecretkey"  # Change this in production!
+API_KEY = "key"  # Change this in production!
 
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
@@ -34,6 +40,14 @@ if not os.path.exists(MODEL_DIR):
 app = FastAPI(title="Advanced Prophet ML Service",
               description="A feature-rich time series forecasting API with Prophet.",
               version="2.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # or ["*"] for all origins (not recommended for prod)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- Authentication Dependency ---
 def api_key_auth(key: str = Query(..., description="API Key for authentication")):
@@ -106,6 +120,23 @@ def get_inventory_from_firebase():
     ref = db.reference('inventory')
     return ref.get()
 
+ALLOWED_ADMINS = ["abhixshek20@gmail.com", "sharveshsr9@gmail.com"]  # Replace with your real admin emails
+
+# Store uploaded data in memory for demo (replace with persistent storage in production)
+last_uploaded_df = None
+
+def push_dashboard_to_firestore(data):
+    db_firestore = firestore.client()
+    db_firestore.collection("dashboard").document("main").set(data)
+
+def push_sales_to_firestore(data):
+    db_firestore = firestore.client()
+    db_firestore.collection("sales").document("main").set(data)
+
+def push_notifications_to_firestore(data):
+    db_firestore = firestore.client()
+    db_firestore.collection("notifications").document("main").set(data)
+
 # --- Endpoints ---
 @app.get("/health", tags=["Utility"])
 def health_check():
@@ -174,7 +205,14 @@ async def train_model_csv(
     """Train a Prophet model from a CSV file. CSV must have 'ds' and 'y' columns."""
     if not file.filename or not file.filename.endswith('.csv'):
         raise HTTPException(status_code=400, detail="File must be a CSV with a valid name.")
-    df = pd.read_csv(file.file)
+    
+    rawdata = file.file.read()
+    result = chardet.detect(rawdata)
+    encoding = result['encoding']
+
+    import io
+    df = pd.read_csv(io.BytesIO(rawdata), encoding=encoding)
+
     if 'ds' not in df.columns or 'y' not in df.columns:
         raise HTTPException(status_code=400, detail="CSV must have 'ds' and 'y' columns")
     model_name = model_name or f"model_{uuid.uuid4().hex[:8]}"
@@ -258,3 +296,131 @@ def train_model_async(train_data: TrainData, background_tasks: BackgroundTasks, 
 def get_inventory():
     data = get_inventory_from_firebase()
     return {"inventory": data} 
+
+@app.post("/api/admin-upload")
+async def admin_upload(
+    file: UploadFile = File(...),
+    authorization: str = Header(None)
+):
+    global last_uploaded_df
+    # 1. Verify Firebase ID token
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing token")
+    id_token = authorization.split("Bearer ")[1]
+    try:
+        decoded_token = firebase_auth.verify_id_token(id_token)
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    user_email = decoded_token.get("email")
+    if user_email not in ALLOWED_ADMINS:
+        raise HTTPException(status_code=403, detail="Not authorized")
+
+    # 2. Read and store CSV for later prediction
+    df = pd.read_csv(file.file, encoding="latin1")
+    last_uploaded_df = df.copy()
+    # (Optional) Train models here if needed
+    return {"message": "File uploaded and ready for prediction."}
+
+@app.post("/api/admin-predict")
+async def admin_predict(authorization: str = Header(None)):
+    print("admin-predict endpoint called")
+    global last_uploaded_df
+    if last_uploaded_df is None:
+        raise HTTPException(status_code=400, detail="No data uploaded yet.")
+    # 1. Verify Firebase ID token
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing token")
+    id_token = authorization.split("Bearer ")[1]
+    try:
+        decoded_token = firebase_auth.verify_id_token(id_token)
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    user_email = decoded_token.get("email")
+    if user_email not in ALLOWED_ADMINS:
+        raise HTTPException(status_code=403, detail="Not authorized")
+
+    df = last_uploaded_df.copy()
+    # --- Placeholder ML logic ---
+    # Predict category (classification)
+    if 'category' in df.columns:
+        X_cat = df[['price', 'quantity_sold']].fillna(0)
+        y_cat = df['category']
+        clf = RandomForestClassifier()
+        clf.fit(X_cat, y_cat)
+        df['predicted_category'] = clf.predict(X_cat)
+    else:
+        df['predicted_category'] = 'unknown'
+    # Predict sales (regression)
+    if 'sales' in df.columns:
+        X_sales = df[['price', 'quantity_sold']].fillna(0)
+        y_sales = df['sales']
+        reg = RandomForestRegressor()
+        reg.fit(X_sales, y_sales)
+        df['predicted_sales'] = reg.predict(X_sales)
+    else:
+        df['predicted_sales'] = df['price'] * df['quantity_sold']
+
+    # --- Prepare Firestore data for UI ---
+    # Limit to top 10 items to avoid Firestore 1MB document size limit and show only top sales/products/notifications
+    pieData = [
+        {"name": row['product_name'], "value": row['predicted_sales'], "color": "#a99cff"}
+        for _, row in df.iterrows()
+    ][:10]
+    transactions = [
+        {"name": row['product_name'], "amount": row['predicted_sales'], "date": row['date']}
+        for _, row in df.iterrows()
+    ][:10]
+    topProducts = [
+        {"name": row['product_name'], "demand": int(row['quantity_sold']), "color": "#7c8aff"}
+        for _, row in df.iterrows()
+    ][:10]
+    dashboard_data = {
+        "pieData": pieData,
+        "transactions": transactions,
+        "topProducts": topProducts,
+        "balance": float(df['predicted_sales'].sum()),
+        "balanceChangePercent": 10.0
+    }
+    # Group by month for financial overview
+    df['date'] = pd.to_datetime(df['date'])
+    monthly = df.groupby(df['date'].dt.strftime('%b'))  # 'Jan', 'Feb', etc.
+    financialData = [
+        {
+            "month": month,
+            "income": float(group['predicted_sales'].sum()),
+            "expense": float(group['price'].sum())
+        }
+        for month, group in monthly
+    ]
+    sales_transactions = [
+        {"name": row['product_name'], "date": row['date'], "amount": row['predicted_sales'], "positive": True}
+        for _, row in df.iterrows()
+    ][:10]
+    orders = [
+        {"id": row.get('order_id', f"{i:05d}"), "product": row['product_name'], "customer": row.get('customer', 'N/A'), "price": row['price'], "date": row['date'], "payment": row.get('payment', 'Paid'), "status": row.get('status', 'Shipping')}
+        for i, row in df.iterrows()
+    ][:10]
+    sales_data = {
+        "financialData": financialData,
+        "transactions": sales_transactions,
+        "orders": orders
+    }
+    weeklySalesData = [
+        {"week": row.get('week', 'W1'), "sales": row['predicted_sales'], "settlements": row['predicted_sales']*0.8}
+        for _, row in df.iterrows()
+    ][:10]
+    notifications_list = [
+        {"type": row.get('notification_type', 'Info'), "item": row.get('notification_item', row['product_name']), "date": row.get('notification_date', row['date']), "details": row.get('notification_details', '')}
+        for _, row in df.iterrows()
+    ][:10]
+    notifications_data = {
+        "weeklySalesData": weeklySalesData,
+        "notifications": notifications_list
+    }
+    db_firestore = firestore.client()
+    print("Pushing to Firestore...")
+    db_firestore.collection("dashboard").document("main").set(dashboard_data)
+    db_firestore.collection("sales").document("main").set(sales_data)
+    db_firestore.collection("notifications").document("main").set(notifications_data)
+    print("Pushed to Firestore!")
+    return {"message": "Predictions pushed to Firestore and will reflect in frontend."} 
