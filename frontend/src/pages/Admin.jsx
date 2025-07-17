@@ -3,13 +3,14 @@ import { Box, Card, CardContent, Typography, Button, CircularProgress, Table, Ta
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { allowedEmails } from "../../allowedEmails";
+import { getAuth } from "firebase/auth";
 
 export default function Admin() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [predictions, setPredictions] = useState(null);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Admin() {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setPredictions(null);
+    setSuccess(false);
     setError("");
   };
 
@@ -29,17 +30,21 @@ export default function Admin() {
     if (!file) return;
     setLoading(true);
     setError("");
-    setPredictions(null);
+    setSuccess(false);
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("/api/train-and-predict", {
+      const auth = getAuth();
+      const token = await auth.currentUser.getIdToken();
+      const res = await fetch("/api/admin-upload", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-      if (!res.ok) throw new Error("Failed to upload and predict");
-      const data = await res.json();
-      setPredictions(data.predictions || []);
+      if (!res.ok) throw new Error("Failed to upload and process file");
+      setSuccess(true);
     } catch (err) {
       setError("Error: " + err.message);
     } finally {
@@ -60,7 +65,7 @@ export default function Admin() {
       <Card sx={{ maxWidth: 500, mb: 4 }}>
         <CardContent>
           <Typography variant="h6" fontWeight={600} gutterBottom>
-            Admin Upload Data for Prediction
+            Admin Upload Data for Dashboard
           </Typography>
           <input
             type="file"
@@ -74,38 +79,12 @@ export default function Admin() {
             disabled={!file || loading}
             sx={{ ml: 2 }}
           >
-            {loading ? <CircularProgress size={24} /> : "Upload & Predict"}
+            {loading ? <CircularProgress size={24} /> : "Upload"}
           </Button>
+          {success && <Typography color="success.main" sx={{ mt: 2 }}>File uploaded and processed! Dashboard will update shortly.</Typography>}
           {error && <Typography color="error" sx={{ mt: 2 }}>{error}</Typography>}
         </CardContent>
       </Card>
-      {predictions && (
-        <Card sx={{ maxWidth: 700, mb: 4 }}>
-          <CardContent>
-            <Typography variant="h6" fontWeight={600} gutterBottom>
-              Predictions
-            </Typography>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>#</TableCell>
-                    <TableCell>Prediction</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {predictions.map((pred, idx) => (
-                    <TableRow key={idx}>
-                      <TableCell>{idx + 1}</TableCell>
-                      <TableCell>{pred}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </CardContent>
-        </Card>
-      )}
     </Box>
   );
 } 
