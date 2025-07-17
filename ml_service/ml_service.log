@@ -99,21 +99,23 @@ cwd: None
 2025-07-11 14:10:52,298 INFO Chain [1] start processing
 2025-07-11 14:11:06,356 INFO Chain [1] done processing
 2025-07-11 14:11:06,626 INFO Trained model 'model_0748a0ed' from CSV with 100000 rows.
-2025-07-14 09:42:20,118 DEBUG cmd: where.exe tbb.dll
+2025-07-15 14:21:52,599 ERROR Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+
+2025-07-15 14:24:02,932 DEBUG cmd: where.exe tbb.dll
 cwd: None
-2025-07-14 09:42:20,284 DEBUG Adding TBB (c:\Users\hp\OneDrive\Desktop\Sakthi_01\.venv\lib\site-packages\prophet\stan_model\cmdstan-2.33.1\stan\lib\stan_math\lib\tbb) to PATH
-2025-07-14 09:42:52,381 DEBUG cmd: where.exe tbb.dll
+2025-07-15 14:24:03,096 DEBUG Adding TBB (e:\Sakthi_01\.venv\Lib\site-packages\prophet\stan_model\cmdstan-2.33.1\stan\lib\stan_math\lib\tbb) to PATH
+2025-07-15 14:25:50,644 DEBUG cmd: where.exe tbb.dll
 cwd: None
-2025-07-14 09:42:52,491 DEBUG TBB already found in load path
-2025-07-14 09:46:29,833 DEBUG cmd: where.exe tbb.dll
-cwd: None
-2025-07-14 09:46:29,957 DEBUG Adding TBB (c:\Users\hp\OneDrive\Desktop\Sakthi_01\.venv\lib\site-packages\prophet\stan_model\cmdstan-2.33.1\stan\lib\stan_math\lib\tbb) to PATH
-2025-07-14 09:46:30,085 INFO Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
-2025-07-14 09:46:30,557 DEBUG input tempfile: C:\Users\hp\AppData\Local\Temp\tmp2cb4n7kq\sdvzt4d8.json
-2025-07-14 09:46:39,054 DEBUG input tempfile: C:\Users\hp\AppData\Local\Temp\tmp2cb4n7kq\utv4s_0u.json
-2025-07-14 09:46:39,072 DEBUG idx 0
-2025-07-14 09:46:39,073 DEBUG running CmdStan, num_threads: None
-2025-07-14 09:46:39,073 DEBUG CmdStan args: ['C:\\Users\\hp\\OneDrive\\Desktop\\Sakthi_01\\.venv\\Lib\\site-packages\\prophet\\stan_model\\prophet_model.bin', 'random', 'seed=55820', 'data', 'file=C:\\Users\\hp\\AppData\\Local\\Temp\\tmp2cb4n7kq\\sdvzt4d8.json', 'init=C:\\Users\\hp\\AppData\\Local\\Temp\\tmp2cb4n7kq\\utv4s_0u.json', 'output', 'file=C:\\Users\\hp\\AppData\\Local\\Temp\\tmp2cb4n7kq\\prophet_model70d56emd\\prophet_model-20250714094639.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
-2025-07-14 09:46:39,073 INFO Chain [1] start processing
-2025-07-14 09:46:54,329 INFO Chain [1] done processing
-2025-07-14 09:46:54,613 INFO Trained model 'model_624764af' from CSV with 100000 rows.
+2025-07-15 14:25:50,803 DEBUG TBB already found in load path
+2025-07-15 14:25:51,058 INFO Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-07-15 14:25:51,893 DEBUG input tempfile: C:\Users\Lenovo\AppData\Local\Temp\tmp94w7m3az\f_a7rghi.json
+2025-07-15 14:26:07,626 DEBUG input tempfile: C:\Users\Lenovo\AppData\Local\Temp\tmp94w7m3az\aqtzt8ff.json
+2025-07-15 14:26:07,635 DEBUG idx 0
+2025-07-15 14:26:07,642 DEBUG running CmdStan, num_threads: None
+2025-07-15 14:26:07,642 DEBUG CmdStan args: ['E:\\Sakthi_01\\.venv\\Lib\\site-packages\\prophet\\stan_model\\prophet_model.bin', 'random', 'seed=16819', 'data', 'file=C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp94w7m3az\\f_a7rghi.json', 'init=C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp94w7m3az\\aqtzt8ff.json', 'output', 'file=C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmp94w7m3az\\prophet_modelp43l4_6w\\prophet_model-20250715142607.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-07-15 14:26:07,642 INFO Chain [1] start processing
+2025-07-15 14:26:45,465 INFO Chain [1] done processing
+2025-07-15 14:26:46,083 INFO Trained model 'model_d62ba6ba' from CSV with 100000 rows.
