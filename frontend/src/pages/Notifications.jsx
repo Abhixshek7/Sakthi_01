@@ -70,10 +70,10 @@ export default function Notifications() {
           overflow: 'hidden',
         }}
       >
-        {/* Top Section */}
-        <Box sx={{ display: 'flex', gap: 2, mt: 4, mb: 3, height: 270, width: '100%', minWidth: 0, overflowX: 'hidden' }}>
-          {/* Weekly Sales & Settlements Chart */}
-          <Paper elevation={2} sx={{ width: '74%', minWidth: 0, borderRadius: 3, p: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        
+        {/* <Box sx={{ display: 'flex', gap: 2, mt: 4, mb: 3, height: 270, width: '100%', minWidth: 0, overflowX: 'hidden' }}> */}
+    
+          {/* <Paper elevation={2} sx={{ width: '74%', minWidth: 0, borderRadius: 3, p: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
               <Typography fontWeight={600} fontSize={18}>Weekly Sales & Monthly Settlements</Typography>
             </Box>
@@ -88,9 +88,9 @@ export default function Notifications() {
                 <Bar dataKey="settlements" name="Settlements" fill="#22c55e" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
-          </Paper>
+          </Paper> */}
           {/* Recent Notifications */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', height: 270, width: '26%', minWidth: 0 }}>
+          {/* <Box sx={{ display: 'flex', flexDirection: 'column', height: 270, width: '26%', minWidth: 0 }}>
             <Paper elevation={2} sx={{ width: '100%', borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                 <Typography fontWeight={600} fontSize={16}>Recent Notifications</Typography>
@@ -106,9 +106,9 @@ export default function Notifications() {
               </Box>
             </Paper>
           </Box>
-        </Box>
+        </Box> */}
         {/* All Notifications Table Section */}
-        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', width: '100%' }}>
+        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', width: '100%', height:'100%' }}>
           <Box sx={{ overflow: 'auto', flex: 1 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed' }}>
               <thead>

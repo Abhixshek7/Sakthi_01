@@ -25,7 +25,7 @@ logging.basicConfig(filename='ml_service.log', level=logging.INFO, format='%(asc
 
 # --- Constants ---
 MODEL_DIR = "models"
-API_KEY = "supersecretkey"  # Change this in production!
+API_KEY = "key"  # Change this in production!
 
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)

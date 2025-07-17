@@ -114,7 +114,7 @@ export default function Sales() {
               </AreaChart>
             </ResponsiveContainer>
           </Paper>
-          {/* Recent Transactions */}
+          
           <Box sx={{ display: 'flex', flexDirection: 'column', height: 220, width: '20.7%' }}>
             <Paper elevation={2} sx={{ width: '100%', borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
