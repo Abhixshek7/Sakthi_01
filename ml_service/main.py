@@ -20,6 +20,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from fastapi.middleware.cors import CORSMiddleware
 import chardet
+import json
 
 cred = credentials.Certificate("firebase_key.json")
 firebase_admin.initialize_app(cred, {
@@ -111,10 +112,10 @@ def allowed_file(filename):
 
 def save_prediction_to_firebase(date, prediction):
     ref = db.reference('predictions')
-    ref.push({
+    ref.push(json.dumps({
         'date': str(date),  # Ensure it's a string
         'prediction': prediction
-    })
+    }))
 
 def get_inventory_from_firebase():
     ref = db.reference('inventory')
@@ -318,29 +319,8 @@ async def admin_upload(
     # 2. Read and store CSV for later prediction
     df = pd.read_csv(file.file, encoding="latin1")
     last_uploaded_df = df.copy()
-    # (Optional) Train models here if needed
-    return {"message": "File uploaded and ready for prediction."}
 
-@app.post("/api/admin-predict")
-async def admin_predict(authorization: str = Header(None)):
-    print("admin-predict endpoint called")
-    global last_uploaded_df
-    if last_uploaded_df is None:
-        raise HTTPException(status_code=400, detail="No data uploaded yet.")
-    # 1. Verify Firebase ID token
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing token")
-    id_token = authorization.split("Bearer ")[1]
-    try:
-        decoded_token = firebase_auth.verify_id_token(id_token)
-    except Exception:
-        raise HTTPException(status_code=401, detail="Invalid token")
-    user_email = decoded_token.get("email")
-    if user_email not in ALLOWED_ADMINS:
-        raise HTTPException(status_code=403, detail="Not authorized")
-
-    df = last_uploaded_df.copy()
-    # --- Placeholder ML logic ---
+    # --- ML Logic (moved from /api/admin-predict) ---
     # Predict category (classification)
     if 'category' in df.columns:
         X_cat = df[['price', 'quantity_sold']].fillna(0)
@@ -361,7 +341,7 @@ async def admin_predict(authorization: str = Header(None)):
         df['predicted_sales'] = df['price'] * df['quantity_sold']
 
     # --- Prepare Firestore data for UI ---
-    # Limit to top 10 items to avoid Firestore 1MB document size limit and show only top sales/products/notifications
+    df['date'] = pd.to_datetime(df['date'])
     pieData = [
         {"name": row['product_name'], "value": row['predicted_sales'], "color": "#a99cff"}
         for _, row in df.iterrows()
@@ -381,9 +361,7 @@ async def admin_predict(authorization: str = Header(None)):
         "balance": float(df['predicted_sales'].sum()),
         "balanceChangePercent": 10.0
     }
-    # Group by month for financial overview
-    df['date'] = pd.to_datetime(df['date'])
-    monthly = df.groupby(df['date'].dt.strftime('%b'))  # 'Jan', 'Feb', etc.
+    monthly = df.groupby(df['date'].dt.strftime('%b'))
     financialData = [
         {
             "month": month,
@@ -418,9 +396,9 @@ async def admin_predict(authorization: str = Header(None)):
         "notifications": notifications_list
     }
     db_firestore = firestore.client()
-    print("Pushing to Firestore...")
     db_firestore.collection("dashboard").document("main").set(dashboard_data)
     db_firestore.collection("sales").document("main").set(sales_data)
     db_firestore.collection("notifications").document("main").set(notifications_data)
-    print("Pushed to Firestore!")
-    return {"message": "Predictions pushed to Firestore and will reflect in frontend."} 
+    return {"message": "File uploaded, processed, and data pushed to Firestore."}
+
+# Optionally, you can remove or disable /api/admin-predict since it's no longer needed. 

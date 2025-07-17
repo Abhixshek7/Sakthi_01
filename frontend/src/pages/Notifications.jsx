@@ -1,40 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import { Box, Paper, Typography, Button, IconButton, InputBase } from '@mui/material';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import AddIcon from '@mui/icons-material/Add';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
 
-const weeklySalesData = [
-  { week: 'W1', sales: 120, settlements: 80 },
-  { week: 'W2', sales: 150, settlements: 100 },
-  { week: 'W3', sales: 170, settlements: 120 },
-  { week: 'W4', sales: 200, settlements: 140 },
-];
-
-const notifications = [
-  { type: 'Cancelled', item: 'Order #1234', date: '2024-06-01', details: 'Customer cancelled order.' },
-  { type: 'Returned', item: 'Order #1220', date: '2024-05-29', details: 'Item returned by customer.' },
-  { type: 'Settlement', item: 'May 2024', date: '2024-05-31', details: 'Monthly settlement completed.' },
-  { type: 'Cancelled', item: 'Order #1210', date: '2024-05-25', details: 'Customer cancelled order.' },
-  { type: 'Returned', item: 'Order #1205', date: '2024-05-22', details: 'Item returned by customer.' },
-];
-
-const allNotifications = [
-  ...notifications,
-  { type: 'Settlement', item: 'April 2024', date: '2024-04-30', details: 'Monthly settlement completed.' },
-  { type: 'Cancelled', item: 'Order #1190', date: '2024-04-15', details: 'Customer cancelled order.' },
-  { type: 'Returned', item: 'Order #1185', date: '2024-04-10', details: 'Item returned by customer.' },
-];
-
 export default function Notifications() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [search, setSearch] = useState('');
+  const [notificationsData, setNotificationsData] = useState(null);
 
-  const filteredNotifications = allNotifications.filter(n =>
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, 'notifications', 'main'), (docSnap) => {
+      setNotificationsData(docSnap.data());
+    });
+    return () => unsub();
+  }, []);
+
+  if (!notificationsData) return <div>Loading...</div>;
+
+  const filteredNotifications = (notificationsData.notifications || []).filter(n =>
     n.type.toLowerCase().includes(search.toLowerCase()) ||
     n.item.toLowerCase().includes(search.toLowerCase()) ||
     n.details.toLowerCase().includes(search.toLowerCase())
@@ -70,45 +60,8 @@ export default function Notifications() {
           overflow: 'hidden',
         }}
       >
-        {/* Top Section */}
-        <Box sx={{ display: 'flex', gap: 2, mt: 4, mb: 3, height: 270, width: '100%', minWidth: 0, overflowX: 'hidden' }}>
-          {/* Weekly Sales & Settlements Chart */}
-          <Paper elevation={2} sx={{ width: '74%', minWidth: 0, borderRadius: 3, p: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-              <Typography fontWeight={600} fontSize={18}>Weekly Sales & Monthly Settlements</Typography>
-            </Box>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={weeklySalesData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="week" axisLine={false} tickLine={false} />
-                <YAxis axisLine={false} tickLine={false} />
-                <Tooltip />
-                <Legend verticalAlign="top" height={36} />
-                <Bar dataKey="sales" name="Sales" fill="#3b82f6" radius={[6, 6, 0, 0]} />
-                <Bar dataKey="settlements" name="Settlements" fill="#22c55e" radius={[6, 6, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </Paper>
-          {/* Recent Notifications */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', height: 270, width: '26%', minWidth: 0 }}>
-            <Paper elevation={2} sx={{ width: '100%', borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                <Typography fontWeight={600} fontSize={16}>Recent Notifications</Typography>
-              </Box>
-              <Box sx={{ flex: 1, maxHeight: 200, overflowY: 'auto', scrollBehavior: 'smooth', pr: 1 }}>
-                {notifications.map((n, idx) => (
-                  <Box key={idx} sx={{ display: 'flex', flexDirection: 'column', mb: 1, p: 1, bgcolor: n.type === 'Cancelled' ? '#fee2e2' : n.type === 'Returned' ? '#fef9c3' : '#dbeafe', borderRadius: 2 }}>
-                    <Typography fontWeight={600} fontSize={13}>{n.type}: {n.item}</Typography>
-                    <Typography fontSize={11} color="#888">{n.date}</Typography>
-                    <Typography fontSize={12}>{n.details}</Typography>
-                  </Box>
-                ))}
-              </Box>
-            </Paper>
-          </Box>
-        </Box>
         {/* All Notifications Table Section */}
-        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', width: '100%' }}>
+        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', width: '100%', height:'100%' }}>
           <Box sx={{ overflow: 'auto', flex: 1 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed' }}>
               <thead>
