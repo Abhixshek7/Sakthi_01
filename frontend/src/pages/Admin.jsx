@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { allowedEmails } from "../../allowedEmails";
 import { getAuth } from "firebase/auth";
+import Loader from '../components/Loader';
 
 export default function Admin() {
   const { user } = useContext(UserContext);
@@ -53,7 +54,7 @@ export default function Admin() {
   };
 
   if (!user) {
-    return <Box sx={{ p: 4 }}><Typography>Loading...</Typography></Box>;
+    return <Loader />;
   }
 
   if (!allowedEmails.includes(user.email)) {

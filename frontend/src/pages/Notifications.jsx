@@ -6,6 +6,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import AddIcon from '@mui/icons-material/Add';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
+import Loader from '../components/Loader';
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
@@ -22,7 +23,7 @@ export default function Notifications() {
     return () => unsub();
   }, []);
 
-  if (!notificationsData) return <div>Loading...</div>;
+  if (!notificationsData) return <Loader />;
 
   const filteredNotifications = (notificationsData.notifications || []).filter(n =>
     n.type.toLowerCase().includes(search.toLowerCase()) ||
