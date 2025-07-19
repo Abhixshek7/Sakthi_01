@@ -1,0 +1,715 @@
+product_name,price,quantity_sold,date,customer_type,category,sales,order_id,customer,payment,status,week,notification_type,notification_item,notification_date,notification_details
+Coffee,51.28,5,2024-02-09,new,clothing,261.67,43976,Mohammed Ali,Refunded,Processing,W3,Settlement,Order #43976,2024-02-09,Settlement for Coffee
+Cooking Oil,157.89,33,2024-05-15,returning,electronics,4539.78,74791,Wei Chen,Unpaid,Cancelled,W1,Settlement,Order #74791,2024-05-15,Settlement for Cooking Oil
+Sugar,399.61,21,2024-03-31,wholesale,food,7808.94,41832,Emily Brown,Refunded,On Hold,W7,Settlement,Order #41832,2024-03-31,Settlement for Sugar
+Wheat,147.11,48,2024-05-23,returning,cleaning,7295.67,66350,David Kim,Failed,Out for Delivery,W5,Cancelled,Order #66350,2024-05-23,Cancelled for Wheat
+Shampoo,166.95,33,2024-03-14,vip,personal care,5893.71,30452,Wei Chen,Pending,Processing,W8,Cancelled,Order #30452,2024-03-14,Cancelled for Shampoo
+Wheat,107.28,44,2024-06-23,regular,personal care,4379.74,47537,Priya Patel,Refunded,Delivered,W9,Promotion,Order #47537,2024-06-23,Promotion for Wheat
+Juice,399.34,41,2024-06-02,employee,stationery,15956.05,56767,Wei Chen,Refunded,Returned,W7,Reminder,Order #56767,2024-06-02,Reminder for Juice
+Salt,269.03,16,2024-05-26,guest,clothing,3790.49,70295,Carlos Gomez,Pending,Out for Delivery,W2,Delivered,Order #70295,2024-05-26,Delivered for Salt
+Cooking Oil,424.3,39,2024-01-18,employee,food,17450.85,58822,David Kim,Processing,Out for Delivery,W7,Shipped,Order #58822,2024-01-18,Shipped for Cooking Oil
+Tea,231.79,6,2024-04-10,guest,cleaning,1421.87,57783,Jane Smith,Failed,Cancelled,W5,Delivered,Order #57783,2024-04-10,Delivered for Tea
+Toothpaste,493.47,6,2024-06-19,wholesale,beverage,3486.59,88230,Sara Lee,Partial,Processing,W6,Delayed,Order #88230,2024-06-19,Delayed for Toothpaste
+Soap,68.43,5,2024-02-02,wholesale,clothing,368.35,46094,Carlos Gomez,Pending,Returned,W9,Promotion,Order #46094,2024-02-02,Promotion for Soap
+Bathroom Essentials,372.88,32,2024-02-10,guest,electronics,12648.53,76015,Lucas Rossi,Partial,On Hold,W7,Reminder,Order #76015,2024-02-10,Reminder for Bathroom Essentials
+Bathroom Essentials,255.38,22,2024-01-28,guest,stationery,5614.43,33649,Sofia Garcia,Refunded,Cancelled,W4,Settlement,Order #33649,2024-01-28,Settlement for Bathroom Essentials
+Biscuits,407.36,25,2024-03-22,guest,clothing,11584.33,45311,Jane Smith,Unpaid,Shipping,W4,Delivered,Order #45311,2024-03-22,Delivered for Biscuits
+Sugar,284.37,42,2024-02-03,guest,cleaning,11720.52,54386,Emily Brown,Partial,Out for Delivery,W5,Cancelled,Order #54386,2024-02-03,Cancelled for Sugar
+Cooking Oil,133.25,23,2024-04-04,wholesale,stationery,3526.61,32233,Anna Ivanova,Paid,Processing,W7,Promotion,Order #32233,2024-04-04,Promotion for Cooking Oil
+Basmati Rice,192.87,6,2024-04-25,wholesale,food,937.1,90531,David Kim,Failed,Processing,W7,Cancelled,Order #90531,2024-04-25,Cancelled for Basmati Rice
+Sugar,496.77,32,2024-06-12,employee,electronics,15793.54,51235,Wei Chen,Pending,Cancelled,W7,Reminder,Order #51235,2024-06-12,Reminder for Sugar
+Soap,298.44,48,2024-06-05,vip,stationery,15641.08,64668,John Doe,Processing,On Hold,W1,Promotion,Order #64668,2024-06-05,Promotion for Soap
+Juice,319.97,23,2024-02-17,returning,personal care,8411.03,59164,David Kim,Partial,Delivered,W1,Shipped,Order #59164,2024-02-17,Shipped for Juice
+Snacks,423.76,11,2024-05-03,employee,personal care,4747.24,68971,Mohammed Ali,Paid,On Hold,W4,Delivered,Order #68971,2024-05-03,Delivered for Snacks
+Bathroom Essentials,355.73,37,2024-03-24,regular,food,14189.36,59204,Sara Lee,Refunded,Cancelled,W4,Reminder,Order #59204,2024-03-24,Reminder for Bathroom Essentials
+Cooking Oil,72.81,9,2024-05-05,regular,toys,766.61,64080,Wei Chen,Refunded,Returned,W2,Shipped,Order #64080,2024-05-05,Shipped for Cooking Oil
+Milk,434.82,4,2024-02-16,returning,food,2012.42,55942,John Doe,Failed,Processing,W1,Reminder,Order #55942,2024-02-16,Reminder for Milk
+Shampoo,308.5,26,2024-01-07,new,home,6469.05,36002,Mohammed Ali,Unpaid,Shipping,W7,Delivered,Order #36002,2024-01-07,Delivered for Shampoo
+Soap,191.58,50,2024-02-24,guest,stationery,8864.92,83204,Sofia Garcia,Pending,Delivered,W9,Cancelled,Order #83204,2024-02-24,Cancelled for Soap
+Cooking Oil,108.45,47,2024-03-17,regular,stationery,5118.61,65855,Jane Smith,Processing,On Hold,W9,Shipped,Order #65855,2024-03-17,Shipped for Cooking Oil
+Cooking Oil,75.83,28,2024-06-21,new,stationery,2387.93,28487,David Kim,Partial,Shipping,W5,Reminder,Order #28487,2024-06-21,Reminder for Cooking Oil
+Cooking Oil,113.12,17,2024-06-23,regular,beverage,1577.88,39333,Anna Ivanova,Unpaid,Processing,W2,Shipped,Order #39333,2024-06-23,Shipped for Cooking Oil
+Juice,116.14,12,2024-06-09,employee,stationery,1263.19,79424,Carlos Gomez,Failed,On Hold,W2,Settlement,Order #79424,2024-06-09,Settlement for Juice
+Toothpaste,190.48,43,2024-06-24,returning,food,9007.72,48663,Carlos Gomez,Refunded,On Hold,W5,Cancelled,Order #48663,2024-06-24,Cancelled for Toothpaste
+Shampoo,190.8,20,2024-01-21,guest,home,3797.07,45517,Wei Chen,Failed,Processing,W5,Returned,Order #45517,2024-01-21,Returned for Shampoo
+Bathroom Essentials,446.84,30,2024-03-20,wholesale,stationery,13140.62,76697,Mohammed Ali,Partial,Out for Delivery,W6,Info,Order #76697,2024-03-20,Info for Bathroom Essentials
+Basmati Rice,461.61,48,2024-03-24,employee,personal care,25771.8,47106,Mohammed Ali,Refunded,On Hold,W5,Info,Order #47106,2024-03-24,Info for Basmati Rice
+Salt,241.54,25,2024-01-12,new,toys,5761.38,47116,Anna Ivanova,Refunded,Cancelled,W3,Delivered,Order #47116,2024-01-12,Delivered for Salt
+Cooking Oil,286.98,1,2024-03-27,vip,food,304.05,89698,Wei Chen,Partial,Processing,W6,Shipped,Order #89698,2024-03-27,Shipped for Cooking Oil
+Toothpaste,450.5,18,2024-06-21,employee,electronics,9157.22,20577,Sara Lee,Paid,Cancelled,W2,Promotion,Order #20577,2024-06-21,Promotion for Toothpaste
+Shampoo,254.63,31,2024-05-31,regular,electronics,7523.82,42672,Carlos Gomez,Failed,Shipping,W6,Info,Order #42672,2024-05-31,Info for Shampoo
+Salt,374.26,27,2024-05-22,regular,food,10983.8,70367,Leslie Alexander,Failed,Returned,W7,Delayed,Order #70367,2024-05-22,Delayed for Salt
+Wheat,159.33,22,2024-03-09,wholesale,home,4013.93,89684,Carlos Gomez,Pending,Shipping,W8,Shipped,Order #89684,2024-03-09,Shipped for Wheat
+Cooking Oil,12.65,29,2024-02-27,regular,stationery,437.41,60571,Carlos Gomez,Failed,Returned,W9,Delivered,Order #60571,2024-02-27,Delivered for Cooking Oil
+Biscuits,48.18,3,2024-05-05,wholesale,clothing,127.22,57939,Priya Patel,Paid,Shipping,W1,Delivered,Order #57939,2024-05-05,Delivered for Biscuits
+Shampoo,403.49,31,2024-05-16,affiliate,food,14517.68,91092,Priya Patel,Paid,Delivered,W7,Settlement,Order #91092,2024-05-16,Settlement for Shampoo
+Coffee,412.21,15,2024-04-10,guest,home,7071.49,42704,Priya Patel,Partial,Processing,W9,Info,Order #42704,2024-04-10,Info for Coffee
+Cooking Oil,163.25,32,2024-06-14,returning,stationery,4301.56,87495,Emily Brown,Pending,Delivered,W9,Delivered,Order #87495,2024-06-14,Delivered for Cooking Oil
+Soap,462.58,22,2024-06-12,employee,clothing,11587.27,31048,Leslie Alexander,Partial,Delivered,W9,Cancelled,Order #31048,2024-06-12,Cancelled for Soap
+Wheat,199.24,25,2024-05-21,affiliate,home,5743.95,82112,Jane Smith,Paid,On Hold,W8,Delivered,Order #82112,2024-05-21,Delivered for Wheat
+Tea,65.66,23,2024-02-02,affiliate,toys,1422.81,94795,Emily Brown,Unpaid,Delivered,W2,Delivered,Order #94795,2024-02-02,Delivered for Tea
+Milk,411.65,26,2024-05-27,employee,personal care,12792.45,96074,Jane Smith,Pending,On Hold,W5,Reminder,Order #96074,2024-05-27,Reminder for Milk
+Tea,293.56,33,2024-01-19,returning,toys,8572.75,50813,Jane Smith,Pending,Returned,W2,Returned,Order #50813,2024-01-19,Returned for Tea
+Bathroom Essentials,462.38,24,2024-05-13,wholesale,stationery,9296.66,51438,Leslie Alexander,Failed,On Hold,W2,Delivered,Order #51438,2024-05-13,Delivered for Bathroom Essentials
+Tea,220.63,1,2024-04-07,affiliate,electronics,203.34,23761,Fatima Zahra,Pending,Shipping,W5,Info,Order #23761,2024-04-07,Info for Tea
+Basmati Rice,414.48,48,2024-01-05,returning,beverage,22031.87,60269,Leslie Alexander,Unpaid,Delivered,W9,Delayed,Order #60269,2024-01-05,Delayed for Basmati Rice
+Biscuits,487.34,34,2024-02-28,employee,food,14378.87,65085,Lucas Rossi,Paid,Delivered,W5,Shipped,Order #65085,2024-02-28,Shipped for Biscuits
+Snacks,455.87,11,2024-03-18,regular,stationery,5969.97,23627,Emily Brown,Partial,Shipping,W4,Reminder,Order #23627,2024-03-18,Reminder for Snacks
+Coffee,188.27,38,2024-05-20,affiliate,beverage,6318.54,53743,Lucas Rossi,Failed,Out for Delivery,W1,Delayed,Order #53743,2024-05-20,Delayed for Coffee
+Biscuits,143.16,14,2024-02-20,employee,electronics,2273.48,22229,Lucas Rossi,Unpaid,Cancelled,W4,Returned,Order #22229,2024-02-20,Returned for Biscuits
+Salt,494.78,1,2024-05-04,regular,electronics,454.96,63144,Anna Ivanova,Failed,Processing,W3,Returned,Order #63144,2024-05-04,Returned for Salt
+Tea,237.26,36,2024-01-15,affiliate,toys,7033.51,85444,Priya Patel,Partial,Cancelled,W4,Promotion,Order #85444,2024-01-15,Promotion for Tea
+Soap,360.04,31,2024-05-27,vip,toys,9098.41,27422,Lucas Rossi,Refunded,Cancelled,W4,Info,Order #27422,2024-05-27,Info for Soap
+Snacks,209.78,43,2024-05-27,new,beverage,9972.21,59276,Emily Brown,Pending,Cancelled,W7,Returned,Order #59276,2024-05-27,Returned for Snacks
+Biscuits,432.13,43,2024-04-16,employee,personal care,15096.58,37124,Mohammed Ali,Failed,Out for Delivery,W2,Delayed,Order #37124,2024-04-16,Delayed for Biscuits
+Tea,238.11,41,2024-03-15,vip,food,7923.37,55414,David Kim,Pending,Shipping,W8,Shipped,Order #55414,2024-03-15,Shipped for Tea
+Juice,323.73,36,2024-01-20,wholesale,food,11103.82,86142,Jane Smith,Partial,Processing,W2,Delayed,Order #86142,2024-01-20,Delayed for Juice
+Soap,195.97,12,2024-03-16,returning,clothing,1921.34,27511,Lucas Rossi,Processing,Out for Delivery,W9,Delivered,Order #27511,2024-03-16,Delivered for Soap
+Sugar,102.8,22,2024-01-12,vip,home,2408.67,91580,Leslie Alexander,Pending,Shipping,W8,Settlement,Order #91580,2024-01-12,Settlement for Sugar
+Coffee,446.25,2,2024-01-02,affiliate,personal care,840.92,94275,Priya Patel,Refunded,Shipping,W2,Info,Order #94275,2024-01-02,Info for Coffee
+Basmati Rice,126.76,23,2024-03-31,new,electronics,2815.8,47438,Fatima Zahra,Paid,On Hold,W1,Settlement,Order #47438,2024-03-31,Settlement for Basmati Rice
+Tea,89.06,29,2024-04-18,affiliate,personal care,3050.19,40406,John Doe,Pending,Cancelled,W3,Promotion,Order #40406,2024-04-18,Promotion for Tea
+Juice,480.55,48,2024-01-09,new,toys,27436.18,69523,Fatima Zahra,Unpaid,Cancelled,W5,Shipped,Order #69523,2024-01-09,Shipped for Juice
+Tea,148.5,24,2024-06-02,returning,electronics,3474.36,59293,Carlos Gomez,Refunded,Cancelled,W4,Delayed,Order #59293,2024-06-02,Delayed for Tea
+Toothpaste,426.76,40,2024-03-25,vip,home,14173.05,40980,Mohammed Ali,Paid,Processing,W5,Cancelled,Order #40980,2024-03-25,Cancelled for Toothpaste
+Toothpaste,491.66,12,2024-03-23,wholesale,personal care,5568.41,47077,Sara Lee,Pending,On Hold,W7,Promotion,Order #47077,2024-03-23,Promotion for Toothpaste
+Milk,141.15,22,2024-03-17,affiliate,clothing,2734.31,48234,Sara Lee,Pending,Shipping,W1,Settlement,Order #48234,2024-03-17,Settlement for Milk
+Shampoo,440.0,24,2024-06-09,wholesale,stationery,11170.29,73557,Jane Smith,Failed,Delivered,W5,Cancelled,Order #73557,2024-06-09,Cancelled for Shampoo
+Salt,95.17,28,2024-02-23,vip,personal care,2886.78,70312,Sofia Garcia,Pending,Returned,W9,Delayed,Order #70312,2024-02-23,Delayed for Salt
+Biscuits,275.51,41,2024-01-10,guest,food,12446.53,46591,Jane Smith,Unpaid,Out for Delivery,W8,Shipped,Order #46591,2024-01-10,Shipped for Biscuits
+Salt,304.68,23,2024-04-27,employee,personal care,8330.77,49003,Fatima Zahra,Refunded,Out for Delivery,W5,Reminder,Order #49003,2024-04-27,Reminder for Salt
+Coffee,398.89,14,2024-04-21,regular,home,6053.57,36648,Jane Smith,Paid,On Hold,W3,Delayed,Order #36648,2024-04-21,Delayed for Coffee
+Cooking Oil,203.09,31,2024-01-27,vip,toys,6325.34,86703,Mohammed Ali,Pending,Out for Delivery,W1,Settlement,Order #86703,2024-01-27,Settlement for Cooking Oil
+Soap,69.93,29,2024-01-25,wholesale,cleaning,1713.63,55558,Anna Ivanova,Processing,Returned,W4,Returned,Order #55558,2024-01-25,Returned for Soap
+Cooking Oil,479.45,6,2024-04-01,new,food,2899.23,86457,Jane Smith,Refunded,Out for Delivery,W7,Reminder,Order #86457,2024-04-01,Reminder for Cooking Oil
+Juice,214.05,3,2024-01-14,employee,beverage,622.84,53731,Priya Patel,Paid,Processing,W4,Settlement,Order #53731,2024-01-14,Settlement for Juice
+Wheat,218.96,12,2024-02-10,regular,clothing,2388.68,61989,Emily Brown,Unpaid,Delivered,W2,Cancelled,Order #61989,2024-02-10,Cancelled for Wheat
+Coffee,455.53,36,2024-03-05,wholesale,food,14247.02,42761,Lucas Rossi,Partial,Processing,W6,Delivered,Order #42761,2024-03-05,Delivered for Coffee
+Snacks,408.16,35,2024-03-29,wholesale,toys,14637.58,80034,Anna Ivanova,Pending,Cancelled,W1,Returned,Order #80034,2024-03-29,Returned for Snacks
+Soap,496.06,39,2024-05-23,new,electronics,18148.75,54505,Priya Patel,Pending,On Hold,W9,Reminder,Order #54505,2024-05-23,Reminder for Soap
+Cooking Oil,267.42,25,2024-01-24,employee,food,7727.18,70498,Fatima Zahra,Processing,Cancelled,W5,Reminder,Order #70498,2024-01-24,Reminder for Cooking Oil
+Cooking Oil,149.28,17,2024-03-06,new,electronics,2485.62,97817,Priya Patel,Pending,Cancelled,W4,Info,Order #97817,2024-03-06,Info for Cooking Oil
+Coffee,397.94,21,2024-04-09,new,home,8393.1,66063,David Kim,Unpaid,Returned,W3,Returned,Order #66063,2024-04-09,Returned for Coffee
+Salt,41.1,5,2024-02-18,guest,clothing,177.45,33869,David Kim,Refunded,Shipping,W4,Delivered,Order #33869,2024-02-18,Delivered for Salt
+Sugar,294.52,8,2024-04-09,guest,electronics,2397.34,93893,John Doe,Failed,Shipping,W8,Settlement,Order #93893,2024-04-09,Settlement for Sugar
+Snacks,31.9,34,2024-03-08,vip,cleaning,1099.85,40916,Sara Lee,Unpaid,Cancelled,W1,Cancelled,Order #40916,2024-03-08,Cancelled for Snacks
+Milk,82.79,41,2024-03-21,affiliate,beverage,3422.93,95415,Anna Ivanova,Paid,Out for Delivery,W7,Promotion,Order #95415,2024-03-21,Promotion for Milk
+Milk,173.09,45,2024-05-01,affiliate,personal care,6803.27,59707,Fatima Zahra,Failed,Cancelled,W2,Reminder,Order #59707,2024-05-01,Reminder for Milk
+Shampoo,348.16,1,2024-01-14,regular,personal care,340.57,44753,Fatima Zahra,Refunded,Out for Delivery,W9,Shipped,Order #44753,2024-01-14,Shipped for Shampoo
+Juice,245.76,36,2024-06-18,guest,electronics,7933.05,43012,Tom M�ller,Failed,Cancelled,W1,Promotion,Order #43012,2024-06-18,Promotion for Juice
+Bathroom Essentials,244.42,37,2024-02-03,wholesale,food,10431.78,32149,Emily Brown,Failed,On Hold,W4,Promotion,Order #32149,2024-02-03,Promotion for Bathroom Essentials
+Shampoo,263.82,31,2024-03-22,vip,electronics,7921.62,41517,Sofia Garcia,Pending,Cancelled,W8,Cancelled,Order #41517,2024-03-22,Cancelled for Shampoo
+Sugar,187.08,46,2024-01-19,guest,home,7674.01,98100,Jane Smith,Partial,Delivered,W4,Delayed,Order #98100,2024-01-19,Delayed for Sugar
+Basmati Rice,194.09,5,2024-04-06,new,electronics,868.15,20348,Carlos Gomez,Refunded,Out for Delivery,W9,Shipped,Order #20348,2024-04-06,Shipped for Basmati Rice
+Snacks,383.09,24,2024-02-17,returning,food,10926.56,27140,John Doe,Refunded,Shipping,W8,Delivered,Order #27140,2024-02-17,Delivered for Snacks
+Salt,150.72,43,2024-02-18,regular,personal care,5792.58,21120,Anna Ivanova,Partial,Delivered,W3,Settlement,Order #21120,2024-02-18,Settlement for Salt
+Tea,406.19,36,2024-04-20,affiliate,personal care,17278.49,58360,Carlos Gomez,Unpaid,Shipping,W8,Shipped,Order #58360,2024-04-20,Shipped for Tea
+Sugar,240.59,44,2024-02-12,employee,stationery,12016.16,37118,Tom M�ller,Failed,Returned,W2,Delayed,Order #37118,2024-02-12,Delayed for Sugar
+Tea,387.02,33,2024-06-13,new,stationery,11387.04,84670,Emily Brown,Pending,Cancelled,W9,Delayed,Order #84670,2024-06-13,Delayed for Tea
+Tea,280.99,3,2024-06-21,regular,clothing,997.84,73072,Sofia Garcia,Refunded,Returned,W8,Promotion,Order #73072,2024-06-21,Promotion for Tea
+Milk,375.8,35,2024-02-01,regular,toys,11420.71,61583,John Doe,Partial,Cancelled,W1,Info,Order #61583,2024-02-01,Info for Milk
+Sugar,398.32,46,2024-06-22,employee,food,14871.11,35668,Mohammed Ali,Paid,Processing,W8,Delayed,Order #35668,2024-06-22,Delayed for Sugar
+Soap,347.34,50,2024-06-19,regular,personal care,19374.1,62812,Emily Brown,Processing,Delivered,W7,Promotion,Order #62812,2024-06-19,Promotion for Soap
+Milk,464.57,29,2024-03-10,new,stationery,12132.85,80249,Tom M�ller,Failed,Returned,W6,Promotion,Order #80249,2024-03-10,Promotion for Milk
+Toothpaste,463.01,11,2024-02-02,regular,food,4371.07,21211,Lucas Rossi,Paid,Cancelled,W7,Delivered,Order #21211,2024-02-02,Delivered for Toothpaste
+Sugar,415.93,11,2024-01-07,wholesale,clothing,5082.27,29977,Emily Brown,Pending,Returned,W5,Info,Order #29977,2024-01-07,Info for Sugar
+Wheat,274.46,6,2024-04-04,employee,clothing,1971.82,53213,Lucas Rossi,Paid,Out for Delivery,W8,Reminder,Order #53213,2024-04-04,Reminder for Wheat
+Salt,435.3,14,2024-01-03,regular,toys,6816.24,28780,Emily Brown,Paid,Cancelled,W2,Shipped,Order #28780,2024-01-03,Shipped for Salt
+Basmati Rice,402.4,38,2024-05-02,returning,toys,15740.19,55756,John Doe,Pending,Shipping,W7,Delayed,Order #55756,2024-05-02,Delayed for Basmati Rice
+Bathroom Essentials,226.49,41,2024-04-01,returning,cleaning,8093.98,27473,Carlos Gomez,Refunded,Processing,W7,Delayed,Order #27473,2024-04-01,Delayed for Bathroom Essentials
+Juice,304.73,17,2024-06-16,regular,electronics,5854.42,56887,Leslie Alexander,Unpaid,Processing,W6,Shipped,Order #56887,2024-06-16,Shipped for Juice
+Wheat,331.94,47,2024-03-30,employee,personal care,18618.37,94864,Wei Chen,Paid,Out for Delivery,W1,Delivered,Order #94864,2024-03-30,Delivered for Wheat
+Juice,22.98,11,2024-05-01,vip,clothing,259.21,95460,Jane Smith,Refunded,Processing,W3,Shipped,Order #95460,2024-05-01,Shipped for Juice
+Basmati Rice,32.88,39,2024-02-25,employee,cleaning,1392.41,29350,Jane Smith,Partial,Out for Delivery,W2,Cancelled,Order #29350,2024-02-25,Cancelled for Basmati Rice
+Coffee,453.38,37,2024-01-29,affiliate,clothing,16110.15,88401,Tom M�ller,Partial,On Hold,W7,Delivered,Order #88401,2024-01-29,Delivered for Coffee
+Basmati Rice,11.07,16,2024-01-14,wholesale,home,189.35,23904,David Kim,Unpaid,On Hold,W4,Info,Order #23904,2024-01-14,Info for Basmati Rice
+Biscuits,303.71,22,2024-04-02,vip,home,7938.13,23467,Leslie Alexander,Failed,Out for Delivery,W8,Settlement,Order #23467,2024-04-02,Settlement for Biscuits
+Soap,113.97,2,2024-04-06,regular,clothing,270.44,34148,Leslie Alexander,Processing,Processing,W7,Cancelled,Order #34148,2024-04-06,Cancelled for Soap
+Sugar,158.88,24,2024-01-04,affiliate,beverage,4146.76,94725,Wei Chen,Paid,Delivered,W4,Shipped,Order #94725,2024-01-04,Shipped for Sugar
+Milk,243.74,10,2024-05-09,guest,stationery,2101.65,55656,Jane Smith,Pending,Shipping,W8,Settlement,Order #55656,2024-05-09,Settlement for Milk
+Biscuits,295.3,22,2024-01-01,regular,cleaning,6940.38,22486,David Kim,Partial,Cancelled,W5,Reminder,Order #22486,2024-01-01,Reminder for Biscuits
+Soap,266.33,15,2024-02-12,regular,personal care,4780.01,24064,John Doe,Paid,Delivered,W3,Reminder,Order #24064,2024-02-12,Reminder for Soap
+Bathroom Essentials,465.97,3,2024-04-07,wholesale,cleaning,1233.6,51807,Priya Patel,Processing,On Hold,W9,Delayed,Order #51807,2024-04-07,Delayed for Bathroom Essentials
+Sugar,410.97,29,2024-05-23,affiliate,clothing,12326.02,70392,Sofia Garcia,Processing,Cancelled,W2,Delayed,Order #70392,2024-05-23,Delayed for Sugar
+Basmati Rice,322.22,6,2024-02-19,wholesale,food,1810.13,46065,Lucas Rossi,Failed,Processing,W5,Shipped,Order #46065,2024-02-19,Shipped for Basmati Rice
+Salt,133.35,16,2024-01-04,guest,stationery,2029.36,42864,Sara Lee,Refunded,Shipping,W2,Shipped,Order #42864,2024-01-04,Shipped for Salt
+Bathroom Essentials,465.14,27,2024-02-02,affiliate,cleaning,11091.45,71770,Tom M�ller,Failed,Delivered,W3,Settlement,Order #71770,2024-02-02,Settlement for Bathroom Essentials
+Juice,316.2,11,2024-01-01,new,home,3133.61,90014,Lucas Rossi,Partial,On Hold,W3,Reminder,Order #90014,2024-01-01,Reminder for Juice
+Sugar,148.16,49,2024-01-28,regular,home,6422.44,51292,Anna Ivanova,Failed,Shipping,W4,Cancelled,Order #51292,2024-01-28,Cancelled for Sugar
+Soap,430.71,29,2024-04-04,affiliate,food,11737.86,41034,Priya Patel,Unpaid,Delivered,W4,Reminder,Order #41034,2024-04-04,Reminder for Soap
+Soap,291.14,24,2024-03-21,employee,cleaning,8215.09,59930,Lucas Rossi,Pending,Cancelled,W5,Promotion,Order #59930,2024-03-21,Promotion for Soap
+Biscuits,315.46,22,2024-01-29,vip,stationery,5650.97,75504,Anna Ivanova,Pending,Shipping,W3,Shipped,Order #75504,2024-01-29,Shipped for Biscuits
+Basmati Rice,116.68,14,2024-01-02,employee,clothing,1393.64,89061,Jane Smith,Paid,Processing,W4,Cancelled,Order #89061,2024-01-02,Cancelled for Basmati Rice
+Wheat,366.84,40,2024-03-25,new,food,14714.7,29324,Leslie Alexander,Pending,Returned,W6,Promotion,Order #29324,2024-03-25,Promotion for Wheat
+Sugar,282.82,2,2024-01-29,employee,stationery,544.81,62103,Fatima Zahra,Processing,Out for Delivery,W4,Cancelled,Order #62103,2024-01-29,Cancelled for Sugar
+Basmati Rice,388.83,22,2024-01-16,employee,home,8405.39,73046,Priya Patel,Failed,Processing,W1,Cancelled,Order #73046,2024-01-16,Cancelled for Basmati Rice
+Toothpaste,135.01,30,2024-01-07,wholesale,toys,3727.73,99502,Lucas Rossi,Refunded,Cancelled,W3,Info,Order #99502,2024-01-07,Info for Toothpaste
+Juice,399.91,8,2024-01-25,new,toys,3099.15,52484,Anna Ivanova,Partial,Returned,W4,Info,Order #52484,2024-01-25,Info for Juice
+Milk,337.4,36,2024-02-13,returning,clothing,12280.13,79554,Jane Smith,Failed,Shipping,W5,Promotion,Order #79554,2024-02-13,Promotion for Milk
+Soap,69.03,4,2024-05-25,new,beverage,221.94,56636,Mohammed Ali,Refunded,Processing,W7,Reminder,Order #56636,2024-05-25,Reminder for Soap
+Coffee,206.36,31,2024-03-22,guest,personal care,6322.81,31315,Priya Patel,Refunded,Out for Delivery,W3,Delivered,Order #31315,2024-03-22,Delivered for Coffee
+Soap,210.42,48,2024-06-09,returning,home,8083.99,46066,Wei Chen,Processing,Processing,W1,Returned,Order #46066,2024-06-09,Returned for Soap
+Toothpaste,339.62,19,2024-06-09,new,stationery,7548.56,88059,Jane Smith,Partial,Processing,W3,Delayed,Order #88059,2024-06-09,Delayed for Toothpaste
+Wheat,423.51,7,2024-05-20,guest,cleaning,2639.6,20604,Mohammed Ali,Unpaid,Out for Delivery,W8,Delivered,Order #20604,2024-05-20,Delivered for Wheat
+Biscuits,273.78,43,2024-05-04,wholesale,clothing,13130.25,70699,Sara Lee,Processing,Shipping,W6,Settlement,Order #70699,2024-05-04,Settlement for Biscuits
+Tea,110.75,33,2024-05-31,employee,home,3162.42,26582,Wei Chen,Processing,On Hold,W3,Cancelled,Order #26582,2024-05-31,Cancelled for Tea
+Wheat,417.25,12,2024-03-13,regular,stationery,5761.61,88740,Jane Smith,Failed,Out for Delivery,W7,Cancelled,Order #88740,2024-03-13,Cancelled for Wheat
+Sugar,302.16,24,2024-02-02,new,home,7775.76,38411,Mohammed Ali,Partial,Out for Delivery,W1,Cancelled,Order #38411,2024-02-02,Cancelled for Sugar
+Salt,10.54,37,2024-01-01,employee,food,348.75,96191,Carlos Gomez,Unpaid,On Hold,W7,Shipped,Order #96191,2024-01-01,Shipped for Salt
+Wheat,305.01,47,2024-04-06,employee,electronics,13128.94,85561,Mohammed Ali,Processing,Out for Delivery,W6,Delivered,Order #85561,2024-04-06,Delivered for Wheat
+Toothpaste,447.72,17,2024-03-23,vip,clothing,8316.64,50544,Fatima Zahra,Paid,Returned,W9,Returned,Order #50544,2024-03-23,Returned for Toothpaste
+Basmati Rice,327.61,16,2024-04-26,new,stationery,5083.71,75282,John Doe,Pending,Out for Delivery,W3,Delivered,Order #75282,2024-04-26,Delivered for Basmati Rice
+Milk,252.99,20,2024-01-21,returning,personal care,4210.22,64800,Jane Smith,Pending,Out for Delivery,W1,Delivered,Order #64800,2024-01-21,Delivered for Milk
+Milk,468.54,8,2024-01-20,wholesale,clothing,3400.05,20184,Leslie Alexander,Refunded,Shipping,W5,Promotion,Order #20184,2024-01-20,Promotion for Milk
+Salt,130.31,9,2024-06-11,regular,food,1296.82,86261,David Kim,Paid,Out for Delivery,W2,Delivered,Order #86261,2024-06-11,Delivered for Salt
+Basmati Rice,336.19,34,2024-02-17,affiliate,clothing,9210.85,57107,Fatima Zahra,Partial,Returned,W6,Delayed,Order #57107,2024-02-17,Delayed for Basmati Rice
+Basmati Rice,282.42,30,2024-05-18,guest,beverage,8309.58,21158,Lucas Rossi,Unpaid,Processing,W2,Shipped,Order #21158,2024-05-18,Shipped for Basmati Rice
+Milk,319.1,2,2024-03-09,vip,food,723.73,70473,Anna Ivanova,Processing,Returned,W1,Returned,Order #70473,2024-03-09,Returned for Milk
+Bathroom Essentials,190.51,42,2024-04-11,wholesale,clothing,8842.47,31342,Lucas Rossi,Failed,Returned,W9,Settlement,Order #31342,2024-04-11,Settlement for Bathroom Essentials
+Cooking Oil,266.63,22,2024-04-21,employee,home,5670.35,63549,John Doe,Processing,Processing,W3,Returned,Order #63549,2024-04-21,Returned for Cooking Oil
+Biscuits,84.84,29,2024-03-27,vip,stationery,2572.75,89807,Anna Ivanova,Partial,Processing,W7,Delivered,Order #89807,2024-03-27,Delivered for Biscuits
+Toothpaste,138.53,26,2024-04-09,guest,electronics,2890.01,21029,Sofia Garcia,Partial,Delivered,W2,Info,Order #21029,2024-04-09,Info for Toothpaste
+Bathroom Essentials,200.3,42,2024-02-23,guest,food,9873.68,89176,Leslie Alexander,Pending,Returned,W3,Delayed,Order #89176,2024-02-23,Delayed for Bathroom Essentials
+Milk,429.1,7,2024-05-26,employee,electronics,2596.96,74790,Tom M�ller,Partial,Returned,W4,Delayed,Order #74790,2024-05-26,Delayed for Milk
+Coffee,212.52,44,2024-06-15,returning,clothing,11206.97,21669,Sofia Garcia,Paid,Shipping,W4,Delivered,Order #21669,2024-06-15,Delivered for Coffee
+Tea,151.91,26,2024-02-01,guest,clothing,3329.88,76396,Anna Ivanova,Refunded,Cancelled,W3,Promotion,Order #76396,2024-02-01,Promotion for Tea
+Coffee,253.05,33,2024-03-19,regular,stationery,8100.24,75352,John Doe,Unpaid,Processing,W5,Reminder,Order #75352,2024-03-19,Reminder for Coffee
+Tea,192.88,49,2024-01-26,new,beverage,10323.28,44296,Priya Patel,Partial,Delivered,W6,Returned,Order #44296,2024-01-26,Returned for Tea
+Shampoo,282.59,4,2024-02-03,regular,beverage,905.13,53610,Lucas Rossi,Pending,Delivered,W1,Delivered,Order #53610,2024-02-03,Delivered for Shampoo
+Coffee,366.18,14,2024-05-06,guest,beverage,4521.16,49717,Tom M�ller,Failed,Shipping,W1,Settlement,Order #49717,2024-05-06,Settlement for Coffee
+Biscuits,137.54,20,2024-01-10,affiliate,stationery,2644.58,33362,Emily Brown,Pending,Out for Delivery,W9,Promotion,Order #33362,2024-01-10,Promotion for Biscuits
+Biscuits,432.62,39,2024-04-20,regular,stationery,19782.07,82429,Sara Lee,Paid,Returned,W1,Info,Order #82429,2024-04-20,Info for Biscuits
+Basmati Rice,241.65,16,2024-01-31,regular,cleaning,4610.98,20362,Mohammed Ali,Paid,Processing,W3,Promotion,Order #20362,2024-01-31,Promotion for Basmati Rice
+Toothpaste,477.84,6,2024-06-16,employee,home,3383.74,62391,Sofia Garcia,Pending,Shipping,W3,Info,Order #62391,2024-06-16,Info for Toothpaste
+Tea,232.08,11,2024-06-07,guest,clothing,2573.21,32079,Carlos Gomez,Paid,Delivered,W5,Shipped,Order #32079,2024-06-07,Shipped for Tea
+Salt,439.7,21,2024-02-05,new,home,7742.19,83864,Sara Lee,Processing,Delivered,W4,Cancelled,Order #83864,2024-02-05,Cancelled for Salt
+Bathroom Essentials,469.41,7,2024-03-01,returning,stationery,3009.87,93241,Sara Lee,Pending,Cancelled,W9,Settlement,Order #93241,2024-03-01,Settlement for Bathroom Essentials
+Biscuits,418.91,46,2024-03-30,returning,stationery,22432.43,25988,Emily Brown,Failed,Returned,W2,Reminder,Order #25988,2024-03-30,Reminder for Biscuits
+Wheat,111.6,25,2024-01-07,new,electronics,2459.15,31204,David Kim,Pending,Cancelled,W2,Returned,Order #31204,2024-01-07,Returned for Wheat
+Wheat,413.81,34,2024-01-18,guest,personal care,12415.91,69691,Anna Ivanova,Unpaid,Shipping,W8,Info,Order #69691,2024-01-18,Info for Wheat
+Tea,451.54,22,2024-02-29,guest,beverage,8037.32,75401,John Doe,Paid,Delivered,W9,Settlement,Order #75401,2024-02-29,Settlement for Tea
+Biscuits,233.26,49,2024-06-18,wholesale,home,11624.21,53665,John Doe,Unpaid,Shipping,W6,Cancelled,Order #53665,2024-06-18,Cancelled for Biscuits
+Toothpaste,189.01,7,2024-02-07,wholesale,food,1387.63,70001,Leslie Alexander,Processing,Cancelled,W2,Info,Order #70001,2024-02-07,Info for Toothpaste
+Basmati Rice,194.27,18,2024-04-23,new,personal care,3619.71,66837,Mohammed Ali,Paid,Shipping,W8,Info,Order #66837,2024-04-23,Info for Basmati Rice
+Soap,153.12,48,2024-01-16,affiliate,electronics,6548.3,24684,Wei Chen,Unpaid,Shipping,W4,Cancelled,Order #24684,2024-01-16,Cancelled for Soap
+Salt,170.3,47,2024-01-03,guest,electronics,7602.59,88600,Priya Patel,Refunded,Out for Delivery,W7,Info,Order #88600,2024-01-03,Info for Salt
+Juice,175.64,3,2024-02-05,affiliate,clothing,481.37,43229,Leslie Alexander,Pending,Delivered,W2,Cancelled,Order #43229,2024-02-05,Cancelled for Juice
+Wheat,373.94,26,2024-03-11,wholesale,beverage,9081.55,92684,Carlos Gomez,Pending,Cancelled,W1,Cancelled,Order #92684,2024-03-11,Cancelled for Wheat
+Toothpaste,28.53,46,2024-05-02,vip,personal care,1256.44,99388,John Doe,Refunded,Returned,W4,Settlement,Order #99388,2024-05-02,Settlement for Toothpaste
+Biscuits,338.9,2,2024-03-08,affiliate,personal care,610.37,79199,Wei Chen,Unpaid,Processing,W8,Promotion,Order #79199,2024-03-08,Promotion for Biscuits
+Sugar,118.47,6,2024-06-10,new,personal care,815.53,21839,Mohammed Ali,Processing,Out for Delivery,W1,Settlement,Order #21839,2024-06-10,Settlement for Sugar
+Salt,412.06,33,2024-02-06,regular,toys,13578.23,29083,Emily Brown,Refunded,Returned,W6,Cancelled,Order #29083,2024-02-06,Cancelled for Salt
+Tea,446.69,48,2024-01-20,wholesale,cleaning,24716.77,81828,Priya Patel,Processing,Returned,W9,Delivered,Order #81828,2024-01-20,Delivered for Tea
+Wheat,452.42,15,2024-02-23,vip,personal care,5457.9,91016,Emily Brown,Refunded,Shipping,W9,Reminder,Order #91016,2024-02-23,Reminder for Wheat
+Coffee,394.98,28,2024-04-19,employee,clothing,12065.09,52988,Leslie Alexander,Partial,Delivered,W6,Promotion,Order #52988,2024-04-19,Promotion for Coffee
+Snacks,230.49,48,2024-05-03,regular,toys,12926.89,43363,Lucas Rossi,Refunded,Returned,W2,Settlement,Order #43363,2024-05-03,Settlement for Snacks
+Shampoo,20.63,48,2024-06-25,new,cleaning,798.95,43167,Priya Patel,Partial,Cancelled,W7,Promotion,Order #43167,2024-06-25,Promotion for Shampoo
+Sugar,28.64,44,2024-04-06,guest,personal care,1207.41,34156,Fatima Zahra,Failed,Cancelled,W4,Shipped,Order #34156,2024-04-06,Shipped for Sugar
+Coffee,29.85,39,2024-06-27,regular,home,1091.14,28713,David Kim,Unpaid,Out for Delivery,W7,Settlement,Order #28713,2024-06-27,Settlement for Coffee
+Coffee,359.85,41,2024-03-09,returning,beverage,13852.39,23694,Fatima Zahra,Failed,Returned,W3,Info,Order #23694,2024-03-09,Info for Coffee
+Basmati Rice,175.45,36,2024-05-28,wholesale,personal care,5896.58,79016,Sofia Garcia,Processing,Delivered,W9,Cancelled,Order #79016,2024-05-28,Cancelled for Basmati Rice
+Toothpaste,91.82,20,2024-05-10,guest,home,1870.83,95627,Jane Smith,Partial,Cancelled,W1,Returned,Order #95627,2024-05-10,Returned for Toothpaste
+Soap,312.15,36,2024-01-25,regular,food,12578.01,79665,Carlos Gomez,Partial,Shipping,W8,Settlement,Order #79665,2024-01-25,Settlement for Soap
+Wheat,343.65,27,2024-06-22,new,clothing,8446.25,29156,Priya Patel,Pending,Cancelled,W7,Delayed,Order #29156,2024-06-22,Delayed for Wheat
+Coffee,247.51,29,2024-04-04,affiliate,stationery,8080.36,22746,Anna Ivanova,Paid,Shipping,W8,Returned,Order #22746,2024-04-04,Returned for Coffee
+Toothpaste,402.73,13,2024-04-21,new,cleaning,4311.82,62561,Mohammed Ali,Refunded,Shipping,W2,Delayed,Order #62561,2024-04-21,Delayed for Toothpaste
+Sugar,276.72,17,2024-04-06,vip,cleaning,5339.78,53935,Tom M�ller,Failed,Processing,W3,Shipped,Order #53935,2024-04-06,Shipped for Sugar
+Cooking Oil,173.72,25,2024-06-27,regular,home,4037.69,21721,David Kim,Refunded,Out for Delivery,W6,Settlement,Order #21721,2024-06-27,Settlement for Cooking Oil
+Toothpaste,218.59,4,2024-05-24,new,electronics,886.88,60916,Jane Smith,Processing,Returned,W7,Delayed,Order #60916,2024-05-24,Delayed for Toothpaste
+Basmati Rice,25.52,9,2024-01-03,new,cleaning,208.96,89241,Fatima Zahra,Refunded,Shipping,W3,Delivered,Order #89241,2024-01-03,Delivered for Basmati Rice
+Toothpaste,408.89,45,2024-05-02,returning,stationery,21498.7,66228,Jane Smith,Failed,On Hold,W3,Shipped,Order #66228,2024-05-02,Shipped for Toothpaste
+Sugar,483.46,42,2024-05-20,regular,stationery,21034.7,21644,Carlos Gomez,Paid,Returned,W3,Delivered,Order #21644,2024-05-20,Delivered for Sugar
+Biscuits,258.21,8,2024-05-21,wholesale,beverage,2477.65,98755,Jane Smith,Refunded,Returned,W3,Settlement,Order #98755,2024-05-21,Settlement for Biscuits
+Toothpaste,446.41,45,2024-01-30,vip,electronics,23375.94,57434,Fatima Zahra,Partial,Delivered,W2,Returned,Order #57434,2024-01-30,Returned for Toothpaste
+Coffee,488.93,42,2024-03-23,wholesale,food,22351.46,78566,Leslie Alexander,Unpaid,Out for Delivery,W8,Info,Order #78566,2024-03-23,Info for Coffee
+Salt,305.18,19,2024-06-03,regular,electronics,5913.2,78294,Fatima Zahra,Processing,Returned,W8,Delayed,Order #78294,2024-06-03,Delayed for Salt
+Coffee,188.08,22,2024-01-16,new,home,3509.1,39714,Sara Lee,Processing,On Hold,W8,Delivered,Order #39714,2024-01-16,Delivered for Coffee
+Cooking Oil,177.82,38,2024-04-23,affiliate,clothing,6565.56,60503,Lucas Rossi,Refunded,Processing,W1,Reminder,Order #60503,2024-04-23,Reminder for Cooking Oil
+Tea,18.44,38,2024-06-21,wholesale,electronics,756.18,82230,Jane Smith,Processing,Returned,W3,Settlement,Order #82230,2024-06-21,Settlement for Tea
+Coffee,440.07,15,2024-01-12,affiliate,beverage,7917.33,47586,John Doe,Pending,On Hold,W6,Cancelled,Order #47586,2024-01-12,Cancelled for Coffee
+Cooking Oil,221.92,45,2024-03-16,new,stationery,11793.16,59259,Tom M�ller,Unpaid,Delivered,W2,Shipped,Order #59259,2024-03-16,Shipped for Cooking Oil
+Basmati Rice,216.46,24,2024-03-06,wholesale,clothing,5187.58,24314,John Doe,Unpaid,Shipping,W9,Returned,Order #24314,2024-03-06,Returned for Basmati Rice
+Basmati Rice,248.63,30,2024-02-19,wholesale,stationery,7764.58,66734,Fatima Zahra,Failed,Out for Delivery,W8,Returned,Order #66734,2024-02-19,Returned for Basmati Rice
+Wheat,314.05,31,2024-04-05,guest,food,10968.56,53153,Mohammed Ali,Paid,Cancelled,W6,Delayed,Order #53153,2024-04-05,Delayed for Wheat
+Shampoo,192.75,3,2024-02-17,employee,toys,543.82,89157,Leslie Alexander,Unpaid,Processing,W2,Settlement,Order #89157,2024-02-17,Settlement for Shampoo
+Juice,207.42,16,2024-04-08,vip,clothing,2732.03,20518,Tom M�ller,Failed,Processing,W3,Returned,Order #20518,2024-04-08,Returned for Juice
+Shampoo,146.86,3,2024-04-19,guest,personal care,404.44,47603,Fatima Zahra,Paid,On Hold,W4,Shipped,Order #47603,2024-04-19,Shipped for Shampoo
+Milk,43.42,2,2024-03-03,employee,personal care,91.84,30909,Jane Smith,Refunded,On Hold,W8,Settlement,Order #30909,2024-03-03,Settlement for Milk
+Toothpaste,209.49,6,2024-01-11,wholesale,home,1463.19,51334,Anna Ivanova,Paid,Out for Delivery,W1,Promotion,Order #51334,2024-01-11,Promotion for Toothpaste
+Basmati Rice,273.56,34,2024-05-27,wholesale,stationery,9367.43,71540,David Kim,Partial,Delivered,W4,Info,Order #71540,2024-05-27,Info for Basmati Rice
+Shampoo,495.77,45,2024-04-01,regular,personal care,25849.45,96517,Tom M�ller,Unpaid,On Hold,W6,Returned,Order #96517,2024-04-01,Returned for Shampoo
+Cooking Oil,161.51,15,2024-03-21,returning,toys,2001.45,20767,Fatima Zahra,Failed,Cancelled,W1,Shipped,Order #20767,2024-03-21,Shipped for Cooking Oil
+Soap,321.9,39,2024-06-04,employee,cleaning,11031.17,45136,Sofia Garcia,Processing,Returned,W5,Cancelled,Order #45136,2024-06-04,Cancelled for Soap
+Coffee,277.48,42,2024-03-23,affiliate,beverage,13521.18,57946,Sofia Garcia,Paid,On Hold,W7,Shipped,Order #57946,2024-03-23,Shipped for Coffee
+Basmati Rice,207.95,20,2024-01-31,regular,toys,3623.75,95782,Jane Smith,Pending,Delivered,W2,Shipped,Order #95782,2024-01-31,Shipped for Basmati Rice
+Snacks,62.79,49,2024-04-13,vip,toys,3373.19,81713,Fatima Zahra,Refunded,Returned,W4,Promotion,Order #81713,2024-04-13,Promotion for Snacks
+Bathroom Essentials,477.97,41,2024-03-23,wholesale,personal care,20947.75,29933,Sara Lee,Partial,Processing,W5,Reminder,Order #29933,2024-03-23,Reminder for Bathroom Essentials
+Salt,201.75,9,2024-02-03,vip,home,1981.01,98165,Mohammed Ali,Pending,On Hold,W6,Promotion,Order #98165,2024-02-03,Promotion for Salt
+Cooking Oil,477.05,7,2024-02-18,affiliate,clothing,3169.06,74529,John Doe,Paid,Delivered,W2,Delayed,Order #74529,2024-02-18,Delayed for Cooking Oil
+Shampoo,137.05,45,2024-02-09,new,clothing,6255.44,50340,Fatima Zahra,Partial,Returned,W1,Promotion,Order #50340,2024-02-09,Promotion for Shampoo
+Milk,327.47,44,2024-05-23,returning,cleaning,16636.08,76639,Wei Chen,Partial,Returned,W7,Delivered,Order #76639,2024-05-23,Delivered for Milk
+Sugar,189.67,36,2024-01-17,new,beverage,8133.64,64431,Sara Lee,Processing,Out for Delivery,W4,Info,Order #64431,2024-01-17,Info for Sugar
+Toothpaste,62.97,47,2024-02-29,returning,toys,2860.03,38192,Sara Lee,Unpaid,On Hold,W6,Info,Order #38192,2024-02-29,Info for Toothpaste
+Wheat,402.52,6,2024-02-28,affiliate,clothing,2077.27,67873,Fatima Zahra,Failed,Returned,W5,Reminder,Order #67873,2024-02-28,Reminder for Wheat
+Cooking Oil,449.5,39,2024-02-20,vip,cleaning,17659.62,96211,Wei Chen,Unpaid,Out for Delivery,W5,Promotion,Order #96211,2024-02-20,Promotion for Cooking Oil
+Soap,239.57,6,2024-03-20,regular,toys,1540.66,76981,Anna Ivanova,Pending,Returned,W6,Returned,Order #76981,2024-03-20,Returned for Soap
+Coffee,461.85,20,2024-02-11,guest,electronics,8394.66,44034,Tom M�ller,Processing,On Hold,W4,Promotion,Order #44034,2024-02-11,Promotion for Coffee
+Shampoo,236.56,11,2024-03-29,regular,home,2451.22,24290,Fatima Zahra,Failed,Cancelled,W6,Delayed,Order #24290,2024-03-29,Delayed for Shampoo
+Basmati Rice,361.48,32,2024-05-22,new,personal care,12739.52,70831,David Kim,Refunded,Out for Delivery,W2,Shipped,Order #70831,2024-05-22,Shipped for Basmati Rice
+Biscuits,202.49,33,2024-06-12,employee,personal care,6004.28,49579,David Kim,Pending,Out for Delivery,W8,Delivered,Order #49579,2024-06-12,Delivered for Biscuits
+Wheat,66.8,36,2024-06-08,wholesale,home,2472.6,97844,Leslie Alexander,Failed,Returned,W5,Promotion,Order #97844,2024-06-08,Promotion for Wheat
+Wheat,388.92,48,2024-01-31,returning,beverage,16958.56,52680,Carlos Gomez,Paid,Returned,W5,Promotion,Order #52680,2024-01-31,Promotion for Wheat
+Biscuits,358.46,3,2024-06-05,vip,home,1130.62,67794,Lucas Rossi,Refunded,On Hold,W5,Returned,Order #67794,2024-06-05,Returned for Biscuits
+Basmati Rice,203.88,27,2024-05-28,affiliate,beverage,4950.79,98962,John Doe,Unpaid,Returned,W3,Cancelled,Order #98962,2024-05-28,Cancelled for Basmati Rice
+Tea,10.18,37,2024-01-25,regular,electronics,410.52,99869,Sara Lee,Partial,Cancelled,W4,Info,Order #99869,2024-01-25,Info for Tea
+Coffee,181.21,25,2024-05-29,returning,electronics,5025.58,88390,Priya Patel,Pending,Returned,W6,Reminder,Order #88390,2024-05-29,Reminder for Coffee
+Salt,346.99,23,2024-06-02,employee,home,8946.12,21445,Carlos Gomez,Failed,Out for Delivery,W6,Cancelled,Order #21445,2024-06-02,Cancelled for Salt
+Basmati Rice,86.52,48,2024-06-05,guest,personal care,3496.61,67472,Jane Smith,Refunded,Delivered,W9,Returned,Order #67472,2024-06-05,Returned for Basmati Rice
+Bathroom Essentials,305.92,30,2024-03-19,wholesale,cleaning,7601.53,36945,David Kim,Unpaid,Cancelled,W7,Delivered,Order #36945,2024-03-19,Delivered for Bathroom Essentials
+Snacks,54.6,2,2024-02-24,employee,electronics,89.51,91445,Priya Patel,Paid,Returned,W4,Delivered,Order #91445,2024-02-24,Delivered for Snacks
+Tea,459.11,31,2024-06-09,wholesale,personal care,13003.83,69141,John Doe,Processing,Out for Delivery,W9,Shipped,Order #69141,2024-06-09,Shipped for Tea
+Milk,351.98,42,2024-05-31,returning,clothing,13692.85,79483,Wei Chen,Paid,Delivered,W2,Cancelled,Order #79483,2024-05-31,Cancelled for Milk
+Snacks,155.14,46,2024-03-09,affiliate,food,7906.74,72633,Jane Smith,Pending,Processing,W3,Delivered,Order #72633,2024-03-09,Delivered for Snacks
+Sugar,340.27,4,2024-01-02,guest,home,1394.62,21814,Carlos Gomez,Partial,Cancelled,W3,Settlement,Order #21814,2024-01-02,Settlement for Sugar
+Basmati Rice,456.66,12,2024-04-07,regular,food,6250.33,77851,Jane Smith,Pending,On Hold,W7,Returned,Order #77851,2024-04-07,Returned for Basmati Rice
+Sugar,461.57,38,2024-05-26,employee,cleaning,18952.53,77512,Leslie Alexander,Refunded,Delivered,W8,Returned,Order #77512,2024-05-26,Returned for Sugar
+Salt,195.47,48,2024-03-04,vip,cleaning,10888.31,69866,Lucas Rossi,Processing,Processing,W5,Cancelled,Order #69866,2024-03-04,Cancelled for Salt
+Tea,20.91,4,2024-06-29,employee,beverage,92.5,54455,Emily Brown,Processing,Returned,W5,Cancelled,Order #54455,2024-06-29,Cancelled for Tea
+Juice,314.75,10,2024-05-30,affiliate,food,2578.85,56491,Sara Lee,Failed,Shipping,W1,Reminder,Order #56491,2024-05-30,Reminder for Juice
+Tea,376.51,4,2024-02-29,regular,electronics,1757.78,34609,Jane Smith,Pending,On Hold,W7,Returned,Order #34609,2024-02-29,Returned for Tea
+Basmati Rice,19.79,40,2024-01-02,wholesale,clothing,694.27,76006,Sara Lee,Failed,On Hold,W8,Info,Order #76006,2024-01-02,Info for Basmati Rice
+Shampoo,199.25,38,2024-04-12,regular,electronics,6236.93,21423,Tom M�ller,Failed,Out for Delivery,W1,Delayed,Order #21423,2024-04-12,Delayed for Shampoo
+Basmati Rice,395.46,28,2024-04-08,regular,home,12631.08,92347,David Kim,Pending,Out for Delivery,W6,Shipped,Order #92347,2024-04-08,Shipped for Basmati Rice
+Toothpaste,484.02,39,2024-04-04,regular,stationery,18917.25,47791,Leslie Alexander,Unpaid,Returned,W7,Delayed,Order #47791,2024-04-04,Delayed for Toothpaste
+Soap,169.77,36,2024-06-13,regular,food,6745.3,46919,Wei Chen,Processing,Delivered,W9,Delayed,Order #46919,2024-06-13,Delayed for Soap
+Bathroom Essentials,124.83,3,2024-05-17,returning,electronics,419.19,55556,John Doe,Partial,Processing,W9,Reminder,Order #55556,2024-05-17,Reminder for Bathroom Essentials
+Shampoo,288.61,48,2024-04-22,regular,electronics,11485.45,63690,Lucas Rossi,Unpaid,Cancelled,W5,Info,Order #63690,2024-04-22,Info for Shampoo
+Snacks,464.59,16,2024-06-28,wholesale,home,8311.11,38938,Sara Lee,Refunded,Returned,W4,Cancelled,Order #38938,2024-06-28,Cancelled for Snacks
+Milk,457.9,44,2024-05-25,new,toys,18353.94,33871,John Doe,Paid,Delivered,W1,Returned,Order #33871,2024-05-25,Returned for Milk
+Shampoo,143.06,4,2024-03-09,guest,beverage,478.8,99816,Sara Lee,Paid,Shipping,W7,Delayed,Order #99816,2024-03-09,Delayed for Shampoo
+Soap,116.48,46,2024-03-13,new,stationery,5180.73,94227,Sofia Garcia,Paid,Delivered,W4,Cancelled,Order #94227,2024-03-13,Cancelled for Soap
+Basmati Rice,373.06,24,2024-05-08,regular,home,9711.77,71609,Sara Lee,Unpaid,Shipping,W3,Reminder,Order #71609,2024-05-08,Reminder for Basmati Rice
+Wheat,483.02,40,2024-05-22,vip,stationery,16414.78,30705,Mohammed Ali,Processing,Processing,W4,Delivered,Order #30705,2024-05-22,Delivered for Wheat
+Wheat,236.69,22,2024-05-02,affiliate,toys,5173.47,54480,Mohammed Ali,Partial,Processing,W8,Delivered,Order #54480,2024-05-02,Delivered for Wheat
+Snacks,261.17,39,2024-03-11,guest,toys,8729.22,42015,Mohammed Ali,Paid,Out for Delivery,W5,Delivered,Order #42015,2024-03-11,Delivered for Snacks
+Toothpaste,206.26,8,2024-05-11,guest,personal care,1377.75,41764,Tom M�ller,Paid,Processing,W1,Cancelled,Order #41764,2024-05-11,Cancelled for Toothpaste
+Juice,100.75,19,2024-03-17,new,stationery,1824.36,94034,Fatima Zahra,Paid,Delivered,W1,Returned,Order #94034,2024-03-17,Returned for Juice
+Milk,456.29,1,2024-06-05,returning,stationery,545.04,93057,Carlos Gomez,Paid,Returned,W5,Returned,Order #93057,2024-06-05,Returned for Milk
+Salt,41.3,46,2024-04-20,vip,home,2217.43,50074,Fatima Zahra,Partial,On Hold,W9,Promotion,Order #50074,2024-04-20,Promotion for Salt
+Biscuits,392.27,1,2024-04-29,wholesale,electronics,445.61,23537,Sofia Garcia,Refunded,Shipping,W2,Delivered,Order #23537,2024-04-29,Delivered for Biscuits
+Tea,92.71,33,2024-04-15,wholesale,home,2450.87,94104,Leslie Alexander,Failed,Cancelled,W3,Delayed,Order #94104,2024-04-15,Delayed for Tea
+Sugar,226.48,36,2024-01-13,affiliate,beverage,9601.49,79652,Jane Smith,Processing,Delivered,W8,Delivered,Order #79652,2024-01-13,Delivered for Sugar
+Bathroom Essentials,235.27,8,2024-04-29,wholesale,beverage,2175.23,49678,Jane Smith,Unpaid,Out for Delivery,W4,Info,Order #49678,2024-04-29,Info for Bathroom Essentials
+Wheat,344.19,20,2024-04-12,affiliate,cleaning,6746.87,88495,Lucas Rossi,Processing,Returned,W8,Reminder,Order #88495,2024-04-12,Reminder for Wheat
+Milk,114.07,26,2024-05-07,wholesale,clothing,2802.48,46900,John Doe,Refunded,Out for Delivery,W1,Info,Order #46900,2024-05-07,Info for Milk
+Salt,89.15,19,2024-03-13,employee,clothing,1728.57,39275,John Doe,Failed,Shipping,W2,Info,Order #39275,2024-03-13,Info for Salt
+Bathroom Essentials,60.69,26,2024-02-26,guest,toys,1676.34,66207,Wei Chen,Unpaid,Returned,W7,Shipped,Order #66207,2024-02-26,Shipped for Bathroom Essentials
+Milk,184.52,32,2024-02-13,employee,food,6360.87,41692,Sara Lee,Refunded,Out for Delivery,W6,Settlement,Order #41692,2024-02-13,Settlement for Milk
+Salt,169.77,3,2024-05-17,guest,home,566.9,46494,Anna Ivanova,Processing,Returned,W5,Promotion,Order #46494,2024-05-17,Promotion for Salt
+Snacks,224.55,31,2024-02-16,affiliate,cleaning,6542.32,72428,Leslie Alexander,Failed,Shipping,W8,Cancelled,Order #72428,2024-02-16,Cancelled for Snacks
+Sugar,140.79,16,2024-01-01,new,home,1968.46,53738,Sara Lee,Pending,Returned,W2,Info,Order #53738,2024-01-01,Info for Sugar
+Snacks,66.15,6,2024-06-20,new,clothing,379.08,97638,David Kim,Processing,Delivered,W1,Delayed,Order #97638,2024-06-20,Delayed for Snacks
+Snacks,215.1,22,2024-02-12,wholesale,clothing,4764.27,62053,Leslie Alexander,Failed,Returned,W6,Shipped,Order #62053,2024-02-12,Shipped for Snacks
+Sugar,310.37,2,2024-03-10,guest,food,549.2,81885,Mohammed Ali,Pending,Cancelled,W2,Returned,Order #81885,2024-03-10,Returned for Sugar
+Toothpaste,385.58,22,2024-04-19,new,home,7436.36,44942,Anna Ivanova,Unpaid,Returned,W6,Shipped,Order #44942,2024-04-19,Shipped for Toothpaste
+Tea,190.23,20,2024-02-22,returning,clothing,3917.53,40904,Wei Chen,Pending,Returned,W7,Cancelled,Order #40904,2024-02-22,Cancelled for Tea
+Salt,384.39,1,2024-04-17,returning,personal care,452.1,33169,Mohammed Ali,Partial,Shipping,W4,Info,Order #33169,2024-04-17,Info for Salt
+Milk,24.01,20,2024-04-04,returning,cleaning,466.98,97755,Mohammed Ali,Pending,Cancelled,W9,Reminder,Order #97755,2024-04-04,Reminder for Milk
+Sugar,170.02,23,2024-05-19,guest,beverage,3185.34,46671,David Kim,Unpaid,Shipping,W5,Shipped,Order #46671,2024-05-19,Shipped for Sugar
+Juice,377.05,8,2024-02-19,vip,stationery,2591.27,98973,Sofia Garcia,Failed,On Hold,W7,Delayed,Order #98973,2024-02-19,Delayed for Juice
+Juice,231.6,1,2024-06-05,vip,beverage,271.05,41012,Mohammed Ali,Refunded,Shipping,W2,Delivered,Order #41012,2024-06-05,Delivered for Juice
+Shampoo,484.74,3,2024-02-17,wholesale,toys,1546.57,92071,Fatima Zahra,Pending,Returned,W5,Shipped,Order #92071,2024-02-17,Shipped for Shampoo
+Biscuits,277.89,36,2024-03-06,new,stationery,11403.77,70857,Carlos Gomez,Failed,Shipping,W4,Returned,Order #70857,2024-03-06,Returned for Biscuits
+Biscuits,492.51,14,2024-01-23,employee,personal care,5855.78,29194,Wei Chen,Processing,Delivered,W7,Delayed,Order #29194,2024-01-23,Delayed for Biscuits
+Bathroom Essentials,43.5,24,2024-01-04,new,personal care,1145.87,42389,Fatima Zahra,Processing,Shipping,W8,Reminder,Order #42389,2024-01-04,Reminder for Bathroom Essentials
+Bathroom Essentials,110.33,9,2024-03-25,affiliate,beverage,875.68,29049,Sara Lee,Partial,On Hold,W6,Reminder,Order #29049,2024-03-25,Reminder for Bathroom Essentials
+Wheat,329.85,14,2024-05-22,returning,beverage,4222.78,21566,Priya Patel,Partial,Shipping,W2,Returned,Order #21566,2024-05-22,Returned for Wheat
+Toothpaste,34.09,2,2024-06-05,guest,beverage,60.74,42743,David Kim,Refunded,Out for Delivery,W4,Reminder,Order #42743,2024-06-05,Reminder for Toothpaste
+Basmati Rice,410.42,33,2024-01-21,vip,cleaning,14230.01,78009,Mohammed Ali,Partial,Delivered,W9,Delayed,Order #78009,2024-01-21,Delayed for Basmati Rice
+Shampoo,463.13,1,2024-02-04,guest,toys,534.79,83133,Wei Chen,Unpaid,On Hold,W7,Cancelled,Order #83133,2024-02-04,Cancelled for Shampoo
+Sugar,198.05,39,2024-06-29,returning,home,9152.84,61005,Wei Chen,Processing,Shipping,W1,Delivered,Order #61005,2024-06-29,Delivered for Sugar
+Wheat,118.1,13,2024-01-23,regular,beverage,1678.32,26313,Priya Patel,Processing,Returned,W3,Delivered,Order #26313,2024-01-23,Delivered for Wheat
+Tea,239.67,28,2024-01-17,wholesale,cleaning,7825.18,59973,Sofia Garcia,Partial,Processing,W5,Settlement,Order #59973,2024-01-17,Settlement for Tea
+Snacks,338.14,30,2024-05-07,guest,food,9879.35,64343,Carlos Gomez,Refunded,Cancelled,W2,Delayed,Order #64343,2024-05-07,Delayed for Snacks
+Basmati Rice,250.7,41,2024-06-06,returning,beverage,9951.91,93914,Sara Lee,Refunded,Returned,W2,Returned,Order #93914,2024-06-06,Returned for Basmati Rice
+Biscuits,321.11,27,2024-02-21,employee,beverage,9709.49,27185,Mohammed Ali,Partial,Cancelled,W8,Settlement,Order #27185,2024-02-21,Settlement for Biscuits
+Soap,462.42,50,2024-04-25,new,stationery,26365.56,27493,Leslie Alexander,Refunded,Processing,W4,Settlement,Order #27493,2024-04-25,Settlement for Soap
+Salt,419.25,25,2024-05-23,guest,stationery,11911.92,43934,Leslie Alexander,Processing,On Hold,W7,Returned,Order #43934,2024-05-23,Returned for Salt
+Salt,476.37,16,2024-06-23,guest,personal care,6177.56,62435,Lucas Rossi,Failed,Delivered,W4,Delivered,Order #62435,2024-06-23,Delivered for Salt
+Tea,246.91,46,2024-06-11,returning,personal care,11114.53,48082,Emily Brown,Unpaid,Processing,W2,Cancelled,Order #48082,2024-06-11,Cancelled for Tea
+Cooking Oil,24.83,35,2024-05-31,employee,clothing,989.0,70527,Leslie Alexander,Refunded,Shipping,W8,Promotion,Order #70527,2024-05-31,Promotion for Cooking Oil
+Sugar,342.52,8,2024-03-07,employee,cleaning,2770.04,77625,Tom M�ller,Pending,Shipping,W4,Shipped,Order #77625,2024-03-07,Shipped for Sugar
+Wheat,123.56,23,2024-04-02,guest,electronics,3035.44,55478,Sara Lee,Pending,Cancelled,W2,Settlement,Order #55478,2024-04-02,Settlement for Wheat
+Snacks,159.08,7,2024-05-08,guest,clothing,1282.69,89248,Wei Chen,Failed,Delivered,W9,Promotion,Order #89248,2024-05-08,Promotion for Snacks
+Sugar,163.08,4,2024-03-08,returning,food,703.24,20281,Sara Lee,Failed,Shipping,W7,Delayed,Order #20281,2024-03-08,Delayed for Sugar
+Bathroom Essentials,14.92,4,2024-06-08,affiliate,cleaning,53.19,48111,Carlos Gomez,Unpaid,On Hold,W7,Delayed,Order #48111,2024-06-08,Delayed for Bathroom Essentials
+Sugar,93.6,41,2024-06-17,guest,food,4072.27,86605,Fatima Zahra,Processing,Delivered,W3,Delivered,Order #86605,2024-06-17,Delivered for Sugar
+Milk,303.27,37,2024-04-12,employee,clothing,10856.85,28155,Sofia Garcia,Failed,Out for Delivery,W3,Delivered,Order #28155,2024-04-12,Delivered for Milk
+Wheat,209.24,16,2024-03-27,guest,personal care,3821.35,74873,Priya Patel,Partial,Processing,W9,Shipped,Order #74873,2024-03-27,Shipped for Wheat
+Sugar,396.73,9,2024-02-29,vip,toys,3135.71,24841,Mohammed Ali,Processing,Returned,W8,Promotion,Order #24841,2024-02-29,Promotion for Sugar
+Juice,346.18,34,2024-06-14,vip,home,13141.31,65439,Anna Ivanova,Paid,Returned,W7,Reminder,Order #65439,2024-06-14,Reminder for Juice
+Cooking Oil,470.37,43,2024-02-16,new,clothing,16649.8,74842,John Doe,Failed,Out for Delivery,W6,Shipped,Order #74842,2024-02-16,Shipped for Cooking Oil
+Sugar,348.29,44,2024-05-15,returning,cleaning,14955.15,92633,Tom M�ller,Processing,Processing,W1,Promotion,Order #92633,2024-05-15,Promotion for Sugar
+Biscuits,308.16,19,2024-03-09,vip,personal care,4977.11,93597,Emily Brown,Unpaid,Delivered,W3,Delayed,Order #93597,2024-03-09,Delayed for Biscuits
+Coffee,145.01,19,2024-03-31,wholesale,cleaning,2451.39,53571,Carlos Gomez,Refunded,Delivered,W9,Returned,Order #53571,2024-03-31,Returned for Coffee
+Tea,322.37,44,2024-05-27,guest,cleaning,14371.92,45514,John Doe,Partial,Processing,W9,Settlement,Order #45514,2024-05-27,Settlement for Tea
+Sugar,446.76,35,2024-01-02,returning,beverage,14791.14,86041,Lucas Rossi,Partial,Delivered,W2,Shipped,Order #86041,2024-01-02,Shipped for Sugar
+Basmati Rice,363.06,14,2024-05-22,vip,food,4223.26,36285,Jane Smith,Pending,Processing,W8,Delivered,Order #36285,2024-05-22,Delivered for Basmati Rice
+Tea,79.9,28,2024-02-22,new,stationery,2417.31,46347,Anna Ivanova,Failed,Returned,W4,Promotion,Order #46347,2024-02-22,Promotion for Tea
+Soap,397.82,27,2024-02-09,returning,electronics,12685.25,48862,Lucas Rossi,Refunded,Processing,W8,Settlement,Order #48862,2024-02-09,Settlement for Soap
+Cooking Oil,21.41,21,2024-03-30,vip,beverage,415.05,70243,Fatima Zahra,Failed,Processing,W2,Settlement,Order #70243,2024-03-30,Settlement for Cooking Oil
+Bathroom Essentials,316.72,19,2024-06-25,returning,personal care,4922.13,61821,John Doe,Processing,Cancelled,W4,Shipped,Order #61821,2024-06-25,Shipped for Bathroom Essentials
+Juice,455.96,49,2024-01-04,vip,cleaning,20943.79,52553,Mohammed Ali,Processing,Cancelled,W5,Delayed,Order #52553,2024-01-04,Delayed for Juice
+Shampoo,353.84,20,2024-01-19,guest,beverage,7910.44,34870,David Kim,Partial,Cancelled,W9,Returned,Order #34870,2024-01-19,Returned for Shampoo
+Coffee,285.16,31,2024-04-21,regular,home,8150.81,91149,Mohammed Ali,Pending,Out for Delivery,W2,Settlement,Order #91149,2024-04-21,Settlement for Coffee
+Toothpaste,284.07,11,2024-04-11,regular,electronics,2680.7,27809,Wei Chen,Paid,Cancelled,W6,Delayed,Order #27809,2024-04-11,Delayed for Toothpaste
+Salt,404.8,21,2024-06-06,affiliate,cleaning,9902.43,64696,Sara Lee,Unpaid,On Hold,W4,Info,Order #64696,2024-06-06,Info for Salt
+Biscuits,94.45,24,2024-05-18,new,stationery,2053.84,47236,Jane Smith,Failed,Out for Delivery,W4,Returned,Order #47236,2024-05-18,Returned for Biscuits
+Milk,52.92,19,2024-04-26,guest,electronics,1182.14,47833,Emily Brown,Refunded,On Hold,W4,Settlement,Order #47833,2024-04-26,Settlement for Milk
+Soap,418.81,21,2024-01-27,affiliate,toys,7790.08,77087,Anna Ivanova,Partial,Shipping,W7,Settlement,Order #77087,2024-01-27,Settlement for Soap
+Tea,257.74,47,2024-06-03,wholesale,stationery,14121.44,31736,David Kim,Processing,Out for Delivery,W8,Info,Order #31736,2024-06-03,Info for Tea
+Basmati Rice,498.59,6,2024-03-14,new,food,3109.31,47478,Lucas Rossi,Processing,Shipping,W3,Delivered,Order #47478,2024-03-14,Delivered for Basmati Rice
+Biscuits,419.72,46,2024-06-04,returning,home,22434.01,44367,Carlos Gomez,Pending,Processing,W2,Delayed,Order #44367,2024-06-04,Delayed for Biscuits
+Shampoo,140.21,11,2024-02-19,employee,toys,1545.17,68806,Fatima Zahra,Pending,Delivered,W7,Delivered,Order #68806,2024-02-19,Delivered for Shampoo
+Cooking Oil,13.27,49,2024-06-03,guest,home,700.37,94520,Sara Lee,Failed,Out for Delivery,W4,Promotion,Order #94520,2024-06-03,Promotion for Cooking Oil
+Coffee,375.28,29,2024-04-22,wholesale,electronics,11444.45,95811,Lucas Rossi,Pending,Processing,W6,Settlement,Order #95811,2024-04-22,Settlement for Coffee
+Basmati Rice,31.07,13,2024-04-17,wholesale,beverage,324.27,46223,Sara Lee,Partial,Delivered,W2,Cancelled,Order #46223,2024-04-17,Cancelled for Basmati Rice
+Cooking Oil,273.59,21,2024-02-10,employee,electronics,5232.87,63254,Fatima Zahra,Processing,Shipping,W8,Reminder,Order #63254,2024-02-10,Reminder for Cooking Oil
+Bathroom Essentials,378.15,29,2024-06-25,new,toys,9054.35,92507,Priya Patel,Pending,On Hold,W8,Shipped,Order #92507,2024-06-25,Shipped for Bathroom Essentials
+Milk,324.1,49,2024-06-05,employee,stationery,18980.27,20968,Jane Smith,Pending,Delivered,W4,Shipped,Order #20968,2024-06-05,Shipped for Milk
+Bathroom Essentials,257.97,24,2024-02-29,returning,clothing,6947.03,65620,Leslie Alexander,Failed,Out for Delivery,W4,Delayed,Order #65620,2024-02-29,Delayed for Bathroom Essentials
+Soap,276.61,47,2024-02-01,regular,clothing,15483.58,37039,Lucas Rossi,Partial,Delivered,W6,Shipped,Order #37039,2024-02-01,Shipped for Soap
+Shampoo,121.76,42,2024-04-30,employee,food,5585.59,22002,Emily Brown,Unpaid,On Hold,W9,Delayed,Order #22002,2024-04-30,Delayed for Shampoo
+Salt,124.58,3,2024-05-31,returning,stationery,313.68,44258,Mohammed Ali,Processing,Processing,W5,Reminder,Order #44258,2024-05-31,Reminder for Salt
+Sugar,379.56,49,2024-06-21,vip,clothing,21737.54,68414,Wei Chen,Unpaid,Processing,W6,Promotion,Order #68414,2024-06-21,Promotion for Sugar
+Bathroom Essentials,198.0,32,2024-01-28,wholesale,electronics,7159.05,89152,Emily Brown,Processing,Processing,W8,Cancelled,Order #89152,2024-01-28,Cancelled for Bathroom Essentials
+Tea,372.52,17,2024-04-05,returning,personal care,6110.29,89732,Fatima Zahra,Refunded,Returned,W8,Delayed,Order #89732,2024-04-05,Delayed for Tea
+Salt,249.98,2,2024-05-02,returning,clothing,524.42,82019,Anna Ivanova,Partial,Delivered,W8,Reminder,Order #82019,2024-05-02,Reminder for Salt
+Snacks,399.39,4,2024-01-22,employee,cleaning,1800.92,82918,Lucas Rossi,Partial,Returned,W9,Delivered,Order #82918,2024-01-22,Delivered for Snacks
+Juice,100.39,47,2024-02-10,new,electronics,4507.59,62768,Mohammed Ali,Partial,On Hold,W2,Shipped,Order #62768,2024-02-10,Shipped for Juice
+Coffee,171.54,35,2024-05-03,regular,toys,5147.7,37564,Sara Lee,Pending,Delivered,W4,Returned,Order #37564,2024-05-03,Returned for Coffee
+Tea,427.87,48,2024-02-02,regular,toys,22253.2,82782,Fatima Zahra,Partial,Delivered,W7,Settlement,Order #82782,2024-02-02,Settlement for Tea
+Shampoo,371.21,8,2024-04-28,vip,electronics,3359.5,28032,Fatima Zahra,Refunded,Delivered,W9,Returned,Order #28032,2024-04-28,Returned for Shampoo
+Juice,300.56,46,2024-04-20,guest,personal care,16303.44,96886,Anna Ivanova,Pending,Cancelled,W6,Delayed,Order #96886,2024-04-20,Delayed for Juice
+Salt,54.52,48,2024-04-06,employee,toys,2248.44,78276,Leslie Alexander,Paid,Returned,W9,Returned,Order #78276,2024-04-06,Returned for Salt
+Biscuits,321.02,9,2024-01-10,employee,electronics,2798.82,60993,David Kim,Unpaid,Returned,W4,Reminder,Order #60993,2024-01-10,Reminder for Biscuits
+Milk,89.03,18,2024-05-12,returning,cleaning,1753.09,84048,Anna Ivanova,Partial,Processing,W3,Returned,Order #84048,2024-05-12,Returned for Milk
+Wheat,447.22,45,2024-02-21,returning,food,23237.48,22101,Sofia Garcia,Partial,Delivered,W8,Returned,Order #22101,2024-02-21,Returned for Wheat
+Wheat,306.75,15,2024-05-27,returning,cleaning,4903.68,41724,Emily Brown,Pending,Out for Delivery,W4,Delivered,Order #41724,2024-05-27,Delivered for Wheat
+Salt,110.31,21,2024-05-24,wholesale,clothing,1875.14,49924,Fatima Zahra,Processing,Shipping,W7,Reminder,Order #49924,2024-05-24,Reminder for Salt
+Cooking Oil,156.2,2,2024-05-30,guest,beverage,252.82,99585,Jane Smith,Unpaid,On Hold,W4,Info,Order #99585,2024-05-30,Info for Cooking Oil
+Milk,378.45,3,2024-06-22,employee,cleaning,1056.51,61044,Mohammed Ali,Unpaid,Processing,W6,Promotion,Order #61044,2024-06-22,Promotion for Milk
+Basmati Rice,90.47,13,2024-02-21,affiliate,clothing,1381.27,42189,Lucas Rossi,Partial,Cancelled,W9,Returned,Order #42189,2024-02-21,Returned for Basmati Rice
+Toothpaste,64.81,11,2024-01-23,vip,food,575.46,38592,Fatima Zahra,Partial,Cancelled,W9,Promotion,Order #38592,2024-01-23,Promotion for Toothpaste
+Bathroom Essentials,159.0,37,2024-01-30,affiliate,cleaning,6655.96,39146,Anna Ivanova,Failed,Shipping,W8,Info,Order #39146,2024-01-30,Info for Bathroom Essentials
+Wheat,54.2,23,2024-01-01,regular,beverage,1143.17,90518,Lucas Rossi,Paid,Cancelled,W7,Settlement,Order #90518,2024-01-01,Settlement for Wheat
+Snacks,311.61,42,2024-05-30,wholesale,stationery,12094.5,35853,Wei Chen,Partial,Returned,W9,Cancelled,Order #35853,2024-05-30,Cancelled for Snacks
+Sugar,87.74,18,2024-03-31,returning,clothing,1528.02,26590,David Kim,Pending,Cancelled,W7,Delivered,Order #26590,2024-03-31,Delivered for Sugar
+Sugar,229.08,11,2024-04-30,wholesale,electronics,2810.77,63810,Wei Chen,Paid,Shipping,W3,Promotion,Order #63810,2024-04-30,Promotion for Sugar
+Milk,246.32,33,2024-03-12,employee,beverage,7088.24,28153,John Doe,Processing,On Hold,W6,Delayed,Order #28153,2024-03-12,Delayed for Milk
+Bathroom Essentials,21.45,31,2024-06-01,new,food,715.52,96993,Anna Ivanova,Failed,Returned,W5,Returned,Order #96993,2024-06-01,Returned for Bathroom Essentials
+Salt,74.58,7,2024-04-28,new,toys,624.41,97197,Mohammed Ali,Pending,Delivered,W7,Reminder,Order #97197,2024-04-28,Reminder for Salt
+Coffee,280.64,33,2024-05-01,wholesale,home,10084.22,67678,Emily Brown,Paid,Out for Delivery,W8,Info,Order #67678,2024-05-01,Info for Coffee
+Toothpaste,338.41,42,2024-01-25,returning,food,15809.72,40646,Tom M�ller,Pending,Delivered,W4,Delivered,Order #40646,2024-01-25,Delivered for Toothpaste
+Salt,373.47,18,2024-04-16,wholesale,clothing,5701.0,40049,Wei Chen,Refunded,Out for Delivery,W9,Returned,Order #40049,2024-04-16,Returned for Salt
+Bathroom Essentials,21.07,25,2024-02-29,employee,electronics,465.79,86272,Carlos Gomez,Processing,On Hold,W1,Info,Order #86272,2024-02-29,Info for Bathroom Essentials
+Tea,145.59,49,2024-03-28,returning,personal care,5960.59,65923,Lucas Rossi,Unpaid,Processing,W9,Promotion,Order #65923,2024-03-28,Promotion for Tea
+Snacks,35.77,28,2024-01-15,vip,home,922.98,71941,Leslie Alexander,Pending,Delivered,W9,Promotion,Order #71941,2024-01-15,Promotion for Snacks
+Sugar,191.72,27,2024-02-22,returning,electronics,5619.51,34908,Mohammed Ali,Pending,Delivered,W9,Settlement,Order #34908,2024-02-22,Settlement for Sugar
+Tea,26.6,2,2024-05-20,new,clothing,51.37,48629,Anna Ivanova,Unpaid,Returned,W9,Delivered,Order #48629,2024-05-20,Delivered for Tea
+Milk,284.81,9,2024-04-29,regular,cleaning,2299.18,29305,Leslie Alexander,Paid,Out for Delivery,W9,Delayed,Order #29305,2024-04-29,Delayed for Milk
+Wheat,146.37,6,2024-04-01,wholesale,beverage,745.08,31403,Fatima Zahra,Pending,Cancelled,W9,Returned,Order #31403,2024-04-01,Returned for Wheat
+Soap,194.35,8,2024-03-20,affiliate,personal care,1434.21,34997,Anna Ivanova,Unpaid,Processing,W1,Returned,Order #34997,2024-03-20,Returned for Soap
+Bathroom Essentials,346.63,14,2024-02-23,affiliate,home,4557.66,21578,Lucas Rossi,Partial,Cancelled,W9,Settlement,Order #21578,2024-02-23,Settlement for Bathroom Essentials
+Wheat,57.99,5,2024-01-12,employee,stationery,254.08,66772,Carlos Gomez,Paid,Returned,W4,Returned,Order #66772,2024-01-12,Returned for Wheat
+Toothpaste,120.19,50,2024-04-18,employee,electronics,5132.56,36451,Leslie Alexander,Unpaid,Shipping,W3,Cancelled,Order #36451,2024-04-18,Cancelled for Toothpaste
+Biscuits,414.45,19,2024-03-31,vip,toys,8567.96,54610,Leslie Alexander,Paid,Out for Delivery,W2,Shipped,Order #54610,2024-03-31,Shipped for Biscuits
+Shampoo,227.85,18,2024-02-19,new,personal care,4010.76,26797,Lucas Rossi,Unpaid,Delivered,W8,Info,Order #26797,2024-02-19,Info for Shampoo
+Cooking Oil,426.18,18,2024-06-12,wholesale,toys,6631.69,71925,John Doe,Failed,Shipping,W5,Shipped,Order #71925,2024-06-12,Shipped for Cooking Oil
+Biscuits,469.82,11,2024-04-14,returning,toys,6054.83,43438,Sofia Garcia,Partial,Returned,W7,Promotion,Order #43438,2024-04-14,Promotion for Biscuits
+Bathroom Essentials,350.74,42,2024-05-10,returning,food,11930.37,92129,Mohammed Ali,Refunded,Out for Delivery,W4,Promotion,Order #92129,2024-05-10,Promotion for Bathroom Essentials
+Bathroom Essentials,238.81,43,2024-05-24,vip,clothing,10655.91,91933,David Kim,Partial,Delivered,W2,Reminder,Order #91933,2024-05-24,Reminder for Bathroom Essentials
+Cooking Oil,308.95,14,2024-04-24,new,stationery,4894.36,43457,Lucas Rossi,Processing,Delivered,W3,Settlement,Order #43457,2024-04-24,Settlement for Cooking Oil
+Bathroom Essentials,331.78,30,2024-01-01,new,stationery,10047.04,62966,Lucas Rossi,Pending,Returned,W7,Shipped,Order #62966,2024-01-01,Shipped for Bathroom Essentials
+Basmati Rice,84.61,22,2024-06-23,returning,toys,1669.57,92623,John Doe,Refunded,Processing,W6,Info,Order #92623,2024-06-23,Info for Basmati Rice
+Milk,481.57,40,2024-06-22,wholesale,electronics,15613.2,42158,Sofia Garcia,Partial,Processing,W4,Promotion,Order #42158,2024-06-22,Promotion for Milk
+Wheat,223.99,5,2024-06-21,new,beverage,956.45,66657,Wei Chen,Unpaid,Cancelled,W3,Reminder,Order #66657,2024-06-21,Reminder for Wheat
+Salt,387.38,35,2024-05-10,employee,cleaning,13458.84,30979,Leslie Alexander,Paid,Delivered,W1,Delivered,Order #30979,2024-05-10,Delivered for Salt
+Milk,377.38,18,2024-06-26,affiliate,clothing,8129.05,41390,Carlos Gomez,Unpaid,Out for Delivery,W7,Shipped,Order #41390,2024-06-26,Shipped for Milk
+Biscuits,265.45,7,2024-04-20,returning,food,1858.02,27997,Wei Chen,Failed,Cancelled,W4,Returned,Order #27997,2024-04-20,Returned for Biscuits
+Bathroom Essentials,326.03,20,2024-02-01,new,toys,6413.06,90266,Mohammed Ali,Partial,Shipping,W2,Reminder,Order #90266,2024-02-01,Reminder for Bathroom Essentials
+Salt,355.88,37,2024-04-24,vip,beverage,14427.48,72624,David Kim,Paid,On Hold,W1,Cancelled,Order #72624,2024-04-24,Cancelled for Salt
+Salt,419.01,22,2024-02-01,wholesale,beverage,10196.07,54684,Jane Smith,Processing,Returned,W4,Returned,Order #54684,2024-02-01,Returned for Salt
+Tea,289.51,12,2024-05-18,employee,food,2903.06,41021,John Doe,Refunded,Delivered,W8,Shipped,Order #41021,2024-05-18,Shipped for Tea
+Soap,205.45,4,2024-02-05,vip,electronics,727.73,74227,Lucas Rossi,Processing,Returned,W8,Reminder,Order #74227,2024-02-05,Reminder for Soap
+Basmati Rice,403.65,36,2024-01-27,affiliate,electronics,14811.06,20301,Wei Chen,Processing,Processing,W6,Reminder,Order #20301,2024-01-27,Reminder for Basmati Rice
+Juice,327.48,8,2024-03-01,guest,beverage,2487.07,41305,Wei Chen,Paid,On Hold,W7,Shipped,Order #41305,2024-03-01,Shipped for Juice
+Basmati Rice,165.4,13,2024-01-02,regular,electronics,2533.46,41159,Jane Smith,Processing,On Hold,W6,Reminder,Order #41159,2024-01-02,Reminder for Basmati Rice
+Sugar,246.59,39,2024-06-06,new,toys,10613.64,98171,David Kim,Failed,Shipping,W3,Info,Order #98171,2024-06-06,Info for Sugar
+Coffee,44.54,11,2024-05-25,guest,toys,526.26,62466,Wei Chen,Paid,Shipping,W6,Promotion,Order #62466,2024-05-25,Promotion for Coffee
+Basmati Rice,122.82,40,2024-01-18,new,cleaning,5598.1,68737,John Doe,Processing,Processing,W6,Settlement,Order #68737,2024-01-18,Settlement for Basmati Rice
+Shampoo,27.2,41,2024-05-16,employee,stationery,1158.97,33753,Jane Smith,Processing,Shipping,W3,Promotion,Order #33753,2024-05-16,Promotion for Shampoo
+Wheat,282.01,37,2024-06-02,wholesale,toys,10592.98,85560,John Doe,Unpaid,Cancelled,W8,Info,Order #85560,2024-06-02,Info for Wheat
+Salt,245.91,5,2024-06-09,affiliate,electronics,1027.13,27529,Lucas Rossi,Pending,Cancelled,W6,Shipped,Order #27529,2024-06-09,Shipped for Salt
+Coffee,112.71,36,2024-03-16,regular,personal care,4792.08,35136,Jane Smith,Paid,Returned,W6,Shipped,Order #35136,2024-03-16,Shipped for Coffee
+Bathroom Essentials,23.62,37,2024-03-16,new,home,721.8,25532,Leslie Alexander,Processing,Processing,W3,Returned,Order #25532,2024-03-16,Returned for Bathroom Essentials
+Bathroom Essentials,173.21,13,2024-05-22,wholesale,personal care,2660.19,39692,Priya Patel,Pending,Cancelled,W1,Info,Order #39692,2024-05-22,Info for Bathroom Essentials
+Biscuits,295.0,2,2024-01-10,returning,cleaning,520.76,26643,Jane Smith,Paid,Returned,W2,Returned,Order #26643,2024-01-10,Returned for Biscuits
+Juice,277.44,37,2024-04-22,vip,home,9729.37,29115,John Doe,Failed,Processing,W9,Info,Order #29115,2024-04-22,Info for Juice
+Biscuits,189.92,30,2024-03-29,vip,stationery,4929.43,30778,Wei Chen,Failed,On Hold,W7,Info,Order #30778,2024-03-29,Info for Biscuits
+Tea,231.43,46,2024-01-28,regular,clothing,10056.91,68599,Tom M�ller,Partial,Out for Delivery,W4,Cancelled,Order #68599,2024-01-28,Cancelled for Tea
+Biscuits,367.36,49,2024-01-26,affiliate,home,16109.92,55613,Anna Ivanova,Refunded,Shipping,W8,Info,Order #55613,2024-01-26,Info for Biscuits
+Salt,56.35,14,2024-06-14,guest,beverage,637.46,35751,Sofia Garcia,Pending,Returned,W7,Settlement,Order #35751,2024-06-14,Settlement for Salt
+Basmati Rice,458.0,47,2024-03-15,employee,beverage,21391.18,99715,Jane Smith,Pending,On Hold,W9,Settlement,Order #99715,2024-03-15,Settlement for Basmati Rice
+Coffee,471.05,6,2024-06-11,regular,cleaning,2430.09,48494,Anna Ivanova,Failed,Shipping,W6,Returned,Order #48494,2024-06-11,Returned for Coffee
+Milk,295.23,36,2024-02-06,wholesale,food,12417.78,89535,Carlos Gomez,Unpaid,Cancelled,W2,Cancelled,Order #89535,2024-02-06,Cancelled for Milk
+Toothpaste,396.39,34,2024-05-16,vip,food,14493.21,37470,John Doe,Refunded,Cancelled,W1,Promotion,Order #37470,2024-05-16,Promotion for Toothpaste
+Snacks,340.78,24,2024-02-14,vip,food,8000.74,66646,John Doe,Refunded,Processing,W7,Returned,Order #66646,2024-02-14,Returned for Snacks
+Bathroom Essentials,107.41,32,2024-05-26,affiliate,home,3657.17,36414,Mohammed Ali,Unpaid,Delivered,W8,Cancelled,Order #36414,2024-05-26,Cancelled for Bathroom Essentials
+Juice,137.53,6,2024-05-14,vip,beverage,937.42,97841,Anna Ivanova,Paid,Returned,W2,Returned,Order #97841,2024-05-14,Returned for Juice
+Cooking Oil,418.24,36,2024-04-26,regular,personal care,12909.68,37759,Lucas Rossi,Unpaid,Shipping,W1,Delayed,Order #37759,2024-04-26,Delayed for Cooking Oil
+Wheat,462.99,36,2024-05-16,employee,electronics,13997.95,24517,Wei Chen,Processing,Cancelled,W3,Cancelled,Order #24517,2024-05-16,Cancelled for Wheat
+Salt,473.9,34,2024-03-18,vip,electronics,14873.8,86229,Lucas Rossi,Pending,Processing,W3,Shipped,Order #86229,2024-03-18,Shipped for Salt
+Cooking Oil,126.17,6,2024-05-09,new,personal care,776.93,79131,Carlos Gomez,Failed,Delivered,W2,Delivered,Order #79131,2024-05-09,Delivered for Cooking Oil
+Tea,244.53,4,2024-05-08,new,electronics,963.12,63632,Wei Chen,Pending,Returned,W4,Promotion,Order #63632,2024-05-08,Promotion for Tea
+Cooking Oil,394.25,50,2024-03-02,wholesale,toys,18118.89,63221,Sara Lee,Pending,Shipping,W6,Cancelled,Order #63221,2024-03-02,Cancelled for Cooking Oil
+Sugar,365.42,28,2024-05-20,guest,beverage,9145.96,70699,Sofia Garcia,Paid,Delivered,W8,Delivered,Order #70699,2024-05-20,Delivered for Sugar
+Milk,361.75,14,2024-04-13,affiliate,beverage,5248.55,51217,Mohammed Ali,Paid,Delivered,W3,Cancelled,Order #51217,2024-04-13,Cancelled for Milk
+Shampoo,308.26,31,2024-03-28,new,personal care,8719.54,42691,Emily Brown,Unpaid,Processing,W8,Cancelled,Order #42691,2024-03-28,Cancelled for Shampoo
+Milk,327.96,29,2024-01-22,returning,stationery,9709.81,32955,David Kim,Pending,Processing,W7,Returned,Order #32955,2024-01-22,Returned for Milk
+Tea,377.48,35,2024-04-16,new,cleaning,14980.98,78950,Mohammed Ali,Pending,Returned,W4,Delivered,Order #78950,2024-04-16,Delivered for Tea
+Juice,286.22,32,2024-04-05,new,personal care,9495.55,82668,Sofia Garcia,Paid,Returned,W1,Reminder,Order #82668,2024-04-05,Reminder for Juice
+Milk,89.3,48,2024-06-16,vip,electronics,4660.55,84101,Emily Brown,Refunded,Processing,W6,Returned,Order #84101,2024-06-16,Returned for Milk
+Basmati Rice,347.32,17,2024-05-06,regular,cleaning,4941.05,63790,Leslie Alexander,Unpaid,Returned,W7,Reminder,Order #63790,2024-05-06,Reminder for Basmati Rice
+Sugar,276.94,2,2024-05-13,new,food,522.41,33327,Carlos Gomez,Unpaid,Cancelled,W7,Settlement,Order #33327,2024-05-13,Settlement for Sugar
+Basmati Rice,93.96,24,2024-03-13,employee,personal care,2373.28,75282,Sara Lee,Refunded,Processing,W8,Delivered,Order #75282,2024-03-13,Delivered for Basmati Rice
+Tea,382.06,24,2024-04-16,wholesale,beverage,9399.84,86239,Jane Smith,Processing,Cancelled,W4,Cancelled,Order #86239,2024-04-16,Cancelled for Tea
+Sugar,29.37,28,2024-01-13,regular,clothing,694.52,87713,Emily Brown,Failed,Returned,W5,Delivered,Order #87713,2024-01-13,Delivered for Sugar
+Soap,124.48,50,2024-05-04,affiliate,toys,7083.49,62281,Lucas Rossi,Failed,On Hold,W1,Delayed,Order #62281,2024-05-04,Delayed for Soap
+Milk,302.79,45,2024-03-09,guest,electronics,12227.32,25726,Fatima Zahra,Paid,Out for Delivery,W4,Delivered,Order #25726,2024-03-09,Delivered for Milk
+Milk,467.97,3,2024-01-26,returning,beverage,1546.84,31671,Sofia Garcia,Paid,Processing,W4,Delivered,Order #31671,2024-01-26,Delivered for Milk
+Biscuits,466.03,39,2024-04-08,guest,electronics,19432.94,59423,Emily Brown,Paid,Shipping,W9,Shipped,Order #59423,2024-04-08,Shipped for Biscuits
+Coffee,281.69,46,2024-02-08,affiliate,food,14175.61,55881,Sofia Garcia,Pending,Cancelled,W9,Delivered,Order #55881,2024-02-08,Delivered for Coffee
+Biscuits,65.21,30,2024-04-07,vip,toys,2064.73,75139,Anna Ivanova,Partial,Delivered,W6,Promotion,Order #75139,2024-04-07,Promotion for Biscuits
+Tea,474.63,38,2024-06-19,guest,beverage,15933.75,25473,Lucas Rossi,Partial,Out for Delivery,W4,Promotion,Order #25473,2024-06-19,Promotion for Tea
+Shampoo,225.37,5,2024-03-24,employee,electronics,1004.04,81230,Wei Chen,Failed,Cancelled,W9,Reminder,Order #81230,2024-03-24,Reminder for Shampoo
+Salt,341.17,50,2024-04-30,employee,clothing,18231.16,33159,Sara Lee,Unpaid,Returned,W4,Returned,Order #33159,2024-04-30,Returned for Salt
+Cooking Oil,29.32,3,2024-04-30,regular,food,81.37,92004,Fatima Zahra,Refunded,On Hold,W2,Reminder,Order #92004,2024-04-30,Reminder for Cooking Oil
+Toothpaste,48.82,26,2024-02-05,wholesale,electronics,1372.74,99537,Jane Smith,Processing,Out for Delivery,W8,Delivered,Order #99537,2024-02-05,Delivered for Toothpaste
+Biscuits,494.17,45,2024-03-20,employee,home,22301.79,99446,Mohammed Ali,Processing,Cancelled,W2,Promotion,Order #99446,2024-03-20,Promotion for Biscuits
+Juice,52.72,6,2024-06-04,regular,clothing,368.45,21235,Lucas Rossi,Processing,Returned,W9,Settlement,Order #21235,2024-06-04,Settlement for Juice
+Soap,154.52,19,2024-06-16,returning,toys,3047.86,76927,Wei Chen,Pending,On Hold,W3,Delivered,Order #76927,2024-06-16,Delivered for Soap
+Shampoo,91.29,43,2024-01-01,employee,home,4016.68,84989,Emily Brown,Paid,Out for Delivery,W2,Delivered,Order #84989,2024-01-01,Delivered for Shampoo
+Tea,339.85,14,2024-05-26,wholesale,home,5554.93,45551,Lucas Rossi,Unpaid,Out for Delivery,W8,Cancelled,Order #45551,2024-05-26,Cancelled for Tea
+Biscuits,89.01,6,2024-06-02,returning,toys,516.95,43844,Wei Chen,Pending,Shipping,W8,Cancelled,Order #43844,2024-06-02,Cancelled for Biscuits
+Tea,483.63,8,2024-03-21,wholesale,home,4128.7,21388,Priya Patel,Refunded,Delivered,W3,Delayed,Order #21388,2024-03-21,Delayed for Tea
+Soap,26.99,39,2024-05-31,wholesale,cleaning,1078.32,37202,Leslie Alexander,Unpaid,On Hold,W5,Reminder,Order #37202,2024-05-31,Reminder for Soap
+Coffee,80.54,29,2024-02-02,vip,toys,2265.26,73169,Jane Smith,Processing,Cancelled,W4,Returned,Order #73169,2024-02-02,Returned for Coffee
+Toothpaste,271.93,30,2024-04-06,new,beverage,7550.41,94639,Emily Brown,Failed,Returned,W5,Reminder,Order #94639,2024-04-06,Reminder for Toothpaste
+Juice,37.45,19,2024-04-21,wholesale,electronics,689.73,59887,Emily Brown,Processing,Out for Delivery,W7,Settlement,Order #59887,2024-04-21,Settlement for Juice
+Juice,349.32,12,2024-01-23,guest,toys,3639.2,68890,Jane Smith,Partial,Processing,W6,Promotion,Order #68890,2024-01-23,Promotion for Juice
+Biscuits,161.06,3,2024-06-17,returning,clothing,555.87,70870,Carlos Gomez,Failed,On Hold,W5,Info,Order #70870,2024-06-17,Info for Biscuits
+Juice,171.63,34,2024-04-04,employee,cleaning,6560.33,80441,Carlos Gomez,Paid,Shipping,W9,Reminder,Order #80441,2024-04-04,Reminder for Juice
+Sugar,134.68,42,2024-03-05,employee,beverage,5154.88,30374,Wei Chen,Pending,Returned,W5,Reminder,Order #30374,2024-03-05,Reminder for Sugar
+Tea,498.56,12,2024-04-11,wholesale,stationery,6273.84,72147,Wei Chen,Paid,Out for Delivery,W8,Delivered,Order #72147,2024-04-11,Delivered for Tea
+Sugar,478.19,37,2024-06-29,wholesale,personal care,20530.11,33603,Lucas Rossi,Unpaid,Returned,W2,Settlement,Order #33603,2024-06-29,Settlement for Sugar
+Biscuits,131.02,9,2024-01-16,new,electronics,1171.61,20893,Mohammed Ali,Refunded,Returned,W3,Shipped,Order #20893,2024-01-16,Shipped for Biscuits
+Basmati Rice,383.79,10,2024-01-18,returning,home,3705.04,64934,David Kim,Unpaid,Cancelled,W7,Settlement,Order #64934,2024-01-18,Settlement for Basmati Rice
+Shampoo,495.81,29,2024-03-28,wholesale,food,16148.74,90153,Tom M�ller,Failed,Out for Delivery,W1,Reminder,Order #90153,2024-03-28,Reminder for Shampoo
+Milk,274.47,40,2024-04-15,employee,beverage,12624.68,67857,Carlos Gomez,Processing,Processing,W1,Reminder,Order #67857,2024-04-15,Reminder for Milk
+Soap,168.78,40,2024-04-11,new,electronics,7576.32,51883,Carlos Gomez,Partial,On Hold,W1,Delayed,Order #51883,2024-04-11,Delayed for Soap
+Snacks,385.78,45,2024-06-10,affiliate,toys,19021.29,94330,Anna Ivanova,Unpaid,Out for Delivery,W8,Returned,Order #94330,2024-06-10,Returned for Snacks
+Wheat,236.18,45,2024-06-08,wholesale,clothing,11445.44,70663,Emily Brown,Failed,Shipping,W8,Delayed,Order #70663,2024-06-08,Delayed for Wheat
+Basmati Rice,280.72,14,2024-04-03,new,clothing,4290.27,91853,Jane Smith,Processing,On Hold,W1,Returned,Order #91853,2024-04-03,Returned for Basmati Rice
+Basmati Rice,221.94,30,2024-06-04,regular,home,7127.43,69812,Jane Smith,Paid,Cancelled,W8,Reminder,Order #69812,2024-06-04,Reminder for Basmati Rice
+Snacks,185.94,39,2024-06-11,new,personal care,8056.34,77867,Priya Patel,Partial,Cancelled,W1,Delivered,Order #77867,2024-06-11,Delivered for Snacks
+Coffee,471.13,50,2024-02-15,vip,home,21565.77,60381,Sara Lee,Unpaid,Cancelled,W4,Cancelled,Order #60381,2024-02-15,Cancelled for Coffee
+Coffee,396.14,9,2024-06-13,new,beverage,3889.45,67672,David Kim,Refunded,Returned,W3,Settlement,Order #67672,2024-06-13,Settlement for Coffee
+Salt,233.34,26,2024-06-07,affiliate,stationery,6807.43,95644,Carlos Gomez,Failed,Shipping,W2,Cancelled,Order #95644,2024-06-07,Cancelled for Salt
+Toothpaste,432.13,11,2024-04-12,guest,cleaning,4560.6,54722,Emily Brown,Paid,Out for Delivery,W5,Shipped,Order #54722,2024-04-12,Shipped for Toothpaste
+Salt,460.31,4,2024-03-18,new,food,1902.42,27289,Emily Brown,Pending,Shipping,W6,Shipped,Order #27289,2024-03-18,Shipped for Salt
+Basmati Rice,19.65,2,2024-01-15,employee,home,45.71,58354,Leslie Alexander,Partial,Delivered,W4,Reminder,Order #58354,2024-01-15,Reminder for Basmati Rice
+Shampoo,481.27,17,2024-05-09,regular,personal care,9141.63,28099,Anna Ivanova,Failed,Shipping,W9,Settlement,Order #28099,2024-05-09,Settlement for Shampoo
+Snacks,374.52,48,2024-02-16,affiliate,food,16882.35,43317,Wei Chen,Paid,Processing,W3,Delayed,Order #43317,2024-02-16,Delayed for Snacks
+Shampoo,309.67,32,2024-01-03,affiliate,stationery,10661.75,56496,Carlos Gomez,Failed,On Hold,W4,Shipped,Order #56496,2024-01-03,Shipped for Shampoo
+Coffee,483.07,4,2024-01-31,employee,food,2117.7,20985,Sofia Garcia,Paid,On Hold,W3,Settlement,Order #20985,2024-01-31,Settlement for Coffee
+Biscuits,291.89,5,2024-05-23,wholesale,toys,1182.91,60812,David Kim,Paid,Out for Delivery,W5,Delayed,Order #60812,2024-05-23,Delayed for Biscuits
+Snacks,486.19,22,2024-06-16,wholesale,cleaning,10446.75,27208,David Kim,Processing,Processing,W2,Reminder,Order #27208,2024-06-16,Reminder for Snacks
+Soap,292.42,30,2024-01-19,vip,clothing,8721.73,20714,Tom M�ller,Failed,Returned,W9,Returned,Order #20714,2024-01-19,Returned for Soap
+Shampoo,218.65,31,2024-04-06,new,clothing,7559.33,57004,Anna Ivanova,Refunded,Cancelled,W2,Shipped,Order #57004,2024-04-06,Shipped for Shampoo
+Biscuits,482.29,12,2024-02-09,regular,electronics,5303.68,32538,Tom M�ller,Pending,Delivered,W9,Returned,Order #32538,2024-02-09,Returned for Biscuits
+Toothpaste,71.46,28,2024-05-20,returning,clothing,1749.83,78447,David Kim,Unpaid,Returned,W2,Promotion,Order #78447,2024-05-20,Promotion for Toothpaste
+Toothpaste,322.67,31,2024-06-22,vip,home,8168.88,30560,Lucas Rossi,Failed,Shipping,W8,Settlement,Order #30560,2024-06-22,Settlement for Toothpaste
+Bathroom Essentials,70.37,37,2024-03-27,new,toys,2844.62,85013,Leslie Alexander,Refunded,Delivered,W8,Returned,Order #85013,2024-03-27,Returned for Bathroom Essentials
+Biscuits,433.51,19,2024-05-05,new,toys,8651.58,71158,Lucas Rossi,Refunded,Returned,W1,Delivered,Order #71158,2024-05-05,Delivered for Biscuits
+Shampoo,67.59,35,2024-05-22,returning,electronics,2588.12,83349,Emily Brown,Failed,Delivered,W4,Shipped,Order #83349,2024-05-22,Shipped for Shampoo
+Basmati Rice,385.5,3,2024-01-11,wholesale,personal care,1300.55,50238,David Kim,Unpaid,Shipping,W9,Shipped,Order #50238,2024-01-11,Shipped for Basmati Rice
+Coffee,354.42,31,2024-06-21,vip,clothing,12447.23,46336,Mohammed Ali,Paid,Returned,W8,Delivered,Order #46336,2024-06-21,Delivered for Coffee
+Salt,59.44,13,2024-06-04,affiliate,food,641.15,30740,John Doe,Partial,Out for Delivery,W7,Shipped,Order #30740,2024-06-04,Shipped for Salt
+Juice,294.5,42,2024-05-13,regular,home,10926.68,87436,John Doe,Unpaid,Cancelled,W6,Reminder,Order #87436,2024-05-13,Reminder for Juice
+Snacks,477.61,34,2024-01-24,guest,home,16668.62,31812,Lucas Rossi,Paid,Cancelled,W6,Delayed,Order #31812,2024-01-24,Delayed for Snacks
+Wheat,55.87,23,2024-05-08,new,food,1378.43,58627,Sara Lee,Pending,Processing,W9,Cancelled,Order #58627,2024-05-08,Cancelled for Wheat
+Biscuits,290.07,26,2024-01-09,wholesale,stationery,6453.34,37159,Tom M�ller,Pending,Out for Delivery,W4,Settlement,Order #37159,2024-01-09,Settlement for Biscuits
+Juice,205.73,42,2024-03-27,new,stationery,7607.0,24214,Sara Lee,Processing,Processing,W1,Delayed,Order #24214,2024-03-27,Delayed for Juice
+Tea,326.97,22,2024-04-25,affiliate,beverage,8307.8,20400,Sofia Garcia,Unpaid,Cancelled,W6,Info,Order #20400,2024-04-25,Info for Tea
+Toothpaste,197.46,21,2024-03-08,affiliate,electronics,4266.52,27625,Lucas Rossi,Failed,On Hold,W2,Shipped,Order #27625,2024-03-08,Shipped for Toothpaste
+Bathroom Essentials,153.61,38,2024-04-02,regular,personal care,6846.48,54872,Priya Patel,Processing,Delivered,W8,Info,Order #54872,2024-04-02,Info for Bathroom Essentials
+Juice,174.79,44,2024-06-29,vip,personal care,8386.44,26377,Priya Patel,Processing,Shipping,W2,Delivered,Order #26377,2024-06-29,Delivered for Juice
+Shampoo,310.81,41,2024-06-01,regular,toys,11842.02,95239,Sofia Garcia,Unpaid,Delivered,W5,Delivered,Order #95239,2024-06-01,Delivered for Shampoo
+Snacks,210.82,50,2024-04-27,returning,cleaning,10244.98,44734,Sofia Garcia,Failed,Returned,W4,Delayed,Order #44734,2024-04-27,Delayed for Snacks
+Wheat,405.39,4,2024-06-27,returning,stationery,1814.75,49897,Lucas Rossi,Paid,Out for Delivery,W2,Shipped,Order #49897,2024-06-27,Shipped for Wheat
+Soap,323.03,31,2024-04-27,regular,cleaning,12001.88,45230,David Kim,Paid,Cancelled,W3,Reminder,Order #45230,2024-04-27,Reminder for Soap
+Sugar,76.06,12,2024-04-17,vip,food,818.95,58207,John Doe,Partial,Out for Delivery,W1,Shipped,Order #58207,2024-04-17,Shipped for Sugar
+Shampoo,257.61,25,2024-01-14,vip,stationery,7075.71,52872,Priya Patel,Failed,Out for Delivery,W2,Shipped,Order #52872,2024-01-14,Shipped for Shampoo
+Toothpaste,121.08,40,2024-02-20,affiliate,stationery,4379.3,92540,Wei Chen,Partial,Shipping,W6,Returned,Order #92540,2024-02-20,Returned for Toothpaste
+Juice,421.44,37,2024-03-21,affiliate,home,16269.47,85714,Carlos Gomez,Partial,Returned,W6,Returned,Order #85714,2024-03-21,Returned for Juice
+Bathroom Essentials,418.33,36,2024-03-22,returning,beverage,12783.2,78800,John Doe,Refunded,Out for Delivery,W8,Cancelled,Order #78800,2024-03-22,Cancelled for Bathroom Essentials
+Milk,404.41,17,2024-04-27,employee,electronics,8247.9,73084,John Doe,Partial,Shipping,W5,Delayed,Order #73084,2024-04-27,Delayed for Milk
+Cooking Oil,11.06,36,2024-05-08,employee,beverage,379.31,93784,Jane Smith,Unpaid,Delivered,W2,Promotion,Order #93784,2024-05-08,Promotion for Cooking Oil
+Basmati Rice,190.98,2,2024-03-25,employee,food,380.1,43854,Fatima Zahra,Processing,Out for Delivery,W1,Info,Order #43854,2024-03-25,Info for Basmati Rice
+Snacks,179.11,25,2024-04-05,returning,personal care,3942.33,31010,Lucas Rossi,Processing,Shipping,W9,Delivered,Order #31010,2024-04-05,Delivered for Snacks
+Shampoo,391.96,30,2024-04-06,affiliate,food,12397.24,39455,David Kim,Refunded,On Hold,W8,Reminder,Order #39455,2024-04-06,Reminder for Shampoo
+Salt,408.79,13,2024-04-23,guest,home,4947.96,25850,Mohammed Ali,Processing,On Hold,W3,Promotion,Order #25850,2024-04-23,Promotion for Salt
+Toothpaste,48.6,18,2024-02-11,regular,clothing,830.5,23732,John Doe,Refunded,Cancelled,W4,Settlement,Order #23732,2024-02-11,Settlement for Toothpaste
+Sugar,303.67,39,2024-04-25,returning,stationery,10916.73,80222,Mohammed Ali,Pending,Delivered,W2,Reminder,Order #80222,2024-04-25,Reminder for Sugar
+Coffee,441.31,21,2024-03-14,returning,stationery,8999.39,69096,Lucas Rossi,Partial,On Hold,W4,Promotion,Order #69096,2024-03-14,Promotion for Coffee
+Coffee,104.63,39,2024-01-11,returning,electronics,3638.71,32423,David Kim,Unpaid,Returned,W1,Cancelled,Order #32423,2024-01-11,Cancelled for Coffee
+Soap,217.1,2,2024-05-08,returning,cleaning,376.61,88016,John Doe,Pending,Returned,W9,Delivered,Order #88016,2024-05-08,Delivered for Soap
+Juice,426.72,27,2024-06-15,employee,beverage,11479.97,78875,Fatima Zahra,Partial,On Hold,W8,Cancelled,Order #78875,2024-06-15,Cancelled for Juice
+Bathroom Essentials,481.9,19,2024-03-01,wholesale,beverage,7659.95,46269,Lucas Rossi,Partial,Shipping,W1,Cancelled,Order #46269,2024-03-01,Cancelled for Bathroom Essentials
+Bathroom Essentials,391.14,9,2024-01-24,affiliate,stationery,4199.06,78185,Tom M�ller,Paid,Returned,W9,Cancelled,Order #78185,2024-01-24,Cancelled for Bathroom Essentials
+Juice,247.31,31,2024-06-23,employee,food,8305.33,78374,Tom M�ller,Failed,Shipping,W8,Info,Order #78374,2024-06-23,Info for Juice
+Juice,208.16,41,2024-05-08,employee,toys,8373.51,42915,Lucas Rossi,Processing,Out for Delivery,W3,Cancelled,Order #42915,2024-05-08,Cancelled for Juice
+Shampoo,249.96,1,2024-05-12,regular,food,253.99,57023,Tom M�ller,Refunded,Out for Delivery,W6,Cancelled,Order #57023,2024-05-12,Cancelled for Shampoo
+Sugar,327.13,43,2024-05-18,vip,beverage,12874.71,93905,Sofia Garcia,Pending,Out for Delivery,W1,Shipped,Order #93905,2024-05-18,Shipped for Sugar
+Tea,466.6,33,2024-01-08,vip,home,15123.91,78922,Wei Chen,Refunded,Out for Delivery,W4,Info,Order #78922,2024-01-08,Info for Tea
+Shampoo,461.86,27,2024-04-09,wholesale,personal care,10878.0,43013,Sofia Garcia,Pending,Shipping,W2,Info,Order #43013,2024-04-09,Info for Shampoo
+Biscuits,177.72,5,2024-05-28,guest,cleaning,942.41,30526,Tom M�ller,Paid,Out for Delivery,W5,Delivered,Order #30526,2024-05-28,Delivered for Biscuits
+Coffee,434.49,10,2024-01-05,employee,stationery,3478.87,30247,David Kim,Paid,Processing,W4,Delayed,Order #30247,2024-01-05,Delayed for Coffee
+Milk,344.32,47,2024-03-09,guest,toys,13097.95,47422,Sara Lee,Refunded,Shipping,W6,Shipped,Order #47422,2024-03-09,Shipped for Milk
+Cooking Oil,299.59,26,2024-05-07,new,cleaning,7089.75,21682,Anna Ivanova,Partial,Returned,W6,Settlement,Order #21682,2024-05-07,Settlement for Cooking Oil
+Juice,364.92,23,2024-03-13,employee,personal care,7322.35,74354,Mohammed Ali,Failed,On Hold,W7,Promotion,Order #74354,2024-03-13,Promotion for Juice
+Cooking Oil,478.73,44,2024-03-23,vip,toys,21423.61,90926,Priya Patel,Paid,Delivered,W7,Returned,Order #90926,2024-03-23,Returned for Cooking Oil
+Wheat,23.64,34,2024-02-05,new,food,761.88,29231,Emily Brown,Unpaid,Shipping,W7,Delivered,Order #29231,2024-02-05,Delivered for Wheat
+Basmati Rice,120.56,9,2024-03-23,employee,electronics,1074.03,54418,Jane Smith,Refunded,Processing,W8,Cancelled,Order #54418,2024-03-23,Cancelled for Basmati Rice
+Toothpaste,484.23,44,2024-05-15,guest,beverage,25013.03,87747,Sofia Garcia,Partial,Cancelled,W8,Settlement,Order #87747,2024-05-15,Settlement for Toothpaste
+Tea,164.34,29,2024-06-18,wholesale,electronics,4331.52,76064,Leslie Alexander,Failed,Cancelled,W2,Delivered,Order #76064,2024-06-18,Delivered for Tea
+Coffee,182.92,4,2024-01-01,new,electronics,739.16,31891,Carlos Gomez,Pending,Out for Delivery,W1,Shipped,Order #31891,2024-01-01,Shipped for Coffee
+Toothpaste,30.6,40,2024-05-11,wholesale,home,1180.66,25978,Mohammed Ali,Refunded,Processing,W1,Promotion,Order #25978,2024-05-11,Promotion for Toothpaste
+Sugar,425.83,50,2024-04-18,affiliate,clothing,20107.48,67324,Mohammed Ali,Unpaid,Delivered,W6,Info,Order #67324,2024-04-18,Info for Sugar
+Bathroom Essentials,325.86,1,2024-01-03,regular,home,289.16,92766,Emily Brown,Processing,Shipping,W2,Returned,Order #92766,2024-01-03,Returned for Bathroom Essentials
+Shampoo,242.12,9,2024-02-03,regular,personal care,2129.67,69687,Sofia Garcia,Unpaid,Returned,W1,Returned,Order #69687,2024-02-03,Returned for Shampoo
+Tea,94.6,4,2024-06-23,new,clothing,434.25,63301,Lucas Rossi,Partial,Delivered,W7,Info,Order #63301,2024-06-23,Info for Tea
+Basmati Rice,452.99,7,2024-04-15,guest,home,3381.82,90925,Wei Chen,Failed,Delivered,W6,Returned,Order #90925,2024-04-15,Returned for Basmati Rice
+Toothpaste,290.02,16,2024-06-14,employee,toys,4940.94,71693,Emily Brown,Paid,Out for Delivery,W9,Cancelled,Order #71693,2024-06-14,Cancelled for Toothpaste
+Juice,229.8,13,2024-05-25,wholesale,stationery,2718.44,47579,Mohammed Ali,Pending,Returned,W5,Shipped,Order #47579,2024-05-25,Shipped for Juice
+Cooking Oil,162.86,50,2024-06-04,affiliate,electronics,9362.55,54441,Priya Patel,Failed,On Hold,W9,Reminder,Order #54441,2024-06-04,Reminder for Cooking Oil
+Sugar,282.33,42,2024-05-10,employee,personal care,12282.86,57496,Sofia Garcia,Failed,Out for Delivery,W9,Settlement,Order #57496,2024-05-10,Settlement for Sugar
+Milk,88.84,45,2024-03-05,affiliate,home,3259.26,93463,Sofia Garcia,Failed,Cancelled,W1,Delayed,Order #93463,2024-03-05,Delayed for Milk
+Tea,360.76,12,2024-02-20,vip,cleaning,4923.53,33863,Emily Brown,Pending,Shipping,W4,Shipped,Order #33863,2024-02-20,Shipped for Tea
+Tea,113.88,7,2024-01-10,new,personal care,754.34,49481,John Doe,Unpaid,Returned,W1,Reminder,Order #49481,2024-01-10,Reminder for Tea
+Toothpaste,429.28,21,2024-04-10,vip,stationery,10772.51,86137,Emily Brown,Processing,On Hold,W3,Settlement,Order #86137,2024-04-10,Settlement for Toothpaste
+Sugar,435.04,37,2024-03-06,wholesale,home,19109.44,83119,Anna Ivanova,Partial,Delivered,W9,Settlement,Order #83119,2024-03-06,Settlement for Sugar
+Toothpaste,208.34,35,2024-01-20,wholesale,electronics,5955.98,70645,Jane Smith,Failed,Cancelled,W3,Returned,Order #70645,2024-01-20,Returned for Toothpaste
+Salt,37.61,39,2024-03-31,returning,personal care,1186.34,58420,Anna Ivanova,Partial,Returned,W6,Returned,Order #58420,2024-03-31,Returned for Salt
+Milk,443.93,21,2024-04-14,guest,food,9207.79,27105,Fatima Zahra,Processing,Out for Delivery,W6,Promotion,Order #27105,2024-04-14,Promotion for Milk
+Wheat,269.05,4,2024-01-15,employee,personal care,1005.88,72742,Sofia Garcia,Unpaid,Cancelled,W7,Delivered,Order #72742,2024-01-15,Delivered for Wheat
+Juice,488.54,23,2024-06-04,affiliate,personal care,9122.57,35725,Priya Patel,Processing,On Hold,W4,Cancelled,Order #35725,2024-06-04,Cancelled for Juice
+Wheat,421.13,26,2024-02-06,employee,home,11888.6,38604,John Doe,Processing,Cancelled,W3,Settlement,Order #38604,2024-02-06,Settlement for Wheat
+Milk,435.78,25,2024-01-15,wholesale,stationery,12970.83,61481,Tom M�ller,Processing,Returned,W9,Info,Order #61481,2024-01-15,Info for Milk
+Soap,58.12,35,2024-01-04,new,cleaning,2115.5,36204,John Doe,Processing,Delivered,W1,Promotion,Order #36204,2024-01-04,Promotion for Soap
+Shampoo,101.56,27,2024-03-10,affiliate,electronics,3118.86,30675,Anna Ivanova,Processing,Returned,W9,Delivered,Order #30675,2024-03-10,Delivered for Shampoo
+Shampoo,214.6,34,2024-01-31,regular,food,7945.08,39721,John Doe,Unpaid,Cancelled,W4,Shipped,Order #39721,2024-01-31,Shipped for Shampoo
+Biscuits,457.42,16,2024-04-01,affiliate,clothing,7063.59,86091,Priya Patel,Processing,Cancelled,W3,Settlement,Order #86091,2024-04-01,Settlement for Biscuits
+Milk,496.67,48,2024-05-25,guest,personal care,20543.25,23338,Wei Chen,Processing,On Hold,W8,Delivered,Order #23338,2024-05-25,Delivered for Milk
+Basmati Rice,422.92,21,2024-02-29,returning,beverage,8393.17,48555,Sara Lee,Processing,Delivered,W5,Settlement,Order #48555,2024-02-29,Settlement for Basmati Rice
+Coffee,115.73,5,2024-04-16,regular,stationery,689.39,95490,Lucas Rossi,Refunded,Processing,W4,Shipped,Order #95490,2024-04-16,Shipped for Coffee
+Milk,383.86,16,2024-03-17,new,clothing,5676.94,62605,Jane Smith,Processing,Processing,W6,Settlement,Order #62605,2024-03-17,Settlement for Milk
+Bathroom Essentials,442.69,13,2024-05-30,guest,clothing,4722.49,95308,Fatima Zahra,Processing,Out for Delivery,W3,Shipped,Order #95308,2024-05-30,Shipped for Bathroom Essentials
+Sugar,193.44,35,2024-01-17,guest,beverage,7931.17,86726,Jane Smith,Processing,Returned,W6,Reminder,Order #86726,2024-01-17,Reminder for Sugar
+Coffee,488.78,14,2024-02-08,returning,stationery,6727.04,84480,Emily Brown,Paid,Returned,W8,Cancelled,Order #84480,2024-02-08,Cancelled for Coffee
+Salt,181.25,16,2024-01-07,affiliate,toys,2972.71,90658,Fatima Zahra,Unpaid,Cancelled,W6,Returned,Order #90658,2024-01-07,Returned for Salt
+Tea,333.89,46,2024-05-18,regular,food,14285.45,69096,Anna Ivanova,Paid,Processing,W5,Reminder,Order #69096,2024-05-18,Reminder for Tea
+Soap,333.89,9,2024-02-25,employee,food,3282.6,26506,David Kim,Unpaid,Cancelled,W2,Settlement,Order #26506,2024-02-25,Settlement for Soap
+Wheat,43.43,40,2024-06-28,wholesale,beverage,1737.62,68395,Wei Chen,Partial,Delivered,W9,Info,Order #68395,2024-06-28,Info for Wheat
+Basmati Rice,147.3,17,2024-01-03,returning,beverage,2844.09,43962,Sara Lee,Failed,Processing,W4,Delayed,Order #43962,2024-01-03,Delayed for Basmati Rice
+Milk,49.95,28,2024-04-01,regular,electronics,1276.45,81536,Sara Lee,Partial,Shipping,W4,Settlement,Order #81536,2024-04-01,Settlement for Milk
+Biscuits,483.08,29,2024-05-22,vip,clothing,14728.76,75230,Wei Chen,Refunded,On Hold,W4,Info,Order #75230,2024-05-22,Info for Biscuits
+Basmati Rice,335.61,24,2024-06-01,affiliate,personal care,7878.14,75292,Priya Patel,Failed,Returned,W9,Promotion,Order #75292,2024-06-01,Promotion for Basmati Rice
+Coffee,297.52,7,2024-02-23,employee,stationery,2330.6,28784,Jane Smith,Processing,Returned,W6,Delivered,Order #28784,2024-02-23,Delivered for Coffee
+Cooking Oil,311.66,1,2024-06-10,affiliate,clothing,335.94,31731,Priya Patel,Pending,Out for Delivery,W6,Delivered,Order #31731,2024-06-10,Delivered for Cooking Oil
+Tea,474.36,28,2024-03-29,wholesale,stationery,15867.68,20710,Emily Brown,Failed,Processing,W1,Returned,Order #20710,2024-03-29,Returned for Tea
+Soap,236.54,3,2024-06-16,affiliate,food,759.48,20246,Sofia Garcia,Pending,Out for Delivery,W3,Settlement,Order #20246,2024-06-16,Settlement for Soap
+Tea,259.46,4,2024-02-29,employee,personal care,1173.71,36593,Tom M�ller,Paid,Cancelled,W5,Reminder,Order #36593,2024-02-29,Reminder for Tea
+Juice,299.53,31,2024-04-06,vip,home,7644.99,80717,Leslie Alexander,Paid,Processing,W2,Reminder,Order #80717,2024-04-06,Reminder for Juice
+Bathroom Essentials,221.67,16,2024-05-25,guest,clothing,2932.71,81686,Carlos Gomez,Unpaid,Shipping,W5,Cancelled,Order #81686,2024-05-25,Cancelled for Bathroom Essentials
+Salt,427.29,14,2024-02-04,vip,beverage,7114.14,49262,Leslie Alexander,Refunded,Out for Delivery,W7,Promotion,Order #49262,2024-02-04,Promotion for Salt
+Coffee,371.43,27,2024-03-29,guest,electronics,10398.76,78670,Carlos Gomez,Processing,Shipping,W2,Returned,Order #78670,2024-03-29,Returned for Coffee
+Cooking Oil,342.4,27,2024-06-26,affiliate,home,8052.05,92569,Fatima Zahra,Paid,Cancelled,W2,Shipped,Order #92569,2024-06-26,Shipped for Cooking Oil
+Tea,11.79,25,2024-06-17,new,stationery,256.94,83589,Lucas Rossi,Failed,Processing,W9,Delayed,Order #83589,2024-06-17,Delayed for Tea
+Bathroom Essentials,436.96,32,2024-01-29,new,beverage,12519.94,65238,Fatima Zahra,Processing,On Hold,W9,Promotion,Order #65238,2024-01-29,Promotion for Bathroom Essentials
+Shampoo,244.74,27,2024-03-28,guest,toys,5383.39,23475,Fatima Zahra,Partial,Delivered,W8,Reminder,Order #23475,2024-03-28,Reminder for Shampoo
+Snacks,492.68,28,2024-04-01,returning,cleaning,16278.34,48454,Sara Lee,Pending,Delivered,W2,Reminder,Order #48454,2024-04-01,Reminder for Snacks
+Toothpaste,434.74,35,2024-01-19,new,food,14126.03,41679,Carlos Gomez,Failed,On Hold,W4,Delivered,Order #41679,2024-01-19,Delivered for Toothpaste
+Cooking Oil,412.19,40,2024-05-22,vip,cleaning,14534.58,47004,Leslie Alexander,Failed,Returned,W8,Cancelled,Order #47004,2024-05-22,Cancelled for Cooking Oil
+Juice,496.6,16,2024-02-17,employee,toys,6508.63,38900,Priya Patel,Failed,Delivered,W9,Delayed,Order #38900,2024-02-17,Delayed for Juice
+Tea,446.76,31,2024-06-03,vip,clothing,13432.92,44313,John Doe,Pending,Processing,W8,Info,Order #44313,2024-06-03,Info for Tea
+Biscuits,373.32,2,2024-06-14,new,home,665.68,31156,Sara Lee,Failed,Delivered,W9,Info,Order #31156,2024-06-14,Info for Biscuits
+Milk,305.37,13,2024-06-03,affiliate,beverage,3316.72,27900,Priya Patel,Failed,Cancelled,W3,Returned,Order #27900,2024-06-03,Returned for Milk
+Tea,55.32,43,2024-05-21,employee,stationery,2122.62,94631,Priya Patel,Refunded,Processing,W1,Reminder,Order #94631,2024-05-21,Reminder for Tea
+Sugar,52.02,7,2024-01-30,wholesale,stationery,368.05,91280,Tom M�ller,Failed,Shipping,W9,Shipped,Order #91280,2024-01-30,Shipped for Sugar
+Tea,490.1,6,2024-04-02,returning,clothing,2986.76,43900,Sara Lee,Partial,Processing,W9,Delayed,Order #43900,2024-04-02,Delayed for Tea
+Basmati Rice,322.05,39,2024-01-03,guest,stationery,15068.5,88206,Anna Ivanova,Paid,On Hold,W6,Settlement,Order #88206,2024-01-03,Settlement for Basmati Rice
+Salt,365.92,16,2024-02-01,affiliate,personal care,5623.92,99688,Wei Chen,Processing,Shipping,W7,Promotion,Order #99688,2024-02-01,Promotion for Salt
+Wheat,386.77,2,2024-06-14,wholesale,electronics,835.23,57698,Mohammed Ali,Pending,Out for Delivery,W5,Delivered,Order #57698,2024-06-14,Delivered for Wheat
+Wheat,387.73,21,2024-05-06,wholesale,cleaning,7917.09,62498,Anna Ivanova,Unpaid,Processing,W4,Shipped,Order #62498,2024-05-06,Shipped for Wheat
+Shampoo,142.54,21,2024-04-10,guest,beverage,3009.71,30368,Emily Brown,Paid,Out for Delivery,W8,Promotion,Order #30368,2024-04-10,Promotion for Shampoo
+Biscuits,422.0,31,2024-01-30,new,cleaning,11742.85,54487,Leslie Alexander,Paid,Delivered,W2,Promotion,Order #54487,2024-01-30,Promotion for Biscuits
+Shampoo,492.98,40,2024-06-09,affiliate,cleaning,16926.06,50600,Sofia Garcia,Pending,Out for Delivery,W6,Delivered,Order #50600,2024-06-09,Delivered for Shampoo
+Bathroom Essentials,467.65,35,2024-01-15,guest,toys,14730.72,38977,Sara Lee,Processing,Delivered,W8,Promotion,Order #38977,2024-01-15,Promotion for Bathroom Essentials
+Soap,129.35,36,2024-01-30,affiliate,food,4270.96,88579,Sara Lee,Unpaid,Processing,W2,Info,Order #88579,2024-01-30,Info for Soap
+Sugar,51.52,12,2024-01-05,returning,clothing,720.16,63280,Leslie Alexander,Pending,Returned,W2,Info,Order #63280,2024-01-05,Info for Sugar
+Bathroom Essentials,162.61,50,2024-02-16,regular,stationery,6998.32,57253,Leslie Alexander,Failed,Cancelled,W4,Delayed,Order #57253,2024-02-16,Delayed for Bathroom Essentials
+Biscuits,35.92,43,2024-01-08,vip,beverage,1411.59,78710,Priya Patel,Pending,Cancelled,W2,Promotion,Order #78710,2024-01-08,Promotion for Biscuits
+Tea,340.18,32,2024-06-24,guest,toys,9549.72,22752,Sofia Garcia,Processing,Delivered,W3,Delayed,Order #22752,2024-06-24,Delayed for Tea
+Juice,186.88,21,2024-05-17,affiliate,cleaning,4627.23,98197,John Doe,Processing,On Hold,W4,Settlement,Order #98197,2024-05-17,Settlement for Juice
+Sugar,394.94,9,2024-02-27,affiliate,personal care,3998.71,88109,David Kim,Failed,On Hold,W9,Delivered,Order #88109,2024-02-27,Delivered for Sugar
+Milk,22.26,35,2024-05-21,employee,beverage,930.48,55278,Carlos Gomez,Unpaid,Cancelled,W3,Returned,Order #55278,2024-05-21,Returned for Milk
+Bathroom Essentials,476.42,29,2024-05-07,employee,clothing,15983.31,32709,Anna Ivanova,Paid,On Hold,W2,Promotion,Order #32709,2024-05-07,Promotion for Bathroom Essentials
+Bathroom Essentials,156.03,5,2024-06-25,employee,beverage,634.11,53751,Emily Brown,Unpaid,Shipping,W8,Promotion,Order #53751,2024-06-25,Promotion for Bathroom Essentials
+Toothpaste,120.68,25,2024-01-15,vip,clothing,2525.88,65377,Lucas Rossi,Partial,Shipping,W3,Shipped,Order #65377,2024-01-15,Shipped for Toothpaste
+Sugar,39.08,22,2024-05-31,new,home,776.65,74585,Sara Lee,Refunded,Returned,W1,Cancelled,Order #74585,2024-05-31,Cancelled for Sugar
+Soap,97.43,39,2024-04-09,employee,stationery,3295.15,75427,Lucas Rossi,Unpaid,Processing,W7,Promotion,Order #75427,2024-04-09,Promotion for Soap
+Coffee,117.03,27,2024-06-04,returning,electronics,2541.57,31386,Lucas Rossi,Failed,Shipping,W9,Promotion,Order #31386,2024-06-04,Promotion for Coffee
+Tea,455.86,10,2024-03-26,new,food,5266.67,93911,Wei Chen,Failed,Cancelled,W9,Returned,Order #93911,2024-03-26,Returned for Tea
+Toothpaste,132.54,27,2024-01-01,new,home,3932.49,80012,Wei Chen,Pending,On Hold,W1,Reminder,Order #80012,2024-01-01,Reminder for Toothpaste
+Wheat,266.38,2,2024-01-04,wholesale,cleaning,519.53,71355,Lucas Rossi,Paid,Delivered,W5,Promotion,Order #71355,2024-01-04,Promotion for Wheat
+Tea,47.94,9,2024-04-26,returning,home,484.38,82203,Mohammed Ali,Processing,Delivered,W6,Delayed,Order #82203,2024-04-26,Delayed for Tea
+Snacks,435.72,2,2024-05-14,new,beverage,702.56,22163,Sara Lee,Unpaid,Shipping,W9,Info,Order #22163,2024-05-14,Info for Snacks
+Coffee,170.68,1,2024-02-24,new,home,147.11,84033,Wei Chen,Unpaid,Shipping,W4,Delayed,Order #84033,2024-02-24,Delayed for Coffee
+Soap,104.31,32,2024-04-28,new,home,2940.55,47687,Mohammed Ali,Pending,Delivered,W7,Returned,Order #47687,2024-04-28,Returned for Soap
+Sugar,365.48,47,2024-01-14,vip,home,14330.26,46794,David Kim,Processing,Shipping,W1,Cancelled,Order #46794,2024-01-14,Cancelled for Sugar
+Wheat,43.7,5,2024-04-19,wholesale,electronics,194.1,37611,Sofia Garcia,Pending,Delivered,W8,Returned,Order #37611,2024-04-19,Returned for Wheat
+Milk,190.39,5,2024-03-17,new,toys,903.59,81474,Priya Patel,Processing,On Hold,W2,Info,Order #81474,2024-03-17,Info for Milk
+Coffee,366.61,37,2024-01-28,affiliate,home,13021.39,55850,Lucas Rossi,Partial,Out for Delivery,W7,Returned,Order #55850,2024-01-28,Returned for Coffee
+Tea,294.71,30,2024-04-22,vip,clothing,9321.02,54472,Tom M�ller,Failed,Out for Delivery,W4,Delivered,Order #54472,2024-04-22,Delivered for Tea
+Biscuits,178.88,24,2024-02-26,employee,cleaning,4291.19,85767,Anna Ivanova,Processing,Out for Delivery,W2,Promotion,Order #85767,2024-02-26,Promotion for Biscuits
+Toothpaste,350.91,18,2024-05-12,guest,beverage,5697.36,56851,Mohammed Ali,Paid,Processing,W8,Shipped,Order #56851,2024-05-12,Shipped for Toothpaste
+Biscuits,99.4,28,2024-01-18,employee,home,2311.54,76520,Jane Smith,Processing,Delivered,W1,Settlement,Order #76520,2024-01-18,Settlement for Biscuits
+Bathroom Essentials,95.03,50,2024-03-04,returning,beverage,4304.95,95948,Wei Chen,Processing,Returned,W4,Shipped,Order #95948,2024-03-04,Shipped for Bathroom Essentials
+Salt,108.09,15,2024-04-24,vip,food,1625.88,77708,Wei Chen,Pending,Cancelled,W5,Promotion,Order #77708,2024-04-24,Promotion for Salt
+Basmati Rice,305.87,29,2024-02-25,new,electronics,9738.96,52464,Wei Chen,Pending,Processing,W3,Cancelled,Order #52464,2024-02-25,Cancelled for Basmati Rice
+Shampoo,313.25,34,2024-01-13,guest,personal care,8848.69,81078,Wei Chen,Partial,Processing,W5,Info,Order #81078,2024-01-13,Info for Shampoo
+Snacks,403.25,32,2024-04-24,affiliate,cleaning,13667.74,22850,Jane Smith,Unpaid,Processing,W7,Cancelled,Order #22850,2024-04-24,Cancelled for Snacks
+Biscuits,132.95,18,2024-03-10,returning,personal care,2303.43,29258,Priya Patel,Processing,Returned,W9,Cancelled,Order #29258,2024-03-10,Cancelled for Biscuits
+Salt,73.41,15,2024-03-06,guest,home,1017.24,56351,Wei Chen,Processing,On Hold,W1,Shipped,Order #56351,2024-03-06,Shipped for Salt
+Wheat,27.29,27,2024-06-16,returning,cleaning,690.38,88316,Carlos Gomez,Unpaid,Out for Delivery,W1,Info,Order #88316,2024-06-16,Info for Wheat
+Coffee,243.12,29,2024-02-06,regular,toys,6830.21,90191,Sara Lee,Paid,Processing,W6,Returned,Order #90191,2024-02-06,Returned for Coffee
+Milk,384.97,20,2024-01-15,returning,electronics,8760.22,46450,Priya Patel,Unpaid,Cancelled,W5,Delivered,Order #46450,2024-01-15,Delivered for Milk
+Tea,457.33,23,2024-05-15,wholesale,electronics,8673.98,40721,Wei Chen,Pending,Shipping,W7,Promotion,Order #40721,2024-05-15,Promotion for Tea
+Shampoo,492.25,10,2024-01-22,guest,beverage,4218.8,85904,Lucas Rossi,Partial,Returned,W4,Info,Order #85904,2024-01-22,Info for Shampoo
+Wheat,29.58,17,2024-04-24,new,food,574.13,21209,Anna Ivanova,Paid,Cancelled,W2,Delayed,Order #21209,2024-04-24,Delayed for Wheat
+Soap,220.42,49,2024-06-24,guest,food,10686.5,99887,Tom M�ller,Unpaid,On Hold,W8,Settlement,Order #99887,2024-06-24,Settlement for Soap
+Milk,324.58,19,2024-03-01,returning,beverage,6904.83,92972,Emily Brown,Paid,Shipping,W8,Delivered,Order #92972,2024-03-01,Delivered for Milk
+Bathroom Essentials,189.54,23,2024-03-10,regular,home,4815.11,75396,Emily Brown,Processing,Shipping,W5,Settlement,Order #75396,2024-03-10,Settlement for Bathroom Essentials
+Cooking Oil,374.99,46,2024-01-25,vip,beverage,14077.71,24523,Lucas Rossi,Unpaid,Returned,W1,Info,Order #24523,2024-01-25,Info for Cooking Oil

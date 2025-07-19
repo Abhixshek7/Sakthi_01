@@ -340,18 +340,25 @@ async def admin_upload(
     else:
         df['predicted_sales'] = df['price'] * df['quantity_sold']
 
+    # Predict quantity sold (regression or random for demo)
+    if 'quantity_sold' in df.columns:
+        # You can use a regressor or just copy the column for demo
+        df['predicted_quantity_sold'] = df['quantity_sold']
+    else:
+        df['predicted_quantity_sold'] = np.random.randint(1, 500, len(df))
+
     # --- Prepare Firestore data for UI ---
     df['date'] = pd.to_datetime(df['date'])
     pieData = [
-        {"name": row['product_name'], "value": row['predicted_sales'], "color": "#a99cff"}
+        {"name": row['product_name'], "value": row['predicted_sales'], "quantity": row['predicted_quantity_sold'], "color": "#a99cff"}
         for _, row in df.iterrows()
     ][:10]
     transactions = [
-        {"name": row['product_name'], "amount": row['predicted_sales'], "date": row['date']}
+        {"name": row['product_name'], "amount": row['predicted_sales'], "quantity": row['predicted_quantity_sold'], "date": row['date']}
         for _, row in df.iterrows()
     ][:10]
     topProducts = [
-        {"name": row['product_name'], "demand": int(row['quantity_sold']), "color": "#7c8aff"}
+        {"name": row['product_name'], "demand": int(row['quantity_sold']), "quantity": int(row['predicted_quantity_sold']), "color": "#7c8aff"}
         for _, row in df.iterrows()
     ][:10]
     dashboard_data = {
@@ -365,17 +372,18 @@ async def admin_upload(
     financialData = [
         {
             "month": month,
-            "income": float(group['predicted_sales'].sum()),
-            "expense": float(group['price'].sum())
+            "revenue": float(group['predicted_sales'].sum()),
+            "expense": float(group['price'].sum()),
+            "quantity": int(group['predicted_quantity_sold'].sum())
         }
         for month, group in monthly
     ]
     sales_transactions = [
-        {"name": row['product_name'], "date": row['date'], "amount": row['predicted_sales'], "positive": True}
+        {"name": row['product_name'], "date": row['date'], "amount": row['predicted_sales'], "quantity": row['predicted_quantity_sold'], "positive": True}
         for _, row in df.iterrows()
     ][:10]
     orders = [
-        {"id": row.get('order_id', f"{i:05d}"), "product": row['product_name'], "customer": row.get('customer', 'N/A'), "price": row['price'], "date": row['date'], "payment": row.get('payment', 'Paid'), "status": row.get('status', 'Shipping')}
+        {"id": row.get('order_id', f"{i:05d}"), "product": row['product_name'], "customer": row.get('customer', 'N/A'), "price": row['price'], "date": row['date'], "payment": row.get('payment', 'Paid'), "status": row.get('status', 'Shipping'), "predicted_quantity_sold": int(row['predicted_quantity_sold'])}
         for i, row in df.iterrows()
     ][:10]
     sales_data = {
