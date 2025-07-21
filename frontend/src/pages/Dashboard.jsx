@@ -69,7 +69,7 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ display: 'flex', width: '100vw', minHeight: '100vh', bgcolor: mainBg, fontFamily, overflowX: 'hidden' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: mainBg, fontFamily, overflowX: 'hidden' }}>
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       <Box
         sx={{
@@ -81,8 +81,8 @@ export default function Dashboard() {
           minHeight: '100vh',
           fontFamily,
           boxSizing: 'border-box',
-          overflowX: 'hidden',
           width: '100%',
+          overflowX: 'hidden',
         }}
       >
         <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%' }}>

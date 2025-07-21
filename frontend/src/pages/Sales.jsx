@@ -88,7 +88,7 @@ export default function Sales() {
   );
 
   return (
-    <Box sx={{ display: 'flex', width: '100vw', height: '100vh', overflow: 'hidden', bgcolor: '#eaf6fa' }}>
+    <Box sx={{ display: 'flex', height: '100vh', bgcolor: '#eaf6fa' }}>
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       <Box
         sx={{
