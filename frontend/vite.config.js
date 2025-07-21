@@ -7,6 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:8000',
+      '/inventory': 'http://localhost:8000',
+      '/sms': 'http://localhost:8000',
     },
   },
 })

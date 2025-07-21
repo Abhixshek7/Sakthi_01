@@ -13,6 +13,8 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [lowStockResult, setLowStockResult] = useState(null);
+  const [checkingStock, setCheckingStock] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -53,6 +55,19 @@ export default function Admin() {
     }
   };
 
+  const handleCheckLowStock = async () => {
+    setCheckingStock(true);
+    setLowStockResult(null);
+    const res = await fetch("/inventory/check-and-notify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone_number: "+91YOURNUMBER" }) // Replace with your WhatsApp number
+    });
+    const data = await res.json();
+    setLowStockResult(data);
+    setCheckingStock(false);
+  };
+
   if (!user) {
     return <Loader />;
   }
@@ -84,6 +99,22 @@ export default function Admin() {
           </Button>
           {success && <Typography color="success.main" sx={{ mt: 2 }}>File uploaded and processed! Dashboard will update shortly.</Typography>}
           {error && <Typography color="error" sx={{ mt: 2 }}>{error}</Typography>}
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={handleCheckLowStock}
+            disabled={checkingStock}
+            sx={{ mt: 2 }}
+          >
+            {checkingStock ? "Checking..." : "Check Low Stock & Notify"}
+          </Button>
+          {lowStockResult && (
+            <Typography sx={{ mt: 2 }}>
+              {typeof lowStockResult === "string"
+                ? lowStockResult
+                : JSON.stringify(lowStockResult, null, 2)}
+            </Typography>
+          )}
         </CardContent>
       </Card>
     </Box>
