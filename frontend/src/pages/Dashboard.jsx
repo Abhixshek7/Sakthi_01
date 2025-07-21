@@ -193,8 +193,8 @@ export default function Dashboard() {
                   {(dashboard.pieData || []).map((item, idx) => (
                     <Box key={item.name + idx} sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 0.5, minWidth: 0 }}>
                       <Box sx={{ width: 16, height: 16, bgcolor: colorPalette[idx % colorPalette.length], borderRadius: '50%', flexShrink: 0, mr: 1 }} />
-                      <Typography fontSize={13} fontWeight={500} sx={{ fontFamily, color: '#333', lineHeight: 1.2, minWidth: 90 }}>{item.name}</Typography>
-                      <Typography fontSize={13} fontWeight={600} sx={{ fontFamily, color: '#333', lineHeight: 1.2, minWidth: 60 }}>{`₹${Math.round(item.value).toLocaleString()}`}</Typography>
+                      <Typography fontSize={15} fontWeight={500} sx={{ fontFamily, color: '#333', lineHeight: 1.2, minWidth: 120 }}>{item.name}</Typography>
+                      <Typography fontSize={17} fontWeight={600} sx={{ fontFamily, color: '#333', lineHeight: 1.2, minWidth: 60, ml: 2 }}>{`₹${Math.round(item.value).toLocaleString()}`}</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -230,12 +230,12 @@ export default function Dashboard() {
                           {tx.name[0]}
                         </Box>
                         <Box>
-                          <Typography fontWeight={500} fontSize={12}>{tx.name}</Typography>
+                          <Typography fontWeight={500} fontSize={17}>{tx.name}</Typography>
                           <Typography fontSize={10} color="#888">{tx.date && tx.date.toDate ? tx.date.toDate().toLocaleString() : String(tx.date)}</Typography>
                         </Box>
                       </Box>
-                      <Typography fontWeight={600} fontSize={12} color={tx.positive ? '#22c55e' : '#ef4444'}>
-                        {tx.positive ? '+' : ''}${Math.abs(tx.amount).toFixed(2)}
+                      <Typography fontWeight={600} fontSize={17} color={tx.positive ? '#22c55e' : '#ef4444'}>
+                        {tx.positive ? '+' : ''}₹{new Intl.NumberFormat('en-IN').format(Math.round(Math.abs(tx.amount)))}
                       </Typography>
                     </Box>
                   ))
@@ -252,14 +252,13 @@ export default function Dashboard() {
     {/* Balance Card 1 */}
     <Paper sx={{ borderRadius: 3, p: 3, bgcolor: cardBg, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 1, height: 'fit-content' }}>
       <Typography fontSize={14} color="#666" sx={{ fontFamily }}>Balance</Typography>
-      <Typography variant="h4" fontWeight={600} color={blue} sx={{ fontFamily }}>₹{dashboard.balance ? dashboard.balance.toLocaleString() : 0}</Typography>
-      <Chip label={dashboard.balanceChangePercent ? `↑ ${dashboard.balanceChangePercent}%` : '↑ 0%'} sx={{ bgcolor: '#e6f9ed', color: '#16a34a', fontWeight: 600, fontSize: 12, height: 24, alignSelf: 'flex-start' }} />
+      <Typography variant="h4" fontWeight={600} color={blue} sx={{ fontFamily }}>₹{dashboard.balance ? new Intl.NumberFormat('en-IN').format(Math.round(dashboard.balance)) : 0}</Typography>
     </Paper>
     {/* Balance Card 2 */}
     <Paper sx={{ borderRadius: 3, p: 3, bgcolor: cardBg,  minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 1, height: 'fit-content' }}>
-      <Typography fontSize={14} color="#666" sx={{ fontFamily }}>Balance</Typography>
-      <Typography variant="h4" fontWeight={600} color={blue} sx={{ fontFamily }}>₹{dashboard.balance ? dashboard.balance.toLocaleString() : 0}</Typography>
-      <Chip label={dashboard.balanceChangePercent ? `↑ ${dashboard.balanceChangePercent}%` : '↑ 0%'} sx={{ bgcolor: '#e6f9ed', color: '#16a34a', fontWeight: 600, fontSize: 12, height: 24, alignSelf: 'flex-start' }} />
+      <Typography fontSize={14} color="#666" sx={{ fontFamily }}>Profit</Typography>
+      <Typography variant="h4" fontWeight={600} color={blue} sx={{ fontFamily }}>₹{dashboard.balance ? new Intl.NumberFormat('en-IN').format(Math.round(dashboard.balance * 0.25)) : 0}</Typography>
+      <Chip label={`↑ ${dashboard.balance ? Math.round((0.25) * 100) : 0}%`} sx={{ bgcolor: '#e6f9ed', color: '#16a34a', fontWeight: 600, fontSize: 12, height: 24, alignSelf: 'flex-start' }} />
     </Paper>
   </Box>
   {/* Top Products Card */}
