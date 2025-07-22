@@ -15,10 +15,10 @@ const navItems = [
   { label: "Dashboard", icon: House, to: "/dashboard" },
   { label: "Sales", icon: ShoppingCart, to: "/sales" },
   { label: "Notifications", icon: Bell, to: "/notifications" },
-];
-const bottomItems = [
   { label: "Settings", icon: Gear, to: "/settings" },
   { label: "Help", icon: Question, to: "/help" },
+];
+const bottomItems = [
   { label: "Log out", icon: SignOut, action: "logout" },
 ];
 
@@ -83,6 +83,7 @@ const Sidebar = ({ open, setOpen }) => {
               minHeight: 48,
               my: 0.5,
               transition: 'all 0.3s',
+              bgcolor: 'transparent', // Ensure no background by default
               '&:hover': {
                 bgcolor: '#f5f5f5',
                 '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
@@ -115,12 +116,24 @@ const Sidebar = ({ open, setOpen }) => {
               minHeight: 48,
               my: 0.5,
               transition: 'all 0.3s',
+              bgcolor: 'transparent', // Remove gray background
               '&:hover': {
                 bgcolor: '#f5f5f5',
-                '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                  color: '#111',
-                },
               },
+              // Remove border and outline for button (Log out)
+              ...(action === 'logout' && {
+                border: 'none',
+                outline: 'none',
+                boxShadow: 'none',
+                '&:focus': {
+                  outline: 'none',
+                  border: 'none',
+                },
+                '&:active': {
+                  outline: 'none',
+                  border: 'none',
+                },
+              }),
             }}
           >
             <ListItemIcon sx={{ color: '#111 !important', minWidth: 0, justifyContent: 'center', display: 'flex' }}>
@@ -136,7 +149,7 @@ const Sidebar = ({ open, setOpen }) => {
           onClick={() => setOpen(!open)}
           sx={{
             bgcolor: '#fff',
-            boxShadow: 1,
+            
             borderRadius: '50%',
             width: 48,
             height: 48,
