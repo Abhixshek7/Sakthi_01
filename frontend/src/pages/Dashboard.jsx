@@ -234,7 +234,7 @@ export default function Dashboard() {
                           <Typography fontSize={10} color="#888">{tx.date && tx.date.toDate ? tx.date.toDate().toLocaleString() : String(tx.date)}</Typography>
                         </Box>
                       </Box>
-                      <Typography fontWeight={600} fontSize={17} color={tx.positive ? '#22c55e' : '#ef4444'}>
+                      <Typography fontWeight={600} fontSize={17} color={tx.positive ? '#22c55e' : '#2563eb'}>
                         {tx.positive ? '+' : ''}₹{new Intl.NumberFormat('en-IN').format(Math.round(Math.abs(tx.amount)))}
                       </Typography>
                     </Box>
