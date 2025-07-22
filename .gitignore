@@ -1,3 +1,4 @@
 ./ml_service/firebase_key.json
 .env
-./ml_service/ml_service.log
+./ml_service/ml_service.log"ml_service/firebase_key.json" 
+"ml_service/ml_service.log" 
