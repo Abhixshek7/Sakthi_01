@@ -331,7 +331,7 @@ export default function Dashboard() {
               elevation={3}
               sx={{
                 flex: 1,
-                minWidth: 0,
+                minWidth: 0, 
                 borderRadius: 4,
                 p: 4,
                 bgcolor: cardBg,

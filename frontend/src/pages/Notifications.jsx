@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import Loader from '../components/Loader';
+import { useTheme } from '@mui/material/styles';
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
@@ -40,6 +41,8 @@ export default function Notifications() {
   const [lastNotifications, setLastNotifications] = useState([]);
   const [selected, setSelected] = useState([]);
   const [undoMessage, setUndoMessage] = useState('');
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, 'notifications', 'main'), (docSnap) => {
@@ -107,7 +110,7 @@ export default function Notifications() {
 
   // --- Render ---
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#eaf7f7' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: isDark ? '#10151a' : '#eaf7f7' }}>
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       <Box
         component="main"
@@ -116,6 +119,7 @@ export default function Notifications() {
           ml: sidebarOpen ? `${SIDEBAR_WIDTH}px` : `${SIDEBAR_MINI}px`,
           transition: 'margin-left 0.3s',
           p: { xs: 2, sm: 3, md: 4 },
+          bgcolor: isDark ? '#10151a' : undefined,
         }}
       >
         <Paper
@@ -124,13 +128,13 @@ export default function Notifications() {
             maxWidth: 1100,
             mx: 'auto',
             p: { xs: 3, sm: 4, md: 5 },
-            bgcolor: cardBg,
+            bgcolor: isDark ? '#181f23' : cardBg,
             borderRadius: 4,
-            boxShadow: '0 4px 24px rgba(37,99,235,0.10)',
+            boxShadow: isDark ? theme.palette.glow : '0 4px 24px rgba(37,99,235,0.10)',
             minHeight: 500,
           }}
         >
-          <Typography variant="h5" fontWeight={700} sx={{ mb: 3, color: blue, fontFamily, letterSpacing: 0.5 }}>
+          <Typography variant="h5" fontWeight={700} sx={{ mb: 3, color: isDark ? theme.palette.primary.main : blue, fontFamily, letterSpacing: 0.5 }}>
             Notifications
           </Typography>
 
@@ -141,7 +145,7 @@ export default function Notifications() {
               <Typography sx={{ fontFamily, color: blue, fontWeight: 700, fontSize: 22, mb: 1, textAlign: 'center' }}>
                 You are up to date with stock
               </Typography>
-              <Typography sx={{ fontFamily, color: '#666', fontSize: 16, textAlign: 'center' }}>
+              <Typography sx={{ fontFamily, color: '#f3f6fd', fontSize: 16, textAlign: 'center' }}>
                 Please check again later!
               </Typography>
             </Box>
@@ -155,7 +159,7 @@ export default function Notifications() {
                     onChange={handleSelectAll}
                     sx={{ color: blue }}
                   />
-                  <Typography sx={{ fontFamily, fontWeight: 600, fontSize: 15, color: blue }}>
+                  <Typography sx={{ fontFamily, fontWeight: 600, fontSize: 15, color: isDark ? '#f3f6fd' : blue }}>
                     Select All
                   </Typography>
                 </Box>
@@ -237,7 +241,7 @@ export default function Notifications() {
                   Clear All Notifications?
                 </DialogTitle>
                 <DialogContent>
-                  <DialogContentText sx={{ fontFamily, color: '#555', textAlign: 'center', fontSize: 16, mt: 1 }}>
+                  <DialogContentText sx={{ fontFamily, color: '#f3f6fd', textAlign: 'center', fontSize: 16, mt: 1 }}>
                     Are you sure you want to clear all notifications? This action cannot be undone.
                   </DialogContentText>
                 </DialogContent>

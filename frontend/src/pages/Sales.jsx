@@ -23,6 +23,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import autoTable from 'jspdf-autotable';
 import { alpha } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
@@ -349,8 +350,11 @@ export default function Sales() {
     (a, b) => monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month)
   );
 
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   return (
-    <Box sx={{ display: 'flex', height: '100vh', bgcolor: '#eaf6fa' }}>
+    <Box sx={{ display: 'flex', height: '100vh', bgcolor: isDark ? '#10151a' : '#eaf6fa' }}>
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       <Box
         sx={{
@@ -368,28 +372,29 @@ export default function Sales() {
         {/* Top Section */}
         <Box sx={{ display: 'flex', gap: 3, mt: 4, mb: 3, height: 340 }}>
           {/* Financial Overview */}
-          <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-              <Typography fontWeight={600} fontSize={18} sx={{ fontFamily: 'Poppins, sans-serif' }}>Financial Overview</Typography>
+              <Typography fontWeight={600} fontSize={18} sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#2563eb' }}>Financial Overview</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 {overviewMode === 'quantity' && (
                   <FormControl size="small" sx={{ minWidth: 160, mr: 2 }}>
-                    <InputLabel id="product-filter-label">Product</InputLabel>
+                    <InputLabel id="product-filter-label" sx={{ color: isDark ? '#f3f6fd' : '#555' }}>Product</InputLabel>
                     <Select
                       labelId="product-filter-label"
                       value={productFilter}
                       label="Product"
                       onChange={e => setProductFilter(e.target.value)}
+                      sx={{ color: isDark ? '#f3f6fd' : '#555', bgcolor: isDark ? '#181f23' : '#fff', borderRadius: 2 }}
                     >
                       {productNames.map(name => (
-                        <MenuItem key={name} value={name}>{name}</MenuItem>
+                        <MenuItem key={name} value={name} sx={{ color: isDark ? '#f3f6fd' : '#555' }}>{name}</MenuItem>
                       ))}
                     </Select>
                   </FormControl>
                 )}
                 <Button
                   size="small"
-                  sx={{ color: overviewMode === 'revenue' ? '#fff' : '#555', background: overviewMode === 'revenue' ? '#2563eb' : 'transparent', textTransform: 'none', fontWeight: 500, mr: 1 }}
+                  sx={{ color: overviewMode === 'revenue' ? '#fff' : '#555', background: overviewMode === 'revenue' ? '#2563eb' : 'transparent', textTransform: 'none', fontWeight: 500, mr: 1, borderRadius: 2, '&:hover': { background: alpha('#2563eb', 0.1) } }}
                   onClick={() => setOverviewMode('revenue')}
                   variant={overviewMode === 'revenue' ? 'contained' : 'outlined'}
                 >
@@ -397,7 +402,7 @@ export default function Sales() {
                 </Button>
                 <Button
                   size="small"
-                  sx={{ color: overviewMode === 'expense' ? '#fff' : '#555', background: overviewMode === 'expense' ? '#2563eb' : 'transparent', textTransform: 'none', fontWeight: 500, mr: 1 }}
+                  sx={{ color: overviewMode === 'expense' ? '#fff' : '#555', background: overviewMode === 'expense' ? '#2563eb' : 'transparent', textTransform: 'none', fontWeight: 500, mr: 1, borderRadius: 2, '&:hover': { background: alpha('#2563eb', 0.1) } }}
                   onClick={() => setOverviewMode('expense')}
                   variant={overviewMode === 'expense' ? 'contained' : 'outlined'}
                 >
@@ -405,7 +410,7 @@ export default function Sales() {
                 </Button>
                 <Button
                   size="small"
-                  sx={{ color: overviewMode === 'quantity' ? '#fff' : '#555', background: overviewMode === 'quantity' ? '#2563eb' : 'transparent', textTransform: 'none', fontWeight: 500 }}
+                  sx={{ color: overviewMode === 'quantity' ? '#fff' : '#555', background: overviewMode === 'quantity' ? '#2563eb' : 'transparent', textTransform: 'none', fontWeight: 500, borderRadius: 2, '&:hover': { background: alpha('#2563eb', 0.1) } }}
                   onClick={() => setOverviewMode('quantity')}
                   variant={overviewMode === 'quantity' ? 'contained' : 'outlined'}
                 >
@@ -437,15 +442,15 @@ export default function Sales() {
           
         </Box>
         {/* Orders Table Section */}
-        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-          <Typography fontWeight={600} fontSize={18} sx={{ fontFamily: 'Poppins, sans-serif' }}>Sales Transactions</Typography>
+          <Typography fontWeight={600} fontSize={18} sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#2563eb' }}>Sales Transactions</Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Button
               variant="outlined"
               startIcon={<FileDownloadIcon />}
               onClick={handleDownloadMenuOpen}
-              sx={{ fontFamily: 'Poppins, sans-serif', textTransform: 'none', borderRadius: 2 }}
+              sx={{ fontFamily: 'Poppins, sans-serif', textTransform: 'none', borderRadius: 2, color: isDark ? theme.palette.primary.main : '#2563eb', borderColor: isDark ? theme.palette.primary.main : '#2563eb', '&:hover': { background: alpha('#2563eb', 0.08) } }}
             >
               Download
             </Button>
@@ -462,6 +467,9 @@ export default function Sales() {
                   boxShadow: 3,
                   mt: 1,
                   p: 0,
+                  bgcolor: isDark ? '#181f23' : '#fff',
+                  border: '1px solid',
+                  borderColor: isDark ? theme.palette.divider : '#e0e0e0',
                 }
               }}
               MenuListProps={{
@@ -480,8 +488,10 @@ export default function Sales() {
                   borderRadius: 2,
                   gap: 1.5,
                   '&:hover': {
-                    backgroundColor: theme => alpha('#2563eb', 0.08),
+                    backgroundColor: alpha('#2563eb', 0.08),
                   },
+                  color: isDark ? '#f3f6fd' : '#555',
+                  bgcolor: isDark ? '#181f23' : '#fff',
                 }}
               >
                 <FileDownloadIcon fontSize="small" sx={{ mr: 1, color: '#2563eb' }} /> CSV
@@ -496,8 +506,10 @@ export default function Sales() {
                   borderRadius: 2,
                   gap: 1.5,
                   '&:hover': {
-                    backgroundColor: theme => alpha('#be123c', 0.08),
+                    backgroundColor: alpha('#be123c', 0.08),
                   },
+                  color: isDark ? '#f3f6fd' : '#555',
+                  bgcolor: isDark ? '#181f23' : '#fff',
                 }}
               >
                 <PictureAsPdfIcon fontSize="small" sx={{ mr: 1, color: '#be123c' }} /> PDF
@@ -515,7 +527,7 @@ export default function Sales() {
               variant="outlined"
               startIcon={<FilterListIcon />}
               onClick={e => setFilterAnchor(e.currentTarget)}
-              sx={{ fontFamily: 'Poppins, sans-serif', textTransform: 'none', borderRadius: 2 }}
+              sx={{ fontFamily: 'Poppins, sans-serif', textTransform: 'none', borderRadius: 2, color: isDark ? theme.palette.primary.main : '#2563eb', borderColor: isDark ? theme.palette.primary.main : '#2563eb', '&:hover': { background: alpha('#2563eb', 0.08) } }}
             >
               Filters
             </Button>
@@ -524,20 +536,33 @@ export default function Sales() {
               anchorEl={filterAnchor}
               onClose={() => setFilterAnchor(null)}
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              PaperProps={{
+                sx: {
+                  p: 3,
+                  width: 340,
+                  bgcolor: isDark ? '#181f23' : '#f9fafb',
+                  borderRadius: 3,
+                  boxShadow: 3,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                  border: '1px solid',
+                  borderColor: isDark ? theme.palette.divider : '#e0e0e0',
+                }
+              }}
             >
-              <Box sx={{ p: 3, width: 340, bgcolor: '#f9fafb', borderRadius: 3, boxShadow: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Typography fontWeight={700} fontSize={18} mb={1} color="#222" sx={{ fontFamily: 'Poppins, sans-serif' }}>Filter Orders</Typography>
+              <Typography fontWeight={700} fontSize={18} mb={1} color="#222" sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#222' }}>Filter Orders</Typography>
                 {/* Customer Name Filter */}
                 <TextField
                   size="small"
                   label="Customer Name"
                   value={filterCustomer}
                   onChange={e => setFilterCustomer(e.target.value)}
-                  sx={{ mb: 2, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif' }}
+                  sx={{ mb: 2, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}
                 />
                 {/* Predicted Quantity Sold Filter */}
                 <Box mb={1}>
-                  <Typography variant="body2" fontWeight={600} color="#2563eb" mb={0.5} sx={{ fontFamily: 'Poppins, sans-serif' }}>Predicted Quantity Sold</Typography>
+                  <Typography variant="body2" fontWeight={600} color="#2563eb" mb={0.5} sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#2563eb' }}>Predicted Quantity Sold</Typography>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>
                     <TextField
                       size="small"
@@ -545,7 +570,7 @@ export default function Sales() {
                       label="Min"
                       value={filterMinQty}
                       onChange={e => setFilterMinQty(e.target.value)}
-                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif' }}
+                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}
                     />
                     <TextField
                       size="small"
@@ -553,12 +578,12 @@ export default function Sales() {
                       label="Max"
                       value={filterMaxQty}
                       onChange={e => setFilterMaxQty(e.target.value)}
-                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif' }}
+                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}
                     />
                   </Box>
                 </Box>
                 <Box mb={1}>
-                  <Typography variant="body2" fontWeight={600} color="#2563eb" mb={0.5} sx={{ fontFamily: 'Poppins, sans-serif' }}>Price Range (₹)</Typography>
+                  <Typography variant="body2" fontWeight={600} color="#2563eb" mb={0.5} sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#2563eb' }}>Price Range (₹)</Typography>
                   <Slider
                     value={filterPrice}
                     min={minPrice}
@@ -574,7 +599,7 @@ export default function Sales() {
                       label="Min"
                       value={filterPrice[0]}
                       onChange={e => setFilterPrice([Number(e.target.value), filterPrice[1]])}
-                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif' }}
+                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}
                       inputProps={{ min: minPrice, max: filterPrice[1] }}
                     />
                     <TextField
@@ -583,55 +608,55 @@ export default function Sales() {
                       label="Max"
                       value={filterPrice[1]}
                       onChange={e => setFilterPrice([filterPrice[0], Number(e.target.value)])}
-                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif' }}
+                      sx={{ flex: 1, bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}
                       inputProps={{ min: filterPrice[0], max: maxPrice }}
                     />
                   </Box>
                 </Box>
                 <FormControl fullWidth size="small" sx={{ mb: 1 }}>
-                  <InputLabel>Item Name</InputLabel>
+                  <InputLabel sx={{ color: isDark ? '#f3f6fd' : '#555' }}>Item Name</InputLabel>
                   <Select
                     value={filterItem}
                     label="Item Name"
                     onChange={e => setFilterItem(e.target.value)}
-                    sx={{ bgcolor: '#fff', borderRadius: 2 }}
+                    sx={{ bgcolor: '#fff', borderRadius: 2, color: isDark ? '#f3f6fd' : '#555' }}
                   >
-                    <MenuItem value="All">All</MenuItem>
+                    <MenuItem value="All" sx={{ color: isDark ? '#f3f6fd' : '#555' }}>All</MenuItem>
                     {productNames.slice(1).map(name => (
-                      <MenuItem key={name} value={name}>{name}</MenuItem>
+                      <MenuItem key={name} value={name} sx={{ color: isDark ? '#f3f6fd' : '#555' }}>{name}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
                 <FormControl fullWidth size="small" sx={{ mb: 1 }}>
-                  <InputLabel>Payment</InputLabel>
+                  <InputLabel sx={{ color: isDark ? '#f3f6fd' : '#555' }}>Payment</InputLabel>
                   <Select
                     value={filterPayment}
                     label="Payment"
                     onChange={e => setFilterPayment(e.target.value)}
-                    sx={{ bgcolor: '#fff', borderRadius: 2 }}
+                    sx={{ bgcolor: '#fff', borderRadius: 2, color: isDark ? '#f3f6fd' : '#555' }}
                   >
                     {paymentOptions.map(option => (
-                      <MenuItem key={option} value={option}>{option}</MenuItem>
+                      <MenuItem key={option} value={option} sx={{ color: isDark ? '#f3f6fd' : '#555' }}>{option}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
                 <FormControl fullWidth size="small" sx={{ mb: 1 }}>
-                  <InputLabel>Status</InputLabel>
+                  <InputLabel sx={{ color: isDark ? '#f3f6fd' : '#555' }}>Status</InputLabel>
                   <Select
                     value={filterStatus}
                     label="Status"
                     onChange={e => setFilterStatus(e.target.value)}
-                    sx={{ bgcolor: '#fff', borderRadius: 2 }}
+                    sx={{ bgcolor: '#fff', borderRadius: 2, color: isDark ? '#f3f6fd' : '#555' }}
                   >
                     {statusOptions.map(option => (
-                      <MenuItem key={option} value={option}>{option}</MenuItem>
+                      <MenuItem key={option} value={option} sx={{ color: isDark ? '#f3f6fd' : '#555' }}>{option}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
                 <Button
                   variant="outlined"
                   color="secondary"
-                  sx={{ mt: 1, borderRadius: 2, textTransform: 'none', fontWeight: 500, fontFamily: 'Poppins, sans-serif' }}
+                  sx={{ mt: 1, borderRadius: 2, textTransform: 'none', fontWeight: 500, fontFamily: 'Poppins, sans-serif', color: isDark ? theme.palette.primary.main : '#2563eb', borderColor: isDark ? theme.palette.primary.main : '#2563eb', '&:hover': { background: alpha('#2563eb', 0.08) } }}
                   onClick={() => {
                     setFilterPrice([minPrice, maxPrice]);
                     setFilterItem('All');
@@ -644,7 +669,6 @@ export default function Sales() {
                 >
                   Clear Filters
                 </Button>
-              </Box>
             </Popover>
           </Box>
         </Box>
@@ -689,9 +713,17 @@ export default function Sales() {
                         onClose={handleActionClose}
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        PaperProps={{
+                          sx: {
+                            bgcolor: isDark ? '#181f23' : '#f9fafb',
+                            border: '1px solid',
+                            borderColor: isDark ? theme.palette.divider : '#e0e0e0',
+                            boxShadow: 3,
+                          }
+                        }}
                       >
-                        <MenuItem onClick={handleViewDetails}>View Details</MenuItem>
-                        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+                        <MenuItem onClick={handleViewDetails} sx={{ color: isDark ? '#f3f6fd' : '#555' }}>View Details</MenuItem>
+                        <MenuItem onClick={handleEdit} sx={{ color: isDark ? '#f3f6fd' : '#555' }}>Edit</MenuItem>
                         <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>Delete/Cancel</MenuItem>
                       </Menu>
                     </td>
@@ -707,34 +739,34 @@ export default function Sales() {
         <DialogTitle sx={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 22 }}>Edit Order</DialogTitle>
         <DialogContent sx={{ minWidth: 340, fontFamily: 'Poppins, sans-serif', p: 3 }}>
           <FormControl fullWidth size="small" sx={{ mt: 2, mb: 3, fontFamily: 'Poppins, sans-serif' }} variant="outlined">
-            <InputLabel sx={{ fontFamily: 'Poppins, sans-serif' }} shrink>Status</InputLabel>
+            <InputLabel sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }} shrink>Status</InputLabel>
             <Select
               value={editStatus}
               label="Status"
               onChange={e => setEditStatus(e.target.value)}
-              sx={{ bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif' }}
+              sx={{ bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}
             >
               {statusOptions.filter(option => option !== 'All').map(option => (
-                <MenuItem key={option} value={option} sx={{ fontFamily: 'Poppins, sans-serif' }}>{option}</MenuItem>
+                <MenuItem key={option} value={option} sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}>{option}</MenuItem>
               ))}
             </Select>
           </FormControl>
           <FormControl fullWidth size="small" sx={{ fontFamily: 'Poppins, sans-serif' }} variant="outlined">
-            <InputLabel sx={{ fontFamily: 'Poppins, sans-serif' }} shrink>Payment</InputLabel>
+            <InputLabel sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }} shrink>Payment</InputLabel>
             <Select
               value={editPayment}
               label="Payment"
               onChange={e => setEditPayment(e.target.value)}
-              sx={{ bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif' }}
+              sx={{ bgcolor: '#fff', borderRadius: 2, fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}
             >
               {paymentOptions.filter(option => option !== 'All').map(option => (
-                <MenuItem key={option} value={option} sx={{ fontFamily: 'Poppins, sans-serif' }}>{option}</MenuItem>
+                <MenuItem key={option} value={option} sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#555' }}>{option}</MenuItem>
               ))}
             </Select>
           </FormControl>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={handleEditDialogClose} color="secondary" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none' }}>Cancel</Button>
+          <Button onClick={handleEditDialogClose} color="secondary" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none', color: isDark ? theme.palette.primary.main : '#2563eb', '&:hover': { background: alpha('#2563eb', 0.08) } }}>Cancel</Button>
           <Button onClick={handleEditSave} variant="contained" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none', background: '#2563eb' }}>Save</Button>
         </DialogActions>
       </Dialog>
@@ -756,7 +788,7 @@ export default function Sales() {
           )}
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={handleViewDialogClose} color="secondary" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none' }}>Close</Button>
+          <Button onClick={handleViewDialogClose} color="secondary" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none', color: isDark ? theme.palette.primary.main : '#2563eb', '&:hover': { background: alpha('#2563eb', 0.08) } }}>Close</Button>
         </DialogActions>
       </Dialog>
       {/* Delete/Cancel Confirmation Dialog */}
@@ -775,7 +807,7 @@ export default function Sales() {
           )}
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={handleDeleteDialogClose} color="secondary" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none' }}>Cancel</Button>
+          <Button onClick={handleDeleteDialogClose} color="secondary" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none', color: isDark ? theme.palette.primary.main : '#2563eb', '&:hover': { background: alpha('#2563eb', 0.08) } }}>Cancel</Button>
           <Button onClick={handleDeleteConfirm} variant="contained" sx={{ fontFamily: 'Poppins, sans-serif', borderRadius: 2, textTransform: 'none', background: '#be123c' }}>Delete</Button>
         </DialogActions>
       </Dialog>

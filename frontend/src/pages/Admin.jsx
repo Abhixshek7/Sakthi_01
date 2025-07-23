@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 import { allowedEmails } from "../../allowedEmails";
 import { getAuth } from "firebase/auth";
 import Loader from '../components/Loader';
+import { useTheme } from '@mui/material/styles';
 
 export default function Admin() {
   const { user } = useContext(UserContext);
@@ -15,6 +16,8 @@ export default function Admin() {
   const [error, setError] = useState("");
   const [lowStockResult, setLowStockResult] = useState(null);
   const [checkingStock, setCheckingStock] = useState(false);
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
 
   useEffect(() => {
     if (!user) return;
@@ -77,10 +80,10 @@ export default function Admin() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#eaf7f7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-      <Card sx={{ maxWidth: 500, mb: 4 }}>
-        <CardContent>
-          <Typography variant="h6" fontWeight={600} gutterBottom>
+    <Box sx={{ minHeight: '100vh', bgcolor: isDark ? '#10151a' : '#eaf7f7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3, minWidth: 350 }}>
+        <Typography variant="h5" fontWeight={700} sx={{ color: isDark ? theme.palette.primary.main : '#2563eb', fontFamily: 'Poppins, sans-serif', mb: 2 }}>Admin</Typography>
+        <Typography variant="h6" fontWeight={600} gutterBottom>
             Admin Upload Data for Dashboard
           </Typography>
           <input
@@ -115,8 +118,7 @@ export default function Admin() {
                 : JSON.stringify(lowStockResult, null, 2)}
             </Typography>
           )}
-        </CardContent>
-      </Card>
+        </Paper>
     </Box>
   );
 } 
