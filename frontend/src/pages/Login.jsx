@@ -25,7 +25,7 @@ export default function Login() {
     "abhixshek20@gmail.com",
     "sharveshsr9@gmail.com",
     "sharvesheve@gmail.com",
-    "aswinarum3013@gmail.com"
+    "aswinarun3103@gmail.com"
     // Add more emails as needed
   ];
 
