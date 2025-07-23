@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import { Box, Paper, Typography, Chip, MenuItem, Select, Button, Divider } from "@mui/material";
+import { Box, Paper, Typography, Chip, MenuItem, Select, Button, Divider, Badge, Snackbar, IconButton, SnackbarContent } from "@mui/material";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { doc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebase";
 import Loader from "../components/Loader";
+import CloseIcon from "@mui/icons-material/Close";
 
 const mainBg = '#eaf7f7';
 const cardBg = '#fff';
@@ -31,17 +32,14 @@ const colorPalette = [
 ];
 
 export default function Dashboard() {
+  // All hooks at the top
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [dashboard, setDashboard] = useState(null);
   const [period, setPeriod] = useState('Days');
-
-  // For notification sound, add a hidden audio element and play on notification (Snackbar) open
+  // Remove date filter, just use all pieData
   const audioRef = React.useRef(null);
-  useEffect(() => {
-    // Play sound when a notification is shown (Snackbar or similar)
-    // This assumes you use a Snackbar for notifications elsewhere in your app
-    // If you want to trigger sound on a specific event, call audioRef.current.play();
-  }, []);
+  const [bannerOpen, setBannerOpen] = useState(false);
+  const [bannerNotification, setBannerNotification] = useState("");
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "dashboard", "main"), (docSnap) => {
@@ -50,7 +48,10 @@ export default function Dashboard() {
     return () => unsub();
   }, []);
 
-  if (!dashboard) return <Loader/>;
+  // Set of dates with sales
+  const salesDatesSet = new Set((dashboard?.pieData || []).map(item => item.date));
+
+  if (!dashboard) return <Loader />;
 
   // Calculate sidebar width
   const sidebarWidth = sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_MINI;
@@ -81,9 +82,8 @@ export default function Dashboard() {
     if (!dashboard || !dashboard.pieData) return;
     const lowStockItems = dashboard.pieData.filter(item => item.quantity !== undefined && item.quantity < 20);
     if (lowStockItems.length === 0) {
-      // Optionally show a banner for no low stock
-      // setBannerNotification({ details: 'No low stock items to notify.', date: new Date().toLocaleString() });
-      // setBannerOpen(true);
+      setBannerNotification('No low stock items to notify.');
+      setBannerOpen(true);
       return;
     }
     const notificationsRef = doc(db, 'notifications', 'main');
@@ -98,8 +98,8 @@ export default function Dashboard() {
         })
       });
     }
-    // setBannerNotification({ details: 'Low stock notifications sent!', date: now.toLocaleString() });
-    // setBannerOpen(true);
+    setBannerNotification('Low stock notifications sent!');
+    setBannerOpen(true);
   };
 
   return (
@@ -151,7 +151,7 @@ export default function Dashboard() {
                 height: 400,
               }}
             >
-              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: { xs: 2, md: 4 }, pt: 3, pb: 2, minWidth: 0 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', px: { xs: 2, md: 4 }, pt: 2, pb: 2, minWidth: 0, gap: 2 }}>
                 <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: blue, textAlign: 'center', width: '100%', letterSpacing: 0.5 }}>Statistics</Typography>
                 {/* Select filter removed */}
               </Box>
@@ -170,8 +170,8 @@ export default function Dashboard() {
               }}>
                 {/* Pie chart */}
                 <Box sx={{ width: { xs: '100%', md: 300 }, height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 220, position: 'relative', flexShrink: 0, minHeight: 0, background: 'transparent' }}>
-                  <ResponsiveContainer width={240} height={280}>
-                    <PieChart>
+                  <ResponsiveContainer width="100%" height={280}>
+                    <PieChart style={{ filter: 'drop-shadow(0 4px 16px rgba(37,99,235,0.10))' }}>
                       <Pie
                         data={dashboard.pieData || []}
                         dataKey="value"
@@ -187,11 +187,43 @@ export default function Dashboard() {
                         animationDuration={1200}
                         animationEasing="ease-out"
                       >
-                        {(dashboard.pieData || []).map((entry, idx) => (
+                        {dashboard.pieData.map((entry, idx) => (
                           <Cell key={entry.name + idx} fill={colorPalette[idx % colorPalette.length]} />
                         ))}
                       </Pie>
-                      <Tooltip formatter={(value, name, props) => [`₹${Math.round(value).toLocaleString()}`, props.payload.name]} />
+                      <Tooltip
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            const d = payload[0].payload;
+                            return (
+                              <Paper sx={{
+                                p: 2,
+                                borderRadius: 3,
+                                boxShadow: '0 4px 24px rgba(37,99,235,0.10)',
+                                bgcolor: '#fff',
+                                minWidth: 140,
+                                fontFamily,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'flex-start',
+                              }}>
+                                <Typography fontWeight={700} fontSize={18} sx={{ color: blue, fontFamily, mb: 0.5 }}>
+                                  {d.name}
+                                </Typography>
+                                <Typography fontSize={17} fontWeight={700} sx={{ color: '#222', fontFamily, mb: 0.5 }}>
+                                  ₹{Math.round(d.value).toLocaleString('en-IN')}
+                                </Typography>
+                                {d.quantity !== undefined && (
+                                  <Typography fontSize={14} sx={{ color: '#888', fontFamily }}>
+                                    Qty: {d.quantity}
+                                  </Typography>
+                                )}
+                              </Paper>
+                            );
+                          }
+                          return null;
+                        }}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
                 </Box>
@@ -225,7 +257,7 @@ export default function Dashboard() {
                   },
                 }}>
                   {(dashboard.pieData || []).map((item, idx) => (
-                    <Box key={item.name + idx} sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 0.5, minWidth: 0 }}>
+                    <Box key={item.name + idx} sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 0.5, minWidth: 0, transition: 'background 0.2s' }}>
                       <Box sx={{ width: 16, height: 16, bgcolor: colorPalette[idx % colorPalette.length], borderRadius: '50%', flexShrink: 0, mr: 1 }} />
                       <Typography fontSize={15} fontWeight={600} sx={{ fontFamily, color: '#333', lineHeight: 1.2, minWidth: 120 }}>{item.name}</Typography>
                       <Typography fontSize={17} fontWeight={700} sx={{ fontFamily, color: blue, lineHeight: 1.2, minWidth: 60, ml: 2 }}>{`₹${Math.round(item.value).toLocaleString()}`}</Typography>
@@ -266,6 +298,33 @@ export default function Dashboard() {
                   Notifications
                 </Button>
               </Box>
+              {/* Snackbar for notifications */}
+              <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={bannerOpen}
+                autoHideDuration={3000}
+                onClose={() => setBannerOpen(false)}
+              >
+                <SnackbarContent
+                  sx={{
+                    bgcolor: '#2563eb',
+                    color: '#fff',
+                    borderRadius: 2,
+                    fontWeight: 600,
+                    fontFamily: 'Poppins, sans-serif',
+                    boxShadow: '0 4px 24px rgba(37,99,235,0.10)',
+                    minWidth: 260,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  message={bannerNotification}
+                  action={
+                    <IconButton size="small" aria-label="close" sx={{ color: '#fff' }} onClick={() => setBannerOpen(false)}>
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  }
+                />
+              </Snackbar>
             </Paper>
             {/* Recent Transactions Box */}
             <Paper

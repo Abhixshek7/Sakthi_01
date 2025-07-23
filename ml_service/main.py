@@ -151,7 +151,7 @@ def get_inventory_from_firestore():
         inventory[doc.id] = doc.to_dict()
     return inventory
 
-ALLOWED_ADMINS = ["abhixshek20@gmail.com", "sharveshsr9@gmail.com"]  # Replace with your real admin emails
+ALLOWED_ADMINS = ["abhixshek20@gmail.com", "sharveshsr9@gmail.com","aswinarum3013@gmail.com"]  # Replace with your real admin emails
 
 # Store uploaded data in memory for demo (replace with persistent storage in production)
 last_uploaded_df = None
