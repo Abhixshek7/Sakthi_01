@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import { Box, Paper, Typography, Chip, MenuItem, Select, Button, Divider, Badge, Snackbar, IconButton, SnackbarContent } from "@mui/material";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import { Box, Paper, Typography, Chip, MenuItem, Select, Button, Divider, IconButton } from "@mui/material";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, AreaChart, Area, CartesianGrid, XAxis, YAxis, Legend, Label, Sector } from "recharts";
 import { doc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebase";
 import Loader from "../components/Loader";
-import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const mainBg = '#eaf7f7';
 const cardBg = '#fff';
@@ -32,26 +34,47 @@ const colorPalette = [
 ];
 
 export default function Dashboard() {
-  // All hooks at the top
+  // All hooks must be at the top, before any return or conditional
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [dashboard, setDashboard] = useState(null);
   const [period, setPeriod] = useState('Days');
-  // Remove date filter, just use all pieData
   const audioRef = React.useRef(null);
-  const [bannerOpen, setBannerOpen] = useState(false);
-  const [bannerNotification, setBannerNotification] = useState("");
-
+  const navigate = useNavigate();
+  const [notificationsData, setNotificationsData] = useState(null);
+  const [salesData, setSalesData] = useState(null);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, 'sales', 'main'), (docSnap) => {
+      setSalesData(docSnap.data());
+    });
+    return () => unsub();
+  }, []);
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "dashboard", "main"), (docSnap) => {
       setDashboard(docSnap.data());
     });
     return () => unsub();
   }, []);
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, 'notifications', 'main'), (docSnap) => {
+      setNotificationsData(docSnap.data());
+    });
+    return () => unsub();
+  }, []);
 
-  // Set of dates with sales
-  const salesDatesSet = new Set((dashboard?.pieData || []).map(item => item.date));
+  if (!dashboard) return <Loader/>;
 
-  if (!dashboard) return <Loader />;
+  // Prepare financial data for AreaChart (overall) using salesData
+  const monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  let financialData = (salesData && salesData.financialData) || [];
+  financialData = monthOrder.map(month => {
+    const found = (salesData && salesData.financialData || []).find(fd => fd.month === month);
+    return found || { month, revenue: 0, expense: 0, quantity: 0 };
+  });
+  // Low stock items
+  const lowStockItems = (dashboard.pieData || []).filter(item => item.quantity !== undefined && item.quantity < 20);
+  // Recent notifications (latest 5)
+  const notifications = (notificationsData && notificationsData.notifications) ? [...notificationsData.notifications].reverse().slice(0, 5) : [];
 
   // Calculate sidebar width
   const sidebarWidth = sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_MINI;
@@ -82,8 +105,9 @@ export default function Dashboard() {
     if (!dashboard || !dashboard.pieData) return;
     const lowStockItems = dashboard.pieData.filter(item => item.quantity !== undefined && item.quantity < 20);
     if (lowStockItems.length === 0) {
-      setBannerNotification('No low stock items to notify.');
-      setBannerOpen(true);
+      // Optionally show a banner for no low stock
+      // setBannerNotification({ details: 'No low stock items to notify.', date: new Date().toLocaleString() });
+      // setBannerOpen(true);
       return;
     }
     const notificationsRef = doc(db, 'notifications', 'main');
@@ -98,9 +122,45 @@ export default function Dashboard() {
         })
       });
     }
-    setBannerNotification('Low stock notifications sent!');
-    setBannerOpen(true);
+    // setBannerNotification({ details: 'Low stock notifications sent!', date: now.toLocaleString() });
+    // setBannerOpen(true);
   };
+
+  const totalPieValue = (dashboard.pieData || []).reduce((sum, item) => sum + (item.value || 0), 0);
+  const renderActiveShape = (props) => {
+    const RADIAN = Math.PI / 180;
+    const {
+      cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
+      fill, payload, percent, value, index
+    } = props;
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
+    const sx = cx + (outerRadius + 10) * cos;
+    const sy = cy + (outerRadius + 10) * sin;
+    const mx = cx + (outerRadius + 30) * cos;
+    const my = cy + (outerRadius + 30) * sin;
+    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+    const ey = my;
+    const color = colorPalette[index % colorPalette.length];
+    return (
+      <g>
+        <Sector
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          fill={fill}
+        />
+        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={color} fill="none" />
+        <circle cx={ex} cy={ey} r={4} fill={color} stroke="none" />
+        <text x={ex + (cos >= 0 ? 1 : -1) * 8} y={ey} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={700} fontSize={18}>{`₹${value.toLocaleString()}`}</text>
+        <text x={ex + (cos >= 0 ? 1 : -1) * 8} y={ey + 22} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={400} fontSize={14}>{payload.name}</text>
+      </g>
+    );
+  };
+  const onPieEnter = (_, index) => setActiveIndex(index);
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: mainBg, fontFamily, overflowX: 'hidden' }}>
@@ -123,107 +183,142 @@ export default function Dashboard() {
           <Box sx={{ flex: 1 }} />
           <audio ref={audioRef} src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto" style={{ display: 'none' }} />
         </Box>
-          {/* Main content area */}
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              gap: { xs: 2, md: 5 },
-              alignItems: 'stretch',
-              width: '100%',
-              minHeight: 0,
-              pb: 4,
-            }}
-          >
-            {/* Statistics Card */}
-            <Paper
-              elevation={3}
-              sx={{
-                flex: 1,
-                minWidth: 0,
-                borderRadius: 4,
-                p: 4,
-                bgcolor: cardBg,
-                boxShadow: '0 4px 24px rgba(37,99,235,0.10)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                height: 400,
-              }}
-            >
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', px: { xs: 2, md: 4 }, pt: 2, pb: 2, minWidth: 0, gap: 2 }}>
-                <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: blue, textAlign: 'center', width: '100%', letterSpacing: 0.5 }}>Statistics</Typography>
-                {/* Select filter removed */}
+          {/* Main content area: Graph, Notifications, Low Stock */}
+          <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', gap: 4, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+            {/* Graph Card (2x width) */}
+            <Paper elevation={3} sx={{ flex: 2, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', height: 400, justifyContent: 'space-between' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 0 }}>
+                <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: '#222', textAlign: 'left', letterSpacing: 0.5 }}>Overall Financial Overview</Typography>
               </Box>
-              <Box sx={{
-                display: 'flex',
-                flexDirection: { xs: 'column', md: 'row' },
-                justifyContent: 'center', // Center horizontally
-                alignItems: 'center', // Center vertically
-                px: { xs: 2, md: 4 },
-                pt: 0,
-                pb: 0,
-                gap: { xs: 2, md: 0 },
-                width: '100%',
-                minHeight: 0,
-                minWidth: 0,
-              }}>
+              <ResponsiveContainer width="100%" height={320}>
+                <AreaChart data={financialData} margin={{ top: 10, right: 20, left: 40, bottom: 24 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <XAxis
+                    dataKey="month"
+                    axisLine={false}
+                    tickLine={false}
+                    dy={10}
+                  />
+                  <YAxis
+                    axisLine={false}
+                    tickLine={false}
+                    domain={["dataMin", "auto"]}
+                  />
+                  <Tooltip />
+                  <Legend verticalAlign="top" height={36} iconType="plainline" />
+                  <Area type="monotone" dataKey="revenue" name="Revenue" stroke="#22c55e" fill="#bbf7d0" strokeWidth={2} dot={{ r: 4, stroke: '#22c55e', strokeWidth: 2, fill: '#fff' }} />
+                  <Area type="monotone" dataKey="expense" name="Expense" stroke="#ef4444" fill="#fee2e2" strokeWidth={2} dot={{ r: 4, stroke: '#ef4444', strokeWidth: 2, fill: '#fff' }} />
+                  <Area type="monotone" dataKey="quantity" name="Quantity Sold" stroke="#3b82f6" fill="#dbeafe" strokeWidth={2} dot={{ r: 4, stroke: '#3b82f6', strokeWidth: 2, fill: '#fff' }} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </Paper>
+            {/* Recent Notifications Card */}
+            <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', height: 400, justifyContent: 'space-between' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                <Typography variant="h6" fontWeight={700} sx={{ color: '#222', fontFamily, letterSpacing: 0.5, textAlign: 'left' }}>Recent Notifications</Typography>
+                <IconButton onClick={() => navigate('/notifications')} sx={{ color: blue }}><ChevronRightIcon /></IconButton>
+              </Box>
+              <Box sx={{ flex: 1, overflowY: 'auto', pr: 1 }}>
+                {notifications.length === 0 ? (
+                  <Typography fontSize={13} color="#888" sx={{ fontFamily }}>No notifications.</Typography>
+                ) : (
+                  notifications.map((n, idx) => (
+                    <React.Fragment key={idx}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, py: 1 }}>
+                        <Avatar src={n.avatar} alt={n.user} sx={{ width: 36, height: 36, bgcolor: '#e0e7ff', color: blue, fontWeight: 700, fontFamily }} />
+                        <Box sx={{ flex: 1 }}>
+                          <Typography sx={{ fontWeight: 600, fontFamily, fontSize: 15, color: '#222', mb: 0.5 }}>{n.details}</Typography>
+                          <Typography sx={{ fontFamily, fontSize: 12, color: '#888' }}>{n.date}</Typography>
+                        </Box>
+                      </Box>
+                      {idx < notifications.length - 1 && <Divider sx={{ borderColor: '#e5e7eb' }} />}
+                    </React.Fragment>
+                  ))
+                )}
+              </Box>
+              <Button variant="contained" onClick={() => navigate('/notifications')} sx={{ mt: 2, bgcolor: blue, color: '#fff', fontFamily, fontWeight: 700, borderRadius: 2, px: 3, py: 1, fontSize: 15, boxShadow: '0 2px 8px rgba(37,99,235,0.08)', '&:hover': { bgcolor: '#1749b1' } }}>View All</Button>
+            </Paper>
+            {/* Low Stock Quantity Card */}
+            <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', height: 400, justifyContent: 'space-between' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
+                <Typography variant="h6" fontWeight={700} sx={{ color: '#222', fontFamily, letterSpacing: 0.5, textAlign: 'left' }}>Low Stock Items</Typography>
+              </Box>
+              <Box sx={{ flex: 1, overflowY: 'auto', pr: 1 }}>
+                {lowStockItems.length === 0 ? (
+                  <Typography fontSize={13} color="#888" sx={{ fontFamily }}>No low stock items.</Typography>
+                ) : (
+                  lowStockItems.map((item, idx) => (
+                    <React.Fragment key={item.name + idx}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, py: 1 }}>
+                        <Box sx={{ width: 16, height: 16, bgcolor: colorPalette[idx % colorPalette.length], borderRadius: '50%', flexShrink: 0, mr: 1 }} />
+                        <Typography fontSize={15} fontWeight={600} sx={{ fontFamily, color: '#333', lineHeight: 1.2, minWidth: 120 }}>{item.name}</Typography>
+                        <Typography sx={{ bgcolor: '#ffeaea', color: '#ef4444', px: 1.5, py: 0.5, borderRadius: 2, fontWeight: 700, fontSize: 15, ml: 2 }}>{item.quantity} left</Typography>
+                      </Box>
+                      {idx < lowStockItems.length - 1 && <Divider sx={{ borderColor: '#e5e7eb' }} />}
+                    </React.Fragment>
+                  ))
+                )}
+              </Box>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <Button
+                  variant="contained"
+                  onClick={handleSendLowStockNotifications}
+                  sx={{ mt: 2, bgcolor: blue, color: '#fff', fontFamily, fontWeight: 700, borderRadius: 2, px: 3, py: 1, fontSize: 15, boxShadow: '0 2px 8px rgba(37,99,235,0.08)', '&:hover': { bgcolor: '#1749b1' } }}
+                >
+                  Send Notification
+                </Button>
+              </Box>
+            </Paper>
+          </Box>
+        {/* Second row: Pie Chart/Statistics and Recent Transactions */}
+        <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', gap: 4, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+          {/* Statistics Card (Pie Chart) */}
+          <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: 400 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
+              <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: '#222', textAlign: 'left', letterSpacing: 0.5 }}>Statistics</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', alignItems: 'center', px: { xs: 2, md: 4 }, pt: 0, pb: 0, gap: { xs: 2, md: 0 }, width: '100%', minHeight: 0, minWidth: 0 }}>
                 {/* Pie chart */}
                 <Box sx={{ width: { xs: '100%', md: 300 }, height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 220, position: 'relative', flexShrink: 0, minHeight: 0, background: 'transparent' }}>
-                  <ResponsiveContainer width="100%" height={280}>
-                    <PieChart style={{ filter: 'drop-shadow(0 4px 16px rgba(37,99,235,0.10))' }}>
+                  <ResponsiveContainer width={260} height={300}>
+                    <PieChart>
                       <Pie
                         data={dashboard.pieData || []}
                         dataKey="value"
                         nameKey="name"
                         cx="50%"
                         cy="50%"
-                        innerRadius={85}
+                        innerRadius={100}
                         outerRadius={120}
                         fill="#8884d8"
                         paddingAngle={2}
-                        label={false}
+                        labelLine={false}
+                        activeIndex={activeIndex}
+                        activeShape={renderActiveShape}
+                        onMouseEnter={onPieEnter}
                         isAnimationActive={true}
                         animationDuration={1200}
                         animationEasing="ease-out"
                       >
-                        {dashboard.pieData.map((entry, idx) => (
+                        {(dashboard.pieData || []).map((entry, idx) => (
                           <Cell key={entry.name + idx} fill={colorPalette[idx % colorPalette.length]} />
                         ))}
+                        {/* Center dark circle and total */}
+                        <Label
+                          value={`₹${totalPieValue.toLocaleString()}`}
+                          position="center"
+                          fontSize={24}
+                          fontWeight={700}
+                          fill="#222"
+                          style={{
+                            background: '#12263a',
+                            borderRadius: '50%',
+                            padding: '16px 32px',
+                            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.15))',
+                          }}
+                        />
                       </Pie>
-                      <Tooltip
-                        content={({ active, payload }) => {
-                          if (active && payload && payload.length) {
-                            const d = payload[0].payload;
-                            return (
-                              <Paper sx={{
-                                p: 2,
-                                borderRadius: 3,
-                                boxShadow: '0 4px 24px rgba(37,99,235,0.10)',
-                                bgcolor: '#fff',
-                                minWidth: 140,
-                                fontFamily,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'flex-start',
-                              }}>
-                                <Typography fontWeight={700} fontSize={18} sx={{ color: blue, fontFamily, mb: 0.5 }}>
-                                  {d.name}
-                                </Typography>
-                                <Typography fontSize={17} fontWeight={700} sx={{ color: '#222', fontFamily, mb: 0.5 }}>
-                                  ₹{Math.round(d.value).toLocaleString('en-IN')}
-                                </Typography>
-                                {d.quantity !== undefined && (
-                                  <Typography fontSize={14} sx={{ color: '#888', fontFamily }}>
-                                    Qty: {d.quantity}
-                                  </Typography>
-                                )}
-                              </Paper>
-                            );
-                          }
-                          return null;
-                        }}
-                      />
+                      <Tooltip formatter={(value, name, props) => [`₹${Math.round(value).toLocaleString()}`, props.payload.name]} />
                     </PieChart>
                   </ResponsiveContainer>
                 </Box>
@@ -236,116 +331,74 @@ export default function Dashboard() {
                   overflowX: 'hidden',
                   display: 'flex',
                   flexDirection: 'column',
-                  alignItems: 'flex-start', // Left-align legend content
-                  gap: 1.5,
+                  alignItems: 'stretch',
+                  gap: 0.5, // tighter vertical gap
                   pl: 0,
                   boxSizing: 'border-box',
-                  '& > div:hover': {
-                    bgcolor: '#f3f6fd',
-                    borderRadius: 2,
-                    cursor: 'pointer',
-                  },
-                  '&::-webkit-scrollbar': {
-                    width: '6px',
-                  },
-                  '&::-webkit-scrollbar-thumb': {
-                    background: '#c1c1c1',
-                    borderRadius: '3px',
-                  },
-                  '&::-webkit-scrollbar-thumb:hover': {
-                    background: '#a8a8a8',
-                  },
+                  '& > div:hover': { bgcolor: '#f3f6fd', borderRadius: 2, cursor: 'pointer' },
+                  '&::-webkit-scrollbar': { width: '6px' },
+                  '&::-webkit-scrollbar-thumb': { background: '#c1c1c1', borderRadius: '3px' },
+                  '&::-webkit-scrollbar-thumb:hover': { background: '#a8a8a8' }
                 }}>
                   {(dashboard.pieData || []).map((item, idx) => (
-                    <Box key={item.name + idx} sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 0.5, minWidth: 0, transition: 'background 0.2s' }}>
+                    <Box
+                      key={item.name + idx}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 2.5, // more space between dot and label/value
+                        mb: 0.5,
+                        minWidth: 0,
+                        width: '100%',
+                        justifyContent: 'flex-start',
+                        py: 1, // vertical padding for clarity
+                      }}
+                    >
                       <Box sx={{ width: 16, height: 16, bgcolor: colorPalette[idx % colorPalette.length], borderRadius: '50%', flexShrink: 0, mr: 1 }} />
-                      <Typography fontSize={15} fontWeight={600} sx={{ fontFamily, color: '#333', lineHeight: 1.2, minWidth: 120 }}>{item.name}</Typography>
-                      <Typography fontSize={17} fontWeight={700} sx={{ fontFamily, color: blue, lineHeight: 1.2, minWidth: 60, ml: 2 }}>{`₹${Math.round(item.value).toLocaleString()}`}</Typography>
+                      <Typography
+                        fontSize={16}
+                        fontWeight={600}
+                        sx={{
+                          fontFamily,
+                          color: '#222',
+                          lineHeight: 1.2,
+                          minWidth: 140,
+                          flex: 1,
+                          textAlign: 'left',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {item.name}
+                      </Typography>
+                      <Typography
+                        fontSize={17}
+                        fontWeight={700}
+                        sx={{
+                          fontFamily,
+                          color: blue,
+                          lineHeight: 1.2,
+                          minWidth: 90,
+                          ml: 3, // more space between label and value
+                          textAlign: 'right',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {`₹${Math.round(item.value).toLocaleString()}`}
+                      </Typography>
                     </Box>
                   ))}
                 </Box>
-              </Box>
-              {/* WhatsApp and Notifications Buttons */}
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3, width: '100%' }}>
-                <Button
-                  variant="contained"
-                  color="inherit"
-                  size="small"
-                  onClick={handleCheckAndNotify}
-                  sx={{
-                    fontWeight: 600,
-                    fontSize: 14,
-                    px: 2.5,
-                    py: 0.8,
-                    borderRadius: 2,
-                    letterSpacing: 0.5,
-                    minWidth: 120,
-                    boxShadow: '0 2px 8px rgba(37,99,235,0.08)',
-                    backgroundColor: '#25D366',
-                    color: '#fff',
-                    '&:hover': { backgroundColor: '#1ebe57' }
-                  }}
-                >
-                  Whatsapp
-                </Button>
-                <Button
-                  variant="contained"
-                  color="info"
-                  size="small"
-                  onClick={handleSendLowStockNotifications}
-                  sx={{ fontWeight: 600, fontSize: 14, px: 2.5, py: 0.8, borderRadius: 2, letterSpacing: 0.5, minWidth: 120, boxShadow: '0 2px 8px rgba(37,99,235,0.08)' }}
-                >
-                  Notifications
-                </Button>
-              </Box>
-              {/* Snackbar for notifications */}
-              <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={bannerOpen}
-                autoHideDuration={3000}
-                onClose={() => setBannerOpen(false)}
-              >
-                <SnackbarContent
-                  sx={{
-                    bgcolor: '#2563eb',
-                    color: '#fff',
-                    borderRadius: 2,
-                    fontWeight: 600,
-                    fontFamily: 'Poppins, sans-serif',
-                    boxShadow: '0 4px 24px rgba(37,99,235,0.10)',
-                    minWidth: 260,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                  message={bannerNotification}
-                  action={
-                    <IconButton size="small" aria-label="close" sx={{ color: '#fff' }} onClick={() => setBannerOpen(false)}>
-                      <CloseIcon fontSize="small" />
-                    </IconButton>
-                  }
-                />
-              </Snackbar>
-            </Paper>
+              {/* End of Pie Chart and Legend Row */}
+            </Box>
+          </Paper>
             {/* Recent Transactions Box */}
-            <Paper
-              elevation={3}
-              sx={{
-                flex: 1,
-                minWidth: 0, 
-                borderRadius: 4,
-                p: 4,
-                bgcolor: cardBg,
-                boxShadow: '0 4px 24px rgba(37,99,235,0.10)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                overflow: 'hidden',
-                height: 400,
-              }}
-            >
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',  }}>
-                <Typography variant="h5" fontWeight={700} sx={{ color: blue, fontFamily, letterSpacing: 0.5 }}>Recent Transactions</Typography>
-                <Box />
+          <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden', height: 400 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
+              <Typography variant="h5" fontWeight={700} sx={{ color: '#222', fontFamily, letterSpacing: 0.5, textAlign: 'left', mb: 2 }}>
+                Recent Transactions
+              </Typography>
               </Box>
               <Box sx={{ flex: 1, height: '100%', overflowY: 'auto', scrollBehavior: 'smooth', pr: 1 }}>
                 {(dashboard.transactions && dashboard.transactions.length > 0) ? (
@@ -380,28 +433,28 @@ export default function Dashboard() {
   <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0, width: 'fit-content'}}>
     {/* Balance Card 1 */}
     <Paper sx={{ borderRadius: 4, p: 4, bgcolor: cardBg, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 1, height: 'fit-content', boxShadow: '0 4px 24px rgba(37,99,235,0.10)' }}>
-      <Typography fontSize={14} color="#666" sx={{ fontFamily }}>Balance</Typography>
-      <Typography variant="h4" fontWeight={600} color={blue} sx={{ fontFamily }}>₹{dashboard.balance ? new Intl.NumberFormat('en-IN').format(Math.round(dashboard.balance)) : 0}</Typography>
+      <Typography sx={{ fontFamily: 'Poppins, sans-serif', color: '#222', fontWeight: 700, fontSize: 20, textAlign: 'left', mb: 1 }}>Balance</Typography>
+      <Typography sx={{ fontFamily: 'Poppins, sans-serif', color: blue, fontWeight: 600, fontSize: 28, textAlign: 'left' }}>₹{dashboard.balance ? new Intl.NumberFormat('en-IN').format(Math.round(dashboard.balance)) : 0}</Typography>
     </Paper>
     {/* Balance Card 2 */}
     <Paper sx={{ borderRadius: 4, p: 4, bgcolor: cardBg, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', gap: 1, height: 'fit-content', boxShadow: '0 4px 24px rgba(37,99,235,0.10)' }}>
-      <Typography fontSize={14} color="#666" sx={{ fontFamily }}>Profit</Typography>
-      <Typography variant="h4" fontWeight={600} color={blue} sx={{ fontFamily }}>₹{dashboard.balance ? new Intl.NumberFormat('en-IN').format(Math.round(dashboard.balance * 0.25)) : 0}</Typography>
+      <Typography sx={{ fontFamily: 'Poppins, sans-serif', color: '#222', fontWeight: 700, fontSize: 20, textAlign: 'left', mb: 1 }}>Profit</Typography>
+      <Typography sx={{ fontFamily: 'Poppins, sans-serif', color: blue, fontWeight: 600, fontSize: 28, textAlign: 'left' }}>₹{dashboard.balance ? new Intl.NumberFormat('en-IN').format(Math.round(dashboard.balance * 0.25)) : 0}</Typography>
       <Chip label={`↑ ${dashboard.balance ? Math.round((0.25) * 100) : 0}%`} sx={{ bgcolor: '#e6f9ed', color: '#16a34a', fontWeight: 600, fontSize: 12, height: 24, alignSelf: 'flex-start' }} />
     </Paper>
   </Box>
   {/* Top Products Card */}
   <Paper sx={{ flex: 2, borderRadius: 4, p: 4, bgcolor: cardBg, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 2, boxShadow: '0 4px 24px rgba(37,99,235,0.10)' }}>
-    <Typography fontWeight={600} fontSize={16} mb={2} sx={{ fontFamily, color: '#333' }}>Top Products</Typography>
+    <Typography sx={{ fontFamily: 'Poppins, sans-serif', color: '#222', fontWeight: 700, fontSize: 20, textAlign: 'left', mb: 1 }}>Top Products</Typography>
     <Box sx={{ maxHeight: 220, overflowY: 'auto', pr: 1 }}>
       {(dashboard.topProducts || []).map((prod, idx) => (
         <Box key={prod.name + idx} sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
           <Typography fontWeight={500} sx={{ width: 30, fontSize: 13, color: '#666', fontFamily }}>{`0${idx + 1}`}</Typography>
-          <Typography fontWeight={500} sx={{ width: 120, fontSize: 13, color: '#333', fontFamily }}>{prod.name}</Typography>
+          <Typography sx={{ fontFamily, color: '#222', fontWeight: 600, fontSize: 13 }}>{prod.name}</Typography>
           <Box sx={{ flex: 1, mx: 2 }}>
             <Box sx={{ width: `${prod.demand}%`, height: 6, bgcolor: prod.color, borderRadius: 3 }} />
           </Box>
-          <Typography fontWeight={600} sx={{ width: 60, fontSize: 13, color: prod.color, fontFamily }}>{prod.demand}%</Typography>
+          <Typography fontWeight={600} sx={{ fontFamily, color: blue, fontSize: 13 }}>{prod.demand}%</Typography>
         </Box>
       ))}
     </Box>

@@ -10,20 +10,16 @@ import {
   Divider,
   Stack,
   Link,
-  Paper,
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import Loader from '../components/Loader';
-import { useTheme } from '@mui/material/styles';
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const theme = useTheme();
-  const isDark = theme.palette.mode === 'dark';
 
   const allowedEmails = [
     "abhixshek20@gmail.com",
@@ -63,9 +59,30 @@ export default function Login() {
   const fieldWidth = 400;
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: isDark ? '#10151a' : '#eaf7f7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3, minWidth: 350 }}>
-        <Typography variant="h5" fontWeight={700} sx={{ color: isDark ? theme.palette.primary.main : '#2563eb', fontFamily: 'Poppins, sans-serif', mb: 2 }}>Login</Typography>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        bgcolor: "#eaf7f7",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Card
+        sx={{
+          width: 600,
+          borderRadius: 5,
+          // boxShadow: 6,
+          p: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <CardContent sx={{ width: "100%", p: 0 }}>
+          <Typography variant="h4" align="center" fontWeight={600} gutterBottom>
+            Login
+          </Typography>
           <Typography
             variant="body1"
             align="center"
@@ -162,7 +179,8 @@ export default function Login() {
               </Button>
             </Stack>
           </form>
-        </Paper>
+        </CardContent>
+      </Card>
     </Box>
   );
 }
