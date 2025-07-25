@@ -33,6 +33,49 @@ const colorPalette = [
   '#A78BFA', // light purple
 ];
 
+// Helper to spread labels vertically to avoid overlap
+function getSpreadLabelPositions(data, cx, cy, innerRadius, outerRadius) {
+  const RADIAN = Math.PI / 180;
+  const labelData = data.map((entry, index) => {
+    const midAngle = (entry.startAngle + entry.endAngle) / 2;
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
+    const sx = cx + (outerRadius + 6) * cos;
+    const sy = cy + (outerRadius + 6) * sin;
+    const mx = cx + (outerRadius + 48) * cos;
+    const my = cy + (outerRadius + 48) * sin;
+    const ex = mx + (cos >= 0 ? 1 : -1) * 38;
+    const ey = my;
+    return {
+      ...entry,
+      index,
+      midAngle,
+      cos,
+      sin,
+      sx, sy, mx, my, ex, ey,
+      side: cos >= 0 ? 'right' : 'left',
+      origY: ey,
+      origX: ex,
+    };
+  });
+  // Split left/right
+  const left = labelData.filter(d => d.side === 'left').sort((a, b) => a.ey - b.ey);
+  const right = labelData.filter(d => d.side === 'right').sort((a, b) => a.ey - b.ey);
+  // Spread labels on each side
+  function spread(labels, minGap = 32) {
+    for (let i = 1; i < labels.length; i++) {
+      if (labels[i].ey - labels[i-1].ey < minGap) {
+        labels[i].ey = labels[i-1].ey + minGap;
+      }
+    }
+    return labels;
+  }
+  spread(left);
+  spread(right);
+  // Merge back
+  return [...left, ...right].sort((a, b) => a.index - b.index);
+}
+
 export default function Dashboard() {
   // All hooks must be at the top, before any return or conditional
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -127,40 +170,35 @@ export default function Dashboard() {
   };
 
   const totalPieValue = (dashboard.pieData || []).reduce((sum, item) => sum + (item.value || 0), 0);
-  const renderActiveShape = (props) => {
+  // --- PIE CHART SECTION ---
+  // Remove external label rendering and move all logic into Label content
+  const renderPieLabel = (props) => {
     const RADIAN = Math.PI / 180;
     const {
       cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-      fill, payload, percent, value, index
+      fill, payload, value, index
     } = props;
     const sin = Math.sin(-RADIAN * midAngle);
     const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+    const sx = cx + (outerRadius + 6) * cos;
+    const sy = cy + (outerRadius + 6) * sin;
+    const mx = cx + (outerRadius + 36) * cos;
+    const my = cy + (outerRadius + 36) * sin;
+    const ex = mx + (cos >= 0 ? 1 : -1) * 38;
     const ey = my;
     const color = colorPalette[index % colorPalette.length];
     return (
       <g>
-        <Sector
-          cx={cx}
-          cy={cy}
-          innerRadius={innerRadius}
-          outerRadius={outerRadius}
-          startAngle={startAngle}
-          endAngle={endAngle}
-          fill={fill}
-        />
-        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={color} fill="none" />
+        {/* Connector line and dot */}
+        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={color} fill="none" strokeWidth={2} />
         <circle cx={ex} cy={ey} r={4} fill={color} stroke="none" />
-        <text x={ex + (cos >= 0 ? 1 : -1) * 8} y={ey} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={700} fontSize={18}>{`₹${value.toLocaleString()}`}</text>
-        <text x={ex + (cos >= 0 ? 1 : -1) * 8} y={ey + 22} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={400} fontSize={14}>{payload.name}</text>
+        {/* Value label */}
+        <text x={ex + (cos >= 0 ? 1 : -1) * 8} y={ey - 4} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={700} fontSize={16} fontFamily={fontFamily}>{`₹${value.toLocaleString()}`}</text>
+        {/* Category label */}
+        <text x={ex + (cos >= 0 ? 1 : -1) * 8} y={ey + 14} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={400} fontSize={13} fontFamily={fontFamily}>{payload.name}</text>
       </g>
     );
   };
-  const onPieEnter = (_, index) => setActiveIndex(index);
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: mainBg, fontFamily, overflowX: 'hidden' }}>
@@ -273,128 +311,7 @@ export default function Dashboard() {
         {/* Second row: Pie Chart/Statistics and Recent Transactions */}
         <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', gap: 4, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
           {/* Statistics Card (Pie Chart) */}
-          <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: 400 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
-              <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: '#222', textAlign: 'left', letterSpacing: 0.5 }}>Statistics</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', alignItems: 'center', px: { xs: 2, md: 4 }, pt: 0, pb: 0, gap: { xs: 2, md: 0 }, width: '100%', minHeight: 0, minWidth: 0 }}>
-                {/* Pie chart */}
-                <Box sx={{ width: { xs: '100%', md: 300 }, height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 220, position: 'relative', flexShrink: 0, minHeight: 0, background: 'transparent' }}>
-                  <ResponsiveContainer width={260} height={300}>
-                    <PieChart>
-                      <Pie
-                        data={dashboard.pieData || []}
-                        dataKey="value"
-                        nameKey="name"
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={100}
-                        outerRadius={120}
-                        fill="#8884d8"
-                        paddingAngle={2}
-                        labelLine={false}
-                        activeIndex={activeIndex}
-                        activeShape={renderActiveShape}
-                        onMouseEnter={onPieEnter}
-                        isAnimationActive={true}
-                        animationDuration={1200}
-                        animationEasing="ease-out"
-                      >
-                        {(dashboard.pieData || []).map((entry, idx) => (
-                          <Cell key={entry.name + idx} fill={colorPalette[idx % colorPalette.length]} />
-                        ))}
-                        {/* Center dark circle and total */}
-                        <Label
-                          value={`₹${totalPieValue.toLocaleString()}`}
-                          position="center"
-                          fontSize={24}
-                          fontWeight={700}
-                          fill="#222"
-                          style={{
-                            background: '#12263a',
-                            borderRadius: '50%',
-                            padding: '16px 32px',
-                            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.15))',
-                          }}
-                        />
-                      </Pie>
-                      <Tooltip formatter={(value, name, props) => [`₹${Math.round(value).toLocaleString()}`, props.payload.name]} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </Box>
-                {/* Legend - centered and no horizontal scroll */}
-                <Box sx={{
-                  flex: 1,
-                  minWidth: 0,
-                  maxHeight: 220,
-                  overflowY: 'auto',
-                  overflowX: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'stretch',
-                  gap: 0.5, // tighter vertical gap
-                  pl: 0,
-                  boxSizing: 'border-box',
-                  '& > div:hover': { bgcolor: '#f3f6fd', borderRadius: 2, cursor: 'pointer' },
-                  '&::-webkit-scrollbar': { width: '6px' },
-                  '&::-webkit-scrollbar-thumb': { background: '#c1c1c1', borderRadius: '3px' },
-                  '&::-webkit-scrollbar-thumb:hover': { background: '#a8a8a8' }
-                }}>
-                  {(dashboard.pieData || []).map((item, idx) => (
-                    <Box
-                      key={item.name + idx}
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 2.5, // more space between dot and label/value
-                        mb: 0.5,
-                        minWidth: 0,
-                        width: '100%',
-                        justifyContent: 'flex-start',
-                        py: 1, // vertical padding for clarity
-                      }}
-                    >
-                      <Box sx={{ width: 16, height: 16, bgcolor: colorPalette[idx % colorPalette.length], borderRadius: '50%', flexShrink: 0, mr: 1 }} />
-                      <Typography
-                        fontSize={16}
-                        fontWeight={600}
-                        sx={{
-                          fontFamily,
-                          color: '#222',
-                          lineHeight: 1.2,
-                          minWidth: 140,
-                          flex: 1,
-                          textAlign: 'left',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        }}
-                      >
-                        {item.name}
-                      </Typography>
-                      <Typography
-                        fontSize={17}
-                        fontWeight={700}
-                        sx={{
-                          fontFamily,
-                          color: blue,
-                          lineHeight: 1.2,
-                          minWidth: 90,
-                          ml: 3, // more space between label and value
-                          textAlign: 'right',
-                          flexShrink: 0,
-                        }}
-                      >
-                        {`₹${Math.round(item.value).toLocaleString()}`}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-              {/* End of Pie Chart and Legend Row */}
-            </Box>
-          </Paper>
-            {/* Recent Transactions Box */}
-          <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden', height: 400 }}>
+          <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden', height: 440 }}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
               <Typography variant="h5" fontWeight={700} sx={{ color: '#222', fontFamily, letterSpacing: 0.5, textAlign: 'left', mb: 2 }}>
                 Recent Transactions
@@ -426,6 +343,59 @@ export default function Dashboard() {
                 )}
               </Box>
             </Paper>
+          <Paper elevation={3} sx={{ flex: 2, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: 440 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
+              <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: '#222', textAlign: 'left', letterSpacing: 0.5 }}>Yearly Expense</Typography>
+            </Box>
+            <Typography variant="subtitle1" sx={{ color: '#888', fontFamily, textAlign: 'left', mb: 1, ml: 0.5 }}>Breakdown By Category</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: 0, minWidth: 0 }}>
+              {/* Pie chart only, no legend */}
+              <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', flexShrink: 0, background: 'transparent', overflow: 'visible' }}>
+                <ResponsiveContainer width="100%" height={400}>
+                  <PieChart>
+                    <Pie
+                      data={dashboard.pieData || []}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="47%"
+                      innerRadius={70}
+                      outerRadius={120}
+                      fill="#8884d8"
+                      paddingAngle={6.5}
+                      labelLine={false}
+                      label={renderPieLabel}
+                      isAnimationActive={false}
+                    >
+                      {(dashboard.pieData || []).map((entry, idx) => (
+                        <Cell key={entry.name + idx} fill={colorPalette[idx % colorPalette.length]} />
+                      ))}
+                      {/* Center dark circle and total */}
+                      <Label
+                        value={`₹${totalPieValue.toLocaleString()}`}
+                        position="center"
+                        fontSize={24}
+                        fontWeight={700}
+                        fill="#fff"
+                        content={({ viewBox }) => {
+                          if (!viewBox || typeof viewBox.cx !== 'number' || typeof viewBox.cy !== 'number') return null;
+                          const { cx, cy } = viewBox;
+                          return (
+                            <g>
+                              <circle cx={cx} cy={cy} r={60} fill="#12263a" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.15))" />
+                              <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle" fontSize={24} fontWeight={700} fill="#fff" fontFamily={fontFamily}>{`₹${totalPieValue.toLocaleString()}`}</text>
+                            </g>
+                          );
+                        }}
+                      />
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </Box>
+            </Box>
+          </Paper>
+            {/* Recent Transactions Box */}
+          
           </Box>
           {/* Balances and Top Products */}
                              <Box sx={{ display: 'flex', gap: 3, mb: 3 }}>

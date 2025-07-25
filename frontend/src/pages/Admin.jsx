@@ -102,15 +102,7 @@ export default function Admin() {
           </Button>
           {success && <Typography color="success.main" sx={{ mt: 2 }}>File uploaded and processed! Dashboard will update shortly.</Typography>}
           {error && <Typography color="error" sx={{ mt: 2 }}>{error}</Typography>}
-          <Button
-            variant="contained"
-            color="warning"
-            onClick={handleCheckLowStock}
-            disabled={checkingStock}
-            sx={{ mt: 2 }}
-          >
-            {checkingStock ? "Checking..." : "Check Low Stock & Notify"}
-          </Button>
+          
           {lowStockResult && (
             <Typography sx={{ mt: 2 }}>
               {typeof lowStockResult === "string"
