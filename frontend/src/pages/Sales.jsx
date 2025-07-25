@@ -370,7 +370,7 @@ export default function Sales() {
         }}
       >
         {/* Top Section */}
-        <Box sx={{ display: 'flex', gap: 3, mt: 4, mb: 3, height: 340 }}>
+        <Box sx={{ display: 'flex', gap: 3, mt: 3, mb: 3, height: 320 }}>
           {/* Financial Overview */}
           <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
@@ -442,8 +442,8 @@ export default function Sales() {
           
         </Box>
         {/* Orders Table Section */}
-        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+        <Paper elevation={2} sx={{ flex: 1, borderRadius: 3, p: 3, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3,mb: 1.5}}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
           <Typography fontWeight={600} fontSize={18} sx={{ fontFamily: 'Poppins, sans-serif', color: isDark ? '#f3f6fd' : '#2563eb' }}>Sales Transactions</Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Button

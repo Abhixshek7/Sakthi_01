@@ -217,12 +217,12 @@ export default function Dashboard() {
           overflowX: 'hidden',
         }}
       >
-        <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', alignItems: 'center', mb: 2 }}>
+        <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', alignItems: 'center'}}>
           <Box sx={{ flex: 1 }} />
           <audio ref={audioRef} src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto" style={{ display: 'none' }} />
         </Box>
           {/* Main content area: Graph, Notifications, Low Stock */}
-          <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', gap: 4, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+          <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', gap: 4, mb: 3, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
             {/* Graph Card (2x width) */}
             <Paper elevation={3} sx={{ flex: 2, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', height: 400, justifyContent: 'space-between' }}>
               <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 0 }}>
@@ -309,14 +309,16 @@ export default function Dashboard() {
             </Paper>
           </Box>
         {/* Second row: Pie Chart/Statistics and Recent Transactions */}
-        <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', gap: 4, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+        <Box sx={{ maxWidth: 1400, mx: 'auto', width: '100%', display: 'flex', gap: 4, mb: 3, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
           {/* Statistics Card (Pie Chart) */}
           <Paper elevation={3} sx={{ flex: 1, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', overflow: 'hidden', height: 440 }}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
               <Typography variant="h5" fontWeight={700} sx={{ color: '#222', fontFamily, letterSpacing: 0.5, textAlign: 'left', mb: 2 }}>
                 Recent Transactions
               </Typography>
+              
               </Box>
+              
               <Box sx={{ flex: 1, height: '100%', overflowY: 'auto', scrollBehavior: 'smooth', pr: 1 }}>
                 {(dashboard.transactions && dashboard.transactions.length > 0) ? (
                   dashboard.transactions.map((tx, idx) => (
@@ -334,19 +336,25 @@ export default function Dashboard() {
                         <Typography fontWeight={700} fontSize={17} color={tx.positive ? '#22c55e' : blue} sx={{ fontFamily }}>
                           {tx.positive ? '+' : ''}₹{new Intl.NumberFormat('en-IN').format(Math.round(Math.abs(tx.amount)))}
                         </Typography>
+                        
                       </Box>
+                      
                       {idx < dashboard.transactions.length - 1 && <Divider sx={{ my: 1, borderColor: '#e5e7eb' }} />}
+                      
                     </React.Fragment>
+                    
                   ))
                 ) : (
                   <Typography fontSize={13} color="#888" sx={{ fontFamily }}>No recent transactions.</Typography>
                 )}
               </Box>
+              <Button variant="contained" onClick={() => navigate('/sales')} sx={{ mt:2,mb: .5, bgcolor: blue, color: '#fff', fontFamily, fontWeight: 700, borderRadius: 2, px: 3, py: 1, fontSize: 15, boxShadow: '0 2px 8px rgba(37,99,235,0.08)', '&:hover': { bgcolor: '#1749b1' } }}>Go to Sales</Button>
             </Paper>
           <Paper elevation={3} sx={{ flex: 2, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: 440 }}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
               <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: '#222', textAlign: 'left', letterSpacing: 0.5 }}>Yearly Expense</Typography>
             </Box>
+            
             <Typography variant="subtitle1" sx={{ color: '#888', fontFamily, textAlign: 'left', mb: 1, ml: 0.5 }}>Breakdown By Category</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: 0, minWidth: 0 }}>
               {/* Pie chart only, no legend */}
