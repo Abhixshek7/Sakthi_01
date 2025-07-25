@@ -15,10 +15,10 @@ const navItems = [
   { label: "Dashboard", icon: House, to: "/dashboard" },
   { label: "Sales", icon: ShoppingCart, to: "/sales" },
   { label: "Notifications", icon: Bell, to: "/notifications" },
-];
-const bottomItems = [
   { label: "Settings", icon: Gear, to: "/settings" },
   { label: "Help", icon: Question, to: "/help" },
+];
+const bottomItems = [
   { label: "Log out", icon: SignOut, action: "logout" },
 ];
 
@@ -32,23 +32,19 @@ const Sidebar = ({ open, setOpen }) => {
   };
 
   return (
-    <Box
-      sx={{
-        width: open ? SIDEBAR_WIDTH : SIDEBAR_MINI,
-        bgcolor: "#fff",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        borderRight: "1px solid #e0e0e0",
-        transition: 'width 0.3s',
-        color: '#111',
-        fontFamily: 'Poppins, sans-serif',
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        zIndex: 100,
-      }}
-    >
+    <Box sx={{
+      width: open ? SIDEBAR_WIDTH : SIDEBAR_MINI,
+      bgcolor: '#fff',
+      color: '#222',
+      boxShadow: '0 2px 8px rgba(37,99,235,0.08)',
+      position: 'fixed',
+      height: '100vh',
+      zIndex: 1200,
+      transition: 'width 0.3s',
+      display: 'flex',
+      flexDirection: 'column',
+      borderRight: '1px solid #e5e7eb',
+    }}>
       {/* User Info */}
       <Box
         sx={{
@@ -83,6 +79,7 @@ const Sidebar = ({ open, setOpen }) => {
               minHeight: 48,
               my: 0.5,
               transition: 'all 0.3s',
+              bgcolor: 'transparent', // Ensure no background by default
               '&:hover': {
                 bgcolor: '#f5f5f5',
                 '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
@@ -115,12 +112,24 @@ const Sidebar = ({ open, setOpen }) => {
               minHeight: 48,
               my: 0.5,
               transition: 'all 0.3s',
+              bgcolor: 'transparent', // Remove gray background
               '&:hover': {
                 bgcolor: '#f5f5f5',
-                '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                  color: '#111',
-                },
               },
+              // Remove border and outline for button (Log out)
+              ...(action === 'logout' && {
+                border: 'none',
+                outline: 'none',
+                boxShadow: 'none',
+                '&:focus': {
+                  outline: 'none',
+                  border: 'none',
+                },
+                '&:active': {
+                  outline: 'none',
+                  border: 'none',
+                },
+              }),
             }}
           >
             <ListItemIcon sx={{ color: '#111 !important', minWidth: 0, justifyContent: 'center', display: 'flex' }}>
@@ -136,7 +145,7 @@ const Sidebar = ({ open, setOpen }) => {
           onClick={() => setOpen(!open)}
           sx={{
             bgcolor: '#fff',
-            boxShadow: 1,
+            
             borderRadius: '50%',
             width: 48,
             height: 48,

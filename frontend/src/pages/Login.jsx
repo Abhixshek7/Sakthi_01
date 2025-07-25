@@ -14,6 +14,7 @@ import {
 import GoogleIcon from "@mui/icons-material/Google";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
+import Loader from '../components/Loader';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,8 @@ export default function Login() {
   const allowedEmails = [
     "abhixshek20@gmail.com",
     "sharveshsr9@gmail.com",
-    "sharvesheve@gmail.com"
+    "sharvesheve@gmail.com",
+    "aswinarun3103@gmail.com"
     // Add more emails as needed
   ];
 

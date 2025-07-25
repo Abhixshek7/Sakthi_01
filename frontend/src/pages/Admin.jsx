@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { allowedEmails } from "../../allowedEmails";
 import { getAuth } from "firebase/auth";
+import Loader from '../components/Loader';
+import { useTheme } from '@mui/material/styles';
 
 export default function Admin() {
   const { user } = useContext(UserContext);
@@ -12,6 +14,10 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [lowStockResult, setLowStockResult] = useState(null);
+  const [checkingStock, setCheckingStock] = useState(false);
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
 
   useEffect(() => {
     if (!user) return;
@@ -52,8 +58,21 @@ export default function Admin() {
     }
   };
 
+  const handleCheckLowStock = async () => {
+    setCheckingStock(true);
+    setLowStockResult(null);
+    const res = await fetch("/inventory/check-and-notify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone_number: "+91YOURNUMBER" }) // Replace with your WhatsApp number
+    });
+    const data = await res.json();
+    setLowStockResult(data);
+    setCheckingStock(false);
+  };
+
   if (!user) {
-    return <Box sx={{ p: 4 }}><Typography>Loading...</Typography></Box>;
+    return <Loader />;
   }
 
   if (!allowedEmails.includes(user.email)) {
@@ -61,10 +80,10 @@ export default function Admin() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#eaf7f7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-      <Card sx={{ maxWidth: 500, mb: 4 }}>
-        <CardContent>
-          <Typography variant="h6" fontWeight={600} gutterBottom>
+    <Box sx={{ minHeight: '100vh', bgcolor: isDark ? '#10151a' : '#eaf7f7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: isDark ? '#181f23' : '#fff', boxShadow: isDark ? theme.palette.glow : 3, minWidth: 350 }}>
+        <Typography variant="h5" fontWeight={700} sx={{ color: isDark ? theme.palette.primary.main : '#2563eb', fontFamily: 'Poppins, sans-serif', mb: 2 }}>Admin</Typography>
+        <Typography variant="h6" fontWeight={600} gutterBottom>
             Admin Upload Data for Dashboard
           </Typography>
           <input
@@ -83,8 +102,15 @@ export default function Admin() {
           </Button>
           {success && <Typography color="success.main" sx={{ mt: 2 }}>File uploaded and processed! Dashboard will update shortly.</Typography>}
           {error && <Typography color="error" sx={{ mt: 2 }}>{error}</Typography>}
-        </CardContent>
-      </Card>
+          
+          {lowStockResult && (
+            <Typography sx={{ mt: 2 }}>
+              {typeof lowStockResult === "string"
+                ? lowStockResult
+                : JSON.stringify(lowStockResult, null, 2)}
+            </Typography>
+          )}
+        </Paper>
     </Box>
   );
 } 

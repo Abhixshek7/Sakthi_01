@@ -1,0 +1,51 @@
+product_name,price,quantity_sold,date,customer_type,category,sales,order_id,customer,payment,status,week,notification_type,notification_item,notification_date,notification_details
+Paracetamol,45.00,120,2024-01-05,returning,pharmaceuticals,5400.00,30001,Dr. Smith,Paid,Delivered,W1,Shipped,Order #30001,2024-01-05,Delivered for Paracetamol
+Blood Pressure Monitor,1200.00,5,2024-01-10,new,medical devices,6000.00,30002,Jane Doe,Unpaid,Processing,W2,Delayed,Order #30002,2024-01-10,Delayed for Blood Pressure Monitor
+Vitamin C Tablets,150.00,40,2024-01-12,affiliate,supplements,6000.00,30003,John Lee,Paid,Delivered,W2,Shipped,Order #30003,2024-01-12,Delivered for Vitamin C Tablets
+Surgical Gloves,250.00,30,2024-01-15,employee,surgical,7500.00,30004,Dr. Patel,Pending,Out for Delivery,W3,Info,Order #30004,2024-01-15,Info for Surgical Gloves
+Face Mask,10.00,200,2024-01-18,guest,personal care,2000.00,30005,Emily Brown,Paid,Delivered,W3,Promotion,Order #30005,2024-01-18,Promotion for Face Mask
+Hand Sanitizer,80.00,50,2024-01-20,wholesale,personal care,4000.00,30006,Michael Chen,Partial,Delivered,W3,Shipped,Order #30006,2024-01-20,Shipped for Hand Sanitizer
+Insulin Syringe,30.00,60,2024-01-22,vip,medical devices,1800.00,30007,Dr. Kumar,Processing,Processing,W4,Reminder,Order #30007,2024-01-22,Reminder for Insulin Syringe
+Thermometer,350.00,10,2024-01-25,affiliate,diagnostics,3500.00,30008,Anna Ivanova,Refunded,Returned,W4,Returned,Order #30008,2024-01-25,Returned for Thermometer
+Bandages,20.00,100,2024-01-28,returning,hospital supplies,2000.00,30009,Lucas Rossi,Paid,Delivered,W4,Delivered,Order #30009,2024-01-28,Delivered for Bandages
+Antiseptic Solution,75.00,25,2024-02-01,employee,pharmaceuticals,1875.00,30010,Wei Chen,Unpaid,Processing,W5,Info,Order #30010,2024-02-01,Info for Antiseptic Solution
+Stethoscope,800.00,3,2024-02-03,new,medical devices,2400.00,30011,Tom Müller,Paid,Delivered,W5,Shipped,Order #30011,2024-02-03,Shipped for Stethoscope
+Glucometer,900.00,4,2024-02-06,affiliate,diagnostics,3600.00,30012,David Kim,Pending,Out for Delivery,W6,Promotion,Order #30012,2024-02-06,Promotion for Glucometer
+IV Drip Set,120.00,15,2024-02-09,guest,hospital supplies,1800.00,30013,Jane Smith,Partial,Delivered,W6,Delivered,Order #30013,2024-02-09,Delivered for IV Drip Set
+Oximeter,500.00,8,2024-02-12,wholesale,diagnostics,4000.00,30014,Leslie Alexander,Processing,Processing,W6,Reminder,Order #30014,2024-02-12,Reminder for Oximeter
+Surgical Mask,8.00,300,2024-02-15,returning,personal care,2400.00,30015,Dr. Patel,Paid,Delivered,W7,Shipped,Order #30015,2024-02-15,Shipped for Surgical Mask
+Antibiotic Cream,60.00,35,2024-02-18,vip,pharmaceuticals,2100.00,30016,Anna Ivanova,Refunded,Returned,W7,Returned,Order #30016,2024-02-18,Returned for Antibiotic Cream
+Wheelchair,5000.00,1,2024-02-20,employee,medical devices,5000.00,30017,John Lee,Pending,Processing,W7,Info,Order #30017,2024-02-20,Info for Wheelchair
+First Aid Kit,350.00,7,2024-02-23,affiliate,hospital supplies,2450.00,30018,Wei Chen,Paid,Delivered,W8,Delivered,Order #30018,2024-02-23,Delivered for First Aid Kit
+Pain Relief Spray,120.00,20,2024-02-25,guest,pharmaceuticals,2400.00,30019,Michael Chen,Partial,Delivered,W8,Promotion,Order #30019,2024-02-25,Promotion for Pain Relief Spray
+Surgical Tape,30.00,40,2024-02-28,wholesale,surgical,1200.00,30020,Emily Brown,Processing,Processing,W8,Shipped,Order #30020,2024-02-28,Shipped for Surgical Tape
+Nebulizer,1500.00,2,2024-03-02,returning,medical devices,3000.00,30021,Dr. Smith,Paid,Delivered,W9,Delivered,Order #30021,2024-03-02,Delivered for Nebulizer
+Antacid Tablets,55.00,60,2024-03-05,affiliate,pharmaceuticals,3300.00,30022,Jane Doe,Unpaid,Processing,W9,Info,Order #30022,2024-03-05,Info for Antacid Tablets
+Crutches,700.00,3,2024-03-08,new,medical devices,2100.00,30023,John Lee,Paid,Delivered,W9,Shipped,Order #30023,2024-03-08,Shipped for Crutches
+Disinfectant Wipes,90.00,25,2024-03-11,employee,personal care,2250.00,30024,Dr. Patel,Pending,Out for Delivery,W10,Promotion,Order #30024,2024-03-11,Promotion for Disinfectant Wipes
+Allergy Syrup,110.00,18,2024-03-14,guest,pharmaceuticals,1980.00,30025,Emily Brown,Paid,Delivered,W10,Delivered,Order #30025,2024-03-14,Delivered for Allergy Syrup
+Surgical Scissors,200.00,6,2024-03-17,wholesale,surgical,1200.00,30026,Michael Chen,Partial,Delivered,W10,Shipped,Order #30026,2024-03-17,Shipped for Surgical Scissors
+Digital Thermometer,400.00,5,2024-03-20,vip,diagnostics,2000.00,30027,Dr. Kumar,Processing,Processing,W11,Reminder,Order #30027,2024-03-20,Reminder for Digital Thermometer
+Sterile Gauze,15.00,80,2024-03-23,affiliate,hospital supplies,1200.00,30028,Anna Ivanova,Refunded,Returned,W11,Returned,Order #30028,2024-03-23,Returned for Sterile Gauze
+Cough Syrup,95.00,22,2024-03-26,returning,pharmaceuticals,2090.00,30029,Lucas Rossi,Paid,Delivered,W11,Delivered,Order #30029,2024-03-26,Delivered for Cough Syrup
+Blood Glucose Test Strips,600.00,10,2024-03-29,employee,diagnostics,6000.00,30030,Wei Chen,Unpaid,Processing,W12,Info,Order #30030,2024-03-29,Info for Blood Glucose Test Strips
+Surgical Cap,20.00,60,2024-04-01,new,surgical,1200.00,30031,Tom Müller,Paid,Delivered,W12,Shipped,Order #30031,2024-04-01,Shipped for Surgical Cap
+Antiseptic Cream,70.00,25,2024-04-04,affiliate,pharmaceuticals,1750.00,30032,David Kim,Pending,Out for Delivery,W12,Promotion,Order #30032,2024-04-04,Promotion for Antiseptic Cream
+Medical Tape,25.00,40,2024-04-07,guest,surgical,1000.00,30033,Jane Smith,Partial,Delivered,W13,Delivered,Order #30033,2024-04-07,Delivered for Medical Tape
+Pulse Oximeter,550.00,7,2024-04-10,wholesale,diagnostics,3850.00,30034,Leslie Alexander,Processing,Processing,W13,Reminder,Order #30034,2024-04-10,Reminder for Pulse Oximeter
+Surgical Blade,35.00,30,2024-04-13,returning,surgical,1050.00,30035,Dr. Patel,Paid,Delivered,W13,Shipped,Order #30035,2024-04-13,Shipped for Surgical Blade
+Multivitamin Tablets,180.00,28,2024-04-16,vip,supplements,5040.00,30036,Anna Ivanova,Refunded,Returned,W14,Returned,Order #30036,2024-04-16,Returned for Multivitamin Tablets
+Surgical Apron,90.00,15,2024-04-19,employee,surgical,1350.00,30037,John Lee,Pending,Processing,W14,Info,Order #30037,2024-04-19,Info for Surgical Apron
+N95 Mask,25.00,100,2024-04-22,affiliate,personal care,2500.00,30038,Wei Chen,Paid,Delivered,W14,Delivered,Order #30038,2024-04-22,Delivered for N95 Mask
+Pain Balm,60.00,20,2024-04-25,guest,pharmaceuticals,1200.00,30039,Michael Chen,Partial,Delivered,W15,Promotion,Order #30039,2024-04-25,Promotion for Pain Balm
+Surgical Forceps,220.00,8,2024-04-28,wholesale,surgical,1760.00,30040,Emily Brown,Processing,Processing,W15,Shipped,Order #30040,2024-04-28,Shipped for Surgical Forceps
+Antifungal Cream,85.00,18,2024-05-01,returning,pharmaceuticals,1530.00,30041,Dr. Smith,Paid,Delivered,W15,Delivered,Order #30041,2024-05-01,Delivered for Antifungal Cream
+Medical Gloves,30.00,60,2024-05-04,affiliate,surgical,1800.00,30042,Jane Doe,Unpaid,Processing,W16,Info,Order #30042,2024-05-04,Info for Medical Gloves
+Surgical Sutures,150.00,12,2024-05-07,new,surgical,1800.00,30043,John Lee,Paid,Delivered,W16,Shipped,Order #30043,2024-05-07,Shipped for Surgical Sutures
+Vitamin D Drops,120.00,15,2024-05-10,employee,supplements,1800.00,30044,Dr. Patel,Pending,Out for Delivery,W16,Promotion,Order #30044,2024-05-10,Promotion for Vitamin D Drops
+Medical Apron,95.00,10,2024-05-13,guest,surgical,950.00,30045,Emily Brown,Paid,Delivered,W17,Delivered,Order #30045,2024-05-13,Delivered for Medical Apron
+Antacid Syrup,65.00,22,2024-05-16,wholesale,pharmaceuticals,1430.00,30046,Michael Chen,Partial,Delivered,W17,Shipped,Order #30046,2024-05-16,Shipped for Antacid Syrup
+Surgical Drapes,200.00,9,2024-05-19,vip,surgical,1800.00,30047,Dr. Kumar,Processing,Processing,W17,Reminder,Order #30047,2024-05-19,Reminder for Surgical Drapes
+Medical Cotton,20.00,80,2024-05-22,affiliate,hospital supplies,1600.00,30048,Anna Ivanova,Refunded,Returned,W18,Returned,Order #30048,2024-05-22,Returned for Medical Cotton
+Pain Relief Gel,110.00,14,2024-05-25,returning,pharmaceuticals,1540.00,30049,Lucas Rossi,Paid,Delivered,W18,Delivered,Order #30049,2024-05-25,Delivered for Pain Relief Gel
+Surgical Needles,60.00,25,2024-05-28,employee,surgical,1500.00,30050,Wei Chen,Unpaid,Processing,W18,Info,Order #30050,2024-05-28,Info for Surgical Needles 

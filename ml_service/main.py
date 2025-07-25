@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks, Query, Depends, Response, Header
+from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks, Query, Depends, Response, Header, Body
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import pandas as pd
@@ -21,18 +21,40 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from fastapi.middleware.cors import CORSMiddleware
 import chardet
 import json
+from twilio.rest import Client
+from dotenv import load_dotenv
 
 cred = credentials.Certificate("firebase_key.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://mlinventorymanagment-default-rtdb.firebaseio.com/'
 })
 
+# Load environment variables
+load_dotenv()
+
 # --- Logging Setup ---
 logging.basicConfig(filename='ml_service.log', level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 # --- Constants ---
 MODEL_DIR = "models"
-API_KEY = "key"  # Change this in production!
+API_KEY = os.getenv('API_KEY', 'key')  # Get from .env or use default
+
+# --- Twilio Setup ---
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
+TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
+
+# Initialize Twilio client
+if TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN:
+    try:
+        twilio_client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+        logging.info("Twilio client initialized successfully")
+    except Exception as e:
+        twilio_client = None
+        logging.warning(f"Failed to initialize Twilio client: {e}")
+else:
+    twilio_client = None
+    logging.warning("Twilio credentials not found in .env file. SMS functionality will be disabled.")
 
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)
@@ -121,7 +143,15 @@ def get_inventory_from_firebase():
     ref = db.reference('inventory')
     return ref.get()
 
-ALLOWED_ADMINS = ["abhixshek20@gmail.com", "sharveshsr9@gmail.com"]  # Replace with your real admin emails
+def get_inventory_from_firestore():
+    db_firestore = firestore.client()
+    docs = db_firestore.collection("inventory").stream()
+    inventory = {}
+    for doc in docs:
+        inventory[doc.id] = doc.to_dict()
+    return inventory
+
+ALLOWED_ADMINS = ["abhixshek20@gmail.com", "sharveshsr9@gmail.com","aswinarun3103@gmail.com"]  # Replace with your real admin emails
 
 # Store uploaded data in memory for demo (replace with persistent storage in production)
 last_uploaded_df = None
@@ -137,6 +167,70 @@ def push_sales_to_firestore(data):
 def push_notifications_to_firestore(data):
     db_firestore = firestore.client()
     db_firestore.collection("notifications").document("main").set(data)
+
+def send_sms_notification(phone_number: str, message: str):
+    """Send WhatsApp notification using Twilio"""
+    if not twilio_client:
+        logging.error("Twilio client not initialized. Cannot send WhatsApp message.")
+        return False
+    
+    # Format phone number for WhatsApp if not already formatted
+    if not phone_number.startswith('whatsapp:'):
+        phone_number = f"whatsapp:{phone_number}"
+    
+    try:
+        message = twilio_client.messages.create(
+            body=message,
+            from_=TWILIO_PHONE_NUMBER,
+            to=phone_number
+        )
+        logging.info(f"WhatsApp message sent successfully to {phone_number}. SID: {message.sid}")
+        return True
+    except Exception as e:
+        logging.error(f"Failed to send WhatsApp message to {phone_number}: {str(e)}")
+        return False
+
+def send_inventory_alert(phone_number: str, product_name: str, current_stock: int, threshold: int = 10):
+    """Send inventory alert when stock is low"""
+    message = f"🚨 INVENTORY ALERT: {product_name} stock is low! Current stock: {current_stock}, Threshold: {threshold}"
+    return send_sms_notification(phone_number, message)
+
+def send_sales_notification(phone_number: str, total_sales: float, date: str):
+    """Send daily sales summary"""
+    message = f"📊 DAILY SALES REPORT: Total sales for {date}: ${total_sales:.2f}"
+    return send_sms_notification(phone_number, message)
+
+def send_whatsapp_template_message(phone_number: str, template_sid: str, variables: dict):
+    """Send WhatsApp message using a template"""
+    if not twilio_client:
+        logging.error("Twilio client not initialized. Cannot send WhatsApp template message.")
+        return False
+    
+    # Format phone number for WhatsApp if not already formatted
+    if not phone_number.startswith('whatsapp:'):
+        phone_number = f"whatsapp:{phone_number}"
+    
+    try:
+        message = twilio_client.messages.create(
+            from_=TWILIO_PHONE_NUMBER,
+            content_sid=template_sid,
+            content_variables=json.dumps(variables),
+            to=phone_number
+        )
+        logging.info(f"WhatsApp template message sent successfully to {phone_number}. SID: {message.sid}")
+        return True
+    except Exception as e:
+        logging.error(f"Failed to send WhatsApp template message to {phone_number}: {str(e)}")
+        return False
+
+def send_order_notification(phone_number: str, delivery_date: str, delivery_time: str):
+    """Send order notification using WhatsApp template"""
+    template_sid = "HX350d429d32e64a552466cafecbe95f3c"  # Order Notifications template
+    variables = {
+        "1": delivery_date,
+        "2": delivery_time
+    }
+    return send_whatsapp_template_message(phone_number, template_sid, variables)
 
 # --- Endpoints ---
 @app.get("/health", tags=["Utility"])
@@ -340,18 +434,25 @@ async def admin_upload(
     else:
         df['predicted_sales'] = df['price'] * df['quantity_sold']
 
+    # Predict quantity sold (regression or random for demo)
+    if 'quantity_sold' in df.columns:
+        # You can use a regressor or just copy the column for demo
+        df['predicted_quantity_sold'] = df['quantity_sold']
+    else:
+        df['predicted_quantity_sold'] = np.random.randint(1, 500, len(df))
+
     # --- Prepare Firestore data for UI ---
     df['date'] = pd.to_datetime(df['date'])
     pieData = [
-        {"name": row['product_name'], "value": row['predicted_sales'], "color": "#a99cff"}
+        {"name": row['product_name'], "value": row['predicted_sales'], "quantity": row['predicted_quantity_sold'], "color": "#a99cff"}
         for _, row in df.iterrows()
     ][:10]
     transactions = [
-        {"name": row['product_name'], "amount": row['predicted_sales'], "date": row['date']}
+        {"name": row['product_name'], "amount": row['predicted_sales'], "quantity": row['predicted_quantity_sold'], "date": row['date']}
         for _, row in df.iterrows()
     ][:10]
     topProducts = [
-        {"name": row['product_name'], "demand": int(row['quantity_sold']), "color": "#7c8aff"}
+        {"name": row['product_name'], "demand": int(row['quantity_sold']), "quantity": int(row['predicted_quantity_sold']), "color": "#7c8aff"}
         for _, row in df.iterrows()
     ][:10]
     dashboard_data = {
@@ -365,17 +466,18 @@ async def admin_upload(
     financialData = [
         {
             "month": month,
-            "income": float(group['predicted_sales'].sum()),
-            "expense": float(group['price'].sum())
+            "revenue": float(group['predicted_sales'].sum()),
+            "expense": float(group['price'].sum()),
+            "quantity": int(group['predicted_quantity_sold'].sum())
         }
         for month, group in monthly
     ]
     sales_transactions = [
-        {"name": row['product_name'], "date": row['date'], "amount": row['predicted_sales'], "positive": True}
+        {"name": row['product_name'], "date": row['date'], "amount": row['predicted_sales'], "quantity": row['predicted_quantity_sold'], "positive": True}
         for _, row in df.iterrows()
     ][:10]
     orders = [
-        {"id": row.get('order_id', f"{i:05d}"), "product": row['product_name'], "customer": row.get('customer', 'N/A'), "price": row['price'], "date": row['date'], "payment": row.get('payment', 'Paid'), "status": row.get('status', 'Shipping')}
+        {"id": row.get('order_id', f"{i:05d}"), "product": row['product_name'], "customer": row.get('customer', 'N/A'), "price": row['price'], "date": row['date'], "payment": row.get('payment', 'Paid'), "status": row.get('status', 'Shipping'), "predicted_quantity_sold": int(row['predicted_quantity_sold'])}
         for i, row in df.iterrows()
     ][:10]
     sales_data = {
@@ -400,5 +502,130 @@ async def admin_upload(
     db_firestore.collection("sales").document("main").set(sales_data)
     db_firestore.collection("notifications").document("main").set(notifications_data)
     return {"message": "File uploaded, processed, and data pushed to Firestore."}
+
+# --- SMS Endpoints ---
+class SMSNotification(BaseModel):
+    phone_number: str
+    message: str
+
+class InventoryAlert(BaseModel):
+    phone_number: str
+    product_name: str
+    current_stock: int
+    threshold: int = 10
+
+class SalesNotification(BaseModel):
+    phone_number: str
+    total_sales: float
+    date: str
+
+class WhatsAppTemplateMessage(BaseModel):
+    phone_number: str
+    template_sid: str
+    variables: dict
+
+class OrderNotification(BaseModel):
+    phone_number: str
+    delivery_date: str
+    delivery_time: str
+
+@app.post("/sms/send", tags=["SMS"])
+def send_sms(sms_data: SMSNotification, key: str = Depends(api_key_auth)):
+    """Send a custom SMS message"""
+    success = send_sms_notification(sms_data.phone_number, sms_data.message)
+    if success:
+        return {"message": "SMS sent successfully"}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to send SMS")
+
+@app.post("/sms/inventory-alert", tags=["SMS"])
+def send_inventory_alert_sms(alert_data: InventoryAlert, key: str = Depends(api_key_auth)):
+    """Send inventory alert SMS"""
+    success = send_inventory_alert(
+        alert_data.phone_number, 
+        alert_data.product_name, 
+        alert_data.current_stock, 
+        alert_data.threshold
+    )
+    if success:
+        return {"message": "Inventory alert SMS sent successfully"}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to send inventory alert SMS")
+
+@app.post("/sms/sales-report", tags=["SMS"])
+def send_sales_report_sms(sales_data: SalesNotification, key: str = Depends(api_key_auth)):
+    """Send daily sales report SMS"""
+    success = send_sales_notification(
+        sales_data.phone_number, 
+        sales_data.total_sales, 
+        sales_data.date
+    )
+    if success:
+        return {"message": "Sales report SMS sent successfully"}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to send sales report SMS")
+
+@app.get("/sms/status", tags=["SMS"])
+def get_sms_status(key: str = Depends(api_key_auth)):
+    """Check if SMS functionality is available"""
+    return {
+        "sms_enabled": twilio_client is not None,
+        "twilio_configured": bool(TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN and TWILIO_PHONE_NUMBER)
+    }
+
+@app.post("/whatsapp/template", tags=["WhatsApp"])
+def send_whatsapp_template(template_data: WhatsAppTemplateMessage, key: str = Depends(api_key_auth)):
+    """Send WhatsApp message using a template"""
+    success = send_whatsapp_template_message(
+        template_data.phone_number, 
+        template_data.template_sid, 
+        template_data.variables
+    )
+    if success:
+        return {"message": "WhatsApp template message sent successfully"}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to send WhatsApp template message")
+
+@app.post("/whatsapp/order-notification", tags=["WhatsApp"])
+def send_order_notification_whatsapp(order_data: OrderNotification, key: str = Depends(api_key_auth)):
+    """Send order notification using WhatsApp template"""
+    success = send_order_notification(
+        order_data.phone_number, 
+        order_data.delivery_date, 
+        order_data.delivery_time
+    )
+    if success:
+        return {"message": "Order notification sent successfully via WhatsApp"}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to send order notification")
+
+@app.post("/inventory/check-and-notify", tags=["Inventory"])
+def check_and_notify_inventory(
+    phone_number: str = Body(..., embed=True),
+    threshold: int = Body(20, embed=True)
+):
+    """
+    Check inventory and send WhatsApp message if any item is below the threshold.
+    """
+    inventory = get_inventory_from_firestore()
+    if not inventory:
+        return {"message": "No inventory data found in Firestore."}
+    low_stock_items = [
+        (item, details.get('quantity', 0))
+        for item, details in inventory.items()
+        if details.get('quantity', 0) < threshold
+    ]
+    if not low_stock_items:
+        return {"message": "All items are above the threshold."}
+
+    for item, qty in low_stock_items:
+        send_sms_notification(
+            phone_number,
+            f"Alert: Stock for '{item}' is low ({qty} units left). Please restock soon!"
+        )
+    return {
+        "message": f"Notifications sent for {len(low_stock_items)} items below {threshold} units.",
+        "low_stock_items": low_stock_items
+    }
 
 # Optionally, you can remove or disable /api/admin-predict since it's no longer needed. 
