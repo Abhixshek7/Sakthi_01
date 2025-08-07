@@ -24,6 +24,7 @@ import html2canvas from 'html2canvas';
 import autoTable from 'jspdf-autotable';
 import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
+import { useSidebar } from '../context/SidebarContext';
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
@@ -41,7 +42,7 @@ function badgeTextColor(type, value) {
 }
 
 export default function Sales() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { sidebarOpen } = useSidebar();
   const [tab, setTab] = useState(0);
   const [search, setSearch] = useState('');
   const [sales, setSales] = useState(null);
@@ -355,7 +356,7 @@ export default function Sales() {
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', bgcolor: isDark ? '#10151a' : '#eaf6fa' }}>
-      <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+      <Sidebar />
       <Box
         sx={{
           flex: 1,

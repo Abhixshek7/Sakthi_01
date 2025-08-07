@@ -8,6 +8,7 @@ import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import Loader from '../components/Loader';
 import { useTheme } from '@mui/material/styles';
+import { useSidebar } from '../context/SidebarContext';
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
@@ -33,7 +34,7 @@ const NotificationItem = ({ notification, checked, onCheck, onDelete }) => {
 };
 
 export default function Notifications() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { sidebarOpen } = useSidebar();
   const [notificationsData, setNotificationsData] = useState(null);
   const [showAllNotifications, setShowAllNotifications] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -111,7 +112,7 @@ export default function Notifications() {
   // --- Render ---
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: isDark ? '#10151a' : '#eaf7f7' }}>
-      <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+      <Sidebar />
       <Box
         component="main"
         sx={{

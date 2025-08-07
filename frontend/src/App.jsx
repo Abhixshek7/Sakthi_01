@@ -5,6 +5,7 @@ import Sales from "./pages/Sales";
 import Notifications from "./pages/Notifications";
 import Admin from "./pages/Admin";
 import { UserProvider } from "./context/UserContext";
+import { SidebarProvider } from "./context/SidebarContext";
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
@@ -81,17 +82,19 @@ function NotificationProvider({ children }) {
 function App() {
   return (
     <UserProvider>
-      <Router>
-        <NotificationProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/sales" element={<Sales />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </NotificationProvider>
-      </Router>
+      <SidebarProvider>
+        <Router>
+          <NotificationProvider>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/sales" element={<Sales />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/admin" element={<Admin />} />
+            </Routes>
+          </NotificationProvider>
+        </Router>
+      </SidebarProvider>
     </UserProvider>
   );
 }

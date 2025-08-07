@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { UserContext } from "../context/UserContext";
+import { useSidebar } from "../context/SidebarContext";
 
 const SIDEBAR_WIDTH = 240;
 const SIDEBAR_MINI = 64;
@@ -22,9 +23,10 @@ const bottomItems = [
   { label: "Log out", icon: SignOut, action: "logout" },
 ];
 
-const Sidebar = ({ open, setOpen }) => {
+const Sidebar = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+  const { sidebarOpen, toggleSidebar } = useSidebar();
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -33,7 +35,7 @@ const Sidebar = ({ open, setOpen }) => {
 
   return (
     <Box sx={{
-      width: open ? SIDEBAR_WIDTH : SIDEBAR_MINI,
+      width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_MINI,
       bgcolor: '#fff',
       color: '#222',
       boxShadow: '0 2px 8px rgba(37,99,235,0.08)',
@@ -50,16 +52,16 @@ const Sidebar = ({ open, setOpen }) => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: open ? 'flex-start' : 'center',
+          justifyContent: sidebarOpen ? 'flex-start' : 'center',
           mb: 3,
           mt: 2,
-          px: open ? 2 : 0,
+          px: sidebarOpen ? 2 : 0,
           minHeight: 56,
           transition: 'all 0.3s',
         }}
       >
-        <Avatar src={user?.photoURL} sx={{ bgcolor: "#c8e6c9", mr: open ? 2 : 0, width: 40, height: 40, transition: 'margin 0.3s' }} />
-        {open && (
+        <Avatar src={user?.photoURL} sx={{ bgcolor: "#c8e6c9", mr: sidebarOpen ? 2 : 0, width: 40, height: 40, transition: 'margin 0.3s' }} />
+        {sidebarOpen && (
           <Typography fontWeight={600} fontSize={18} color="#111" noWrap>
             {user?.displayName || user?.email || "User"}
           </Typography>
@@ -73,8 +75,8 @@ const Sidebar = ({ open, setOpen }) => {
             component={Link}
             to={to}
             sx={{
-              justifyContent: open ? 'flex-start' : 'center',
-              px: open ? 2 : 0,
+              justifyContent: sidebarOpen ? 'flex-start' : 'center',
+              px: sidebarOpen ? 2 : 0,
               width: '100%',
               minHeight: 48,
               my: 0.5,
@@ -91,12 +93,12 @@ const Sidebar = ({ open, setOpen }) => {
             <ListItemIcon sx={{ color: '#111', minWidth: 0, justifyContent: 'center', display: 'flex' }}>
               <Icon size={28} weight="regular" />
             </ListItemIcon>
-            {open && <ListItemText primary={label} primaryTypographyProps={{ color: '#111' }} />}
+            {sidebarOpen && <ListItemText primary={label} primaryTypographyProps={{ color: '#111' }} />}
           </ListItem>
         ))}
       </List>
       <Box sx={{ flexGrow: 1 }} />
-      <Divider sx={{ my: 2, width: open ? '100%' : 40, mx: open ? 0 : 'auto' }} />
+      <Divider sx={{ my: 2, width: sidebarOpen ? '100%' : 40, mx: sidebarOpen ? 0 : 'auto' }} />
       <List sx={{ width: '100%' }}>
         {bottomItems.map(({ label, icon: Icon, to, action }) => (
           <ListItem
@@ -106,8 +108,8 @@ const Sidebar = ({ open, setOpen }) => {
             to={to}
             onClick={action === 'logout' ? handleLogout : undefined}
             sx={{
-              justifyContent: open ? 'flex-start' : 'center',
-              px: open ? 2 : 0,
+              justifyContent: sidebarOpen ? 'flex-start' : 'center',
+              px: sidebarOpen ? 2 : 0,
               width: '100%',
               minHeight: 48,
               my: 0.5,
@@ -135,14 +137,14 @@ const Sidebar = ({ open, setOpen }) => {
             <ListItemIcon sx={{ color: '#111 !important', minWidth: 0, justifyContent: 'center', display: 'flex' }}>
               <Icon size={28} weight="regular" />
             </ListItemIcon>
-            {open && <ListItemText primary={label} primaryTypographyProps={{ color: '#111', sx: { color: '#111 !important' } }} />}
+            {sidebarOpen && <ListItemText primary={label} primaryTypographyProps={{ color: '#111', sx: { color: '#111 !important' } }} />}
           </ListItem>
         ))}
       </List>
       {/* Sidebar open/close button at the bottom */}
-      <Box sx={{ width: '100%', display: 'flex', justifyContent: open ? 'flex-end' : 'center', alignItems: 'center', mb: 2, px: open ? 2 : 0 }}>
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: sidebarOpen ? 'flex-end' : 'center', alignItems: 'center', mb: 2, px: sidebarOpen ? 2 : 0 }}>
         <IconButton
-          onClick={() => setOpen(!open)}
+          onClick={toggleSidebar}
           sx={{
             bgcolor: '#fff',
             
@@ -154,7 +156,7 @@ const Sidebar = ({ open, setOpen }) => {
             transition: 'all 0.3s',
           }}
         >
-          {open ? <ChevronLeftIcon /> : <MenuIcon />}
+          {sidebarOpen ? <ChevronLeftIcon /> : <MenuIcon />}
         </IconButton>
       </Box>
     </Box>
