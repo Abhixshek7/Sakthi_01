@@ -34,49 +34,6 @@ const colorPalette = [
   '#A78BFA', // light purple
 ];
 
-// Helper to spread labels vertically to avoid overlap
-function getSpreadLabelPositions(data, cx, cy, innerRadius, outerRadius) {
-  const RADIAN = Math.PI / 180;
-  const labelData = data.map((entry, index) => {
-    const midAngle = (entry.startAngle + entry.endAngle) / 2;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 6) * cos;
-    const sy = cy + (outerRadius + 6) * sin;
-    const mx = cx + (outerRadius + 70) * cos; // Increased from 48 to 70 for more spacing
-    const my = cy + (outerRadius + 70) * sin; // Increased from 48 to 70 for more spacing
-    const ex = mx + (cos >= 0 ? 1 : -1) * 70; // Increased from 50 to 70 for more spacing
-    const ey = my;
-    return {
-      ...entry,
-      index,
-      midAngle,
-      cos,
-      sin,
-      sx, sy, mx, my, ex, ey,
-      side: cos >= 0 ? 'right' : 'left',
-      origY: ey,
-      origX: ex,
-    };
-  });
-  // Split left/right
-  const left = labelData.filter(d => d.side === 'left').sort((a, b) => a.ey - b.ey);
-  const right = labelData.filter(d => d.side === 'right').sort((a, b) => a.ey - b.ey);
-  // Spread labels on each side
-  function spread(labels, minGap = 50) { // Increased from 32 to 50 for more spacing
-    for (let i = 1; i < labels.length; i++) {
-      if (labels[i].ey - labels[i-1].ey < minGap) {
-        labels[i].ey = labels[i-1].ey + minGap;
-      }
-    }
-    return labels;
-  }
-  spread(left);
-  spread(right);
-  // Merge back
-  return [...left, ...right].sort((a, b) => a.index - b.index);
-}
-
 export default function Dashboard() {
   // All hooks must be at the top, before any return or conditional
   const { sidebarOpen } = useSidebar();
@@ -172,7 +129,6 @@ export default function Dashboard() {
 
   const totalPieValue = (dashboard.pieData || []).reduce((sum, item) => sum + (item.value || 0), 0);
   // --- PIE CHART SECTION ---
-  // Remove external label rendering and move all logic into Label content
   const renderPieLabel = (props) => {
     const RADIAN = Math.PI / 180;
     const {
@@ -180,46 +136,56 @@ export default function Dashboard() {
       fill, payload, value, index
     } = props;
     
-    // Get all pie data to calculate spread positions
-    const pieData = dashboard.pieData || [];
-    const spreadPositions = getSpreadLabelPositions(pieData, cx, cy, innerRadius, outerRadius);
-    const position = spreadPositions[index];
-    
-    if (!position) {
-      // Fallback to original positioning if spread calculation fails
-      const sin = Math.sin(-RADIAN * midAngle);
-      const cos = Math.cos(-RADIAN * midAngle);
-      const sx = cx + (outerRadius + 6) * cos;
-      const sy = cy + (outerRadius + 6) * sin;
-      const mx = cx + (outerRadius + 60) * cos;
-      const my = cy + (outerRadius + 60) * sin;
-      const ex = mx + (cos >= 0 ? 1 : -1) * 60;
-      const ey = my;
-      const color = colorPalette[index % colorPalette.length];
-      
-      return (
-        <g>
-          <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={color} fill="none" strokeWidth={2} />
-          <circle cx={ex} cy={ey} r={4} fill={color} stroke="none" />
-          <text x={ex + (cos >= 0 ? 1 : -1) * 40} y={ey - 8} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={700} fontSize={16} fontFamily={fontFamily}>{`₹${value.toLocaleString()}`}</text>
-          <text x={ex + (cos >= 0 ? 1 :-1) * 8} y={ey + 22} textAnchor={cos >= 0 ? "start" : "end"} fill={color} fontWeight={400} fontSize={16} fontFamily={fontFamily}>{payload.name}</text>
-        </g>
-      );
+    // Skip rendering for very small values to avoid clutter
+    const totalValue = (dashboard.pieData || []).reduce((sum, item) => sum + (item.value || 0), 0);
+    const percentage = (value / totalValue) * 100;
+    if (percentage < 2) {
+      return null; // Don't render labels for very small slices
     }
     
-    // Use calculated spread positions
+    // Simple positioning based on angle
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
+    const sx = cx + (outerRadius + 10) * cos;
+    const sy = cy + (outerRadius + 10) * sin;
+    const mx = cx + (outerRadius + 100) * cos;
+    const my = cy + (outerRadius + 100) * sin;
+    const ex = mx + (cos >= 0 ? 1 : -1) * 100;
+    const ey = my;
     const color = colorPalette[index % colorPalette.length];
-    const isRightSide = position.side === 'right';
+    const isRightSide = cos >= 0;
     
     return (
       <g>
         {/* Connector line and dot */}
-        <path d={`M${position.sx},${position.sy}L${position.mx},${position.my}L${position.ex},${position.ey}`} stroke={color} fill="none" strokeWidth={2} />
-        <circle cx={position.ex} cy={position.ey} r={4} fill={color} stroke="none" />
+        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={color} fill="none" strokeWidth={2} />
+        <circle cx={ex} cy={ey} r={4} fill={color} stroke="none" />
         {/* Value label */}
-        <text x={position.ex + (isRightSide ? 40 : -40)} y={position.ey - 8} textAnchor={isRightSide ? "start" : "end"} fill={color} fontWeight={700} fontSize={16} fontFamily={fontFamily}>{`₹${value.toLocaleString()}`}</text>
+        <text 
+          x={ex + (isRightSide ? 60 : -60)} 
+          y={ey - 10} 
+          textAnchor={isRightSide ? "start" : "end"} 
+          fill={color} 
+          fontWeight={700} 
+          fontSize={14} 
+          fontFamily={fontFamily}
+          dominantBaseline="middle"
+        >
+          {`₹${value.toLocaleString()}`}
+        </text>
         {/* Category label */}
-        <text x={position.ex + (isRightSide ? 8 : -8)} y={position.ey + 22} textAnchor={isRightSide ? "start" : "end"} fill={color} fontWeight={400} fontSize={16} fontFamily={fontFamily}>{payload.name}</text>
+        <text 
+          x={ex + (isRightSide ? 60 : -60)} 
+          y={ey + 20} 
+          textAnchor={isRightSide ? "start" : "end"} 
+          fill={color} 
+          fontWeight={400} 
+          fontSize={12} 
+          fontFamily={fontFamily}
+          dominantBaseline="middle"
+        >
+          {payload.name}
+        </text>
       </g>
     );
   };
@@ -375,28 +341,27 @@ export default function Dashboard() {
               <Button variant="contained" onClick={() => navigate('/sales')} sx={{ mt:2,mb: .5, bgcolor: blue, color: '#fff', fontFamily, fontWeight: 700, borderRadius: 2, px: 3, py: 1, fontSize: 15, boxShadow: '0 2px 8px rgba(37,99,235,0.08)', '&:hover': { bgcolor: '#1749b1' } }}>Go to Sales</Button>
             </Paper>
                 {/*pie chart div*/}
-          <Paper elevation={3} sx={{ flex: 2, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: 440 }}>
+          <Paper elevation={3} sx={{ flex: 2, minWidth: 0, borderRadius: 4, p: 4, bgcolor: cardBg, boxShadow: '0 4px 24px rgba(37,99,235,0.10)', overflow: 'visible', display: 'flex', flexDirection: 'column', height: 500 }}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', mb: 2 }}>
               <Typography variant="h5" fontWeight={700} sx={{ fontFamily, color: '#222', textAlign: 'left', letterSpacing: 0.5 }}>Yearly Expense</Typography>
             </Box>
             
             <Typography variant="subtitle1" sx={{ color: '#888', fontFamily, textAlign: 'left', mb: 1, ml: 0.5 }}>Breakdown By Category</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: 0, minWidth: 0,fontSize:100}}>
-              {/* Pie chart only, no legend */}
-              <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', flexShrink: 0, background: 'transparent', overflow: 'visible' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', minHeight: 0, minWidth: 0, position: 'relative', overflow: 'visible', height: 400 }}>
+              {/* Pie chart with proper spacing for labels */}
+              <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', flexShrink: 0, background: 'transparent', overflow: 'visible', height: 400, width: '100%' }}>
                 <ResponsiveContainer width="100%" height={400}>
-                  <PieChart>
+                  <PieChart margin={{ top: 40, right: 140, bottom: 40, left: 140 }}>
                     <Pie
                       data={dashboard.pieData || []}
                       dataKey="value"
                       nameKey="name"
                       cx="50%"
-                      cy="47%"
-                      innerRadius={70}
-                      outerRadius={120}
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={80}
                       fill="#8884d8"
-  
-                      paddingAngle={6}
+                      paddingAngle={3}
                       labelLine={false}
                       label={renderPieLabel}
                       isAnimationActive={false}
@@ -404,7 +369,6 @@ export default function Dashboard() {
                       {(dashboard.pieData || []).map((entry, idx) => (
                         <Cell key={entry.name + idx} fill={colorPalette[idx % colorPalette.length]} />
                       ))}
-                      
                     </Pie>
                   </PieChart>
                 </ResponsiveContainer>
